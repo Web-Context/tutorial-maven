@@ -1,14 +1,78 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
+  
+  <!-- Product identificaiton -->
   <groupId>com.webcontext.apps</groupId>
   <artifactId>zelibrairie</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
+  
+  <!-- Profduct descirption-->
   <name>ZeLibrairie</name>
   <description>A demonstration librabry project to illustrate apache maven usage. </description>
   <url>http://www.bitbucket.org/webcontext/zelibrarie</url>
+  
+  <!-- Organization -->
   <organization>
     <name>WebContext</name>
     <url>http://www.web-context.com/</url>
   </organization>
+
+  <!-- Publication year -->
+  <inceptionYear>2014</inceptionYear>
+
+  <!-- List of Core commiters -->
+  <developers>
+    <developer>
+      <id>fdelorme</id>
+      <name>Frédéric Delorme</name>
+      <organization>webcontext</organization>
+      <organizationUrl>http://www.web-context.com/</organizationUrl>
+      <roles>
+        <role>architect</role>
+      </roles>
+      <timezone>+1</timezone>
+    </developer>
+  </developers>
+
+  <!-- Contributors
+  <contributors>
+    <contributor>
+        <name>Cae Fernandes</name>
+        <roles>
+          <role>developer</role>
+        </roles>
+        <timezone>-3</timezone>
+    </contributor>
+    ...
+  </contributors-->
+
+  <dependencies>
+    <!-- logging capability -->    
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <version>1.2.17</version>
+    </dependency>
+
+    <!-- testing capability -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.11</version>
+      <scope>test</scope>
+    </dependency>
+
+  </dependencies>
+
+  <scm>
+  	<url>http://bitbucket.org/webcontext/tutorial-maven.git</url>
+  	<connection>scm:git:git@bitbucket.org:webcontext/tutorial-maven.git</connection>
+  	<developerConnection>scm:git:git@bitbucket.org:webcontext/tutorial-maven.git</developerConnection>
+  	<tag>${project.version}</tag>
+  </scm>
+  <issueManagement>
+  	<system>bitbucket</system>
+  	<url>http://bitbucket.org/webcontext/tutorial-maven/issues</url>
+  </issueManagement>
 </project>
