@@ -1,0 +1,194 @@
+Il faut bien avouer que le premier article était TRES succinct. Je vous propose d'aborder plus sérieusement le sujet.
+<h1>Gooaaalllllll !</h1>
+Commençons par le début: les "goals" (non, rien à voir avec le foot, quoique ... )  J'ai évoqué dans la première partie le fait que Maven couvrait toutes les phases de la production logicielle. Et bien c'est exactement le cas.
+
+Laissez moi illustrer (avec un peu d'inspiration du livre référence "<a title="Aller sur le site Amazon.com pour contempler ce bô livre" href="http://www.amazon.com/gp/product/0596517335" target="_blank">Maven: the definitive guide</a>", je l'avoue) l'exemple d'un projet java consistant à créer une librairie livrable sous forme de jar.
+
+Commençons par le début, appelons notre librairie ZeLibraire, publiée par moi même et qui, malencontreusement ne sert a rien d'autre que d'être un exemple par pour cette série d'article.
+
+Nous allons donc produire un beau logiciel à l'aide de maven. pour cela, nous devrons, compiler, gérer des dépendances, faire des tests (par là j'entends les jouer en automatique) et enfin, si tout cela fonctionne, nous pourrons le packager sous la forme d'un JAR. Ensuite nous verrons que, afin de livrer cette librairie de façon propre et élégante, nous pourrons assemble sources, documentation et jar de façon très propre (limite professionnel oserais-je, et cela tombe bien, c'est à cela que Maven sert).
+
+Voila un premier schéma (chouette hein ?) qui explique les principales phases que nous allons activer pour notre projet ZeLibrarie.
+
+<a href="http://mcgivrer.files.wordpress.com/2014/04/maven-phases-vs-goals.png"><img class="aligncenter wp-image-790 size-large" src="http://mcgivrer.files.wordpress.com/2014/04/maven-phases-vs-goals.png?w=750" alt="maven-phases-vs-goals" width="750" height="562" /></a>Bon, un peu d'explication:  sur la gauche, en bleu, les phases gérées par Maven, sur la droite, les "Goals" activables correspondants.
+
+Ok, nous voilà bien avancés, nous ne savons toujours pas ce qu'est un "goal".
+
+Un goal est en fait une action que l'on peut lancer depuis la ligne de commande mvn.  (NDR: Ah ben quand même, il a lâcher le morceau :). Bon, donc maintenant, on commence à entrevoir quelques bribes de choses compréhensible.
+<h3>A l'attaque des pom's</h3>
+Si je veux commencer à créer mon projet , voilà à quoi ressemble les premières lignes de mon fichier de projet maven:
+
+pom.xml
+<pre>&lt;project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
+  &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+  &lt;groupId&gt;com.webcontext.apps&lt;/groupId&gt;
+  &lt;artifactId&gt;zelibrairie&lt;/artifactId&gt;
+  &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
+  &lt;packaging&gt;jar&lt;/packaging&gt;
+  &lt;name&gt;ZeLibrairie&lt;/name&gt;
+  &lt;description&gt;A demonstration librabry project to illustrate apache maven usage. &lt;/description&gt;
+  &lt;url&gt;http://www.bitbucket.org/webcontext/zelibrarie&lt;/url&gt;
+  &lt;organization&gt;
+    &lt;name&gt;WebContext&lt;/name&gt;
+    &lt;url&gt;http://www.web-context.com/&lt;/url&gt;
+  &lt;/organization&gt;
+&lt;/project&gt;
+</pre>
+Nous avons maintenant indiqué que le projet s'appellerait <code>ZeLibrarie</code>, que le nom maven du projet serait <code>zelibrarie</code> (artifactId), qu'il serait publié sous le groupe <code>com.webcontext.apps</code> (groupId). On trouve également une <code>version</code> du logiciel qui servicra a suivre la vie du dit logiciel. on trouve également des champs <code>description</code> et <code>organisation</code> qui serviront a documenter le projet lorsque celui-ci sera publié sur un dépôt officiel Maven (que nous découvrirons dans la phase de release, donc plus tard, dans un prochain artice).
+
+Cela permet le nettoyage avant compilation, toutes les ressources <code>*.java</code> compilées, les ressources externes, bref.
+
+D'ailleurs, je n'ai pas expliqué la structure d'un projet dans les détails. Commençons par créer notre répertoire de travail :
+<pre>$ mkdir zelibrairie
+$ cd zelibrairie
+</pre>
+Ensuite, nous devons créer la struture du projet:
+<pre>$ mkdir -P zelibrairie/src/main/java
+$ mkdir -P zelibrairie/src/test/java
+</pre>
+et ensuite, à l'aide de votre éditeur de code préféré, créé le fichier pom.xml en copiant le contenu de l'exemple précédemment indiqué.
+
+vous devriez obtenir le structure ci-dessous:
+<pre>zelibrabrie      # répertoire de base du projet
+  |_ src              # sources du projet découpées en deux groupes
+  |  |_ main          # les sources a proprement parlé du code du projet
+  |  |  |_ java       # - les classes java dans leurs packages
+  |  |_ test          # le code des tests unitaires, intégration et E2E.
+  |  |  |_ java       # - les parties java pour l'exécution de ce tests
+  |_ pom.xml          # le fichier de description du projet Maven.
+</pre>
+Donc, si nous lançons la commande suivante :
+<pre>$ mvn clean
+</pre>
+On obtient alors, la sortie suivante:
+<pre>$ mvn clean
+[INFO] Scanning for projects...
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building ZeLibraibrie 0.0.1-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ zelibrairie ---
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 0.299s
+[INFO] Finished at: Mon Apr 14 01:42:37 CEST 2014
+[INFO] Final Memory: 5M/108M
+[INFO] ------------------------------------------------------------------------
+</pre>
+Un répertoire <code>target</code> sera créé dès que nous exécuterons la commande de compilation; c'est là que le résultat du travail sera produit.
+<h3>Compilons</h3>
+Même sans code, vous pouvez lancer une petite compilation :
+<pre>$ mvn compile
+</pre>
+donnant lieu à la sortie console suivante :
+<pre>$ mvn compile
+[INFO] Scanning for projects...
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] Building ZeLibrairie 0.0.1-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+Downloading: http://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-
+resources-plugin/2.5/maven-resources-plugin-2.5.pom
+Downloaded: http://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-r
+esources-plugin/2.5/maven-resources-plugin-2.5.pom (7 KB at 5.6 KB/sec)
+Downloading: http://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-
+plugins/19/maven-plugins-19.pom
+Downloaded: http://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-p
+lugins/19/maven-plugins-19.pom (11 KB at 19.1 KB/sec)
+Downloading: http://repo.maven.apache.org/maven2/org/apache/maven/maven-parent/1
+9/maven-parent-19.pom
+Downloaded: http://repo.maven.apache.org/maven2/org/apache/maven/maven-parent/19
+/maven-parent-19.pom (25 KB at 64.9 KB/sec)
+Downloading: http://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-
+resources-plugin/2.5/maven-resources-plugin-2.5.jar
+Downloaded: http://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-r
+esources-plugin/2.5/maven-resources-plugin-2.5.jar (26 KB at 58.5 KB/sec)
+Downloading: http://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-
+compiler-plugin/2.3.2/maven-compiler-plugin-2.3.2.pom
+Downloaded: http://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-c
+ompiler-plugin/2.3.2/maven-compiler-plugin-2.3.2.pom (8 KB at 15.8 KB/sec)
+Downloading: http://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-
+compiler-plugin/2.3.2/maven-compiler-plugin-2.3.2.jar
+Downloaded: http://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-c
+ompiler-plugin/2.3.2/maven-compiler-plugin-2.3.2.jar (29 KB at 32.3 KB/sec)
+[INFO]
+[INFO] --- maven-resources-plugin:2.5:resources (default-resources) @ zelibrairi
+e ---
+Downloading: http://repo.maven.apache.org/maven2/org/apache/maven/shared/maven-f
+iltering/1.0/maven-filtering-1.0.pom
+Downloaded: http://repo.maven.apache.org/maven2/org/apache/maven/shared/maven-fi
+ltering/1.0/maven-filtering-1.0.pom (6 KB at 26.4 KB/sec)
+Downloading: http://repo.maven.apache.org/maven2/org/apache/maven/shared/maven-s
+hared-components/16/maven-shared-components-16.pom
+Downloaded: http://repo.maven.apache.org/maven2/org/apache/maven/shared/maven-sh
+ared-components/16/maven-shared-components-16.pom (9 KB at 33.7 KB/sec)
+Downloading: http://repo.maven.apache.org/maven2/org/apache/maven/shared/maven-f
+iltering/1.0/maven-filtering-1.0.jar
+Downloaded: http://repo.maven.apache.org/maven2/org/apache/maven/shared/maven-fi
+ltering/1.0/maven-filtering-1.0.jar (42 KB at 60.2 KB/sec)
+[debug] execute contextualize
+[WARNING] Using platform encoding (Cp1252 actually) to copy filtered resources,
+i.e. build is platform dependent!
+[INFO] skip non existing resourceDirectory c:\Users\212391884\perso\projects\tut
+orials\maven\samples\zelibrairie\src\main\resources
+[INFO]
+[INFO] --- maven-compiler-plugin:2.3.2:compile (default-compile) @ zelibrairie -
+--
+Downloading: http://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-comp
+iler-api/1.8.1/plexus-compiler-api-1.8.1.pom
+Downloaded: http://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-compi
+ler-api/1.8.1/plexus-compiler-api-1.8.1.pom (805 B at 3.5 KB/sec)
+Downloading: http://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-comp
+iler/1.8.1/plexus-compiler-1.8.1.pom
+Downloaded: http://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-compi
+ler/1.8.1/plexus-compiler-1.8.1.pom (4 KB at 11.2 KB/sec)
+Downloading: http://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-comp
+iler-manager/1.8.1/plexus-compiler-manager-1.8.1.pom
+Downloaded: http://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-compi
+ler-manager/1.8.1/plexus-compiler-manager-1.8.1.pom (713 B at 2.3 KB/sec)
+Downloading: http://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-comp
+iler-javac/1.8.1/plexus-compiler-javac-1.8.1.pom
+Downloaded: http://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-compi
+ler-javac/1.8.1/plexus-compiler-javac-1.8.1.pom (710 B at 3.3 KB/sec)
+Downloading: http://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-comp
+ilers/1.8.1/plexus-compilers-1.8.1.pom
+Downloaded: http://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-compi
+lers/1.8.1/plexus-compilers-1.8.1.pom (2 KB at 6.0 KB/sec)
+Downloading: http://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-comp
+iler-api/1.8.1/plexus-compiler-api-1.8.1.jar
+Downloading: http://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-comp
+iler-manager/1.8.1/plexus-compiler-manager-1.8.1.jar
+Downloading: http://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-comp
+iler-javac/1.8.1/plexus-compiler-javac-1.8.1.jar
+Downloaded: http://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-compi
+ler-manager/1.8.1/plexus-compiler-manager-1.8.1.jar (6 KB at 16.4 KB/sec)
+Downloaded: http://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-compi
+ler-api/1.8.1/plexus-compiler-api-1.8.1.jar (20 KB at 42.6 KB/sec)
+Downloaded: http://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-compi
+ler-javac/1.8.1/plexus-compiler-javac-1.8.1.jar (13 KB at 26.8 KB/sec)
+[INFO] Nothing to compile - all classes are up to date
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 8.715s
+[INFO] Finished at: Mon Apr 14 10:52:35 CEST 2014
+[INFO] Final Memory: 6M/244M
+[INFO] ------------------------------------------------------------------------
+</pre>
+Mais comment se fait-il que la compilation d'aucun code produise autant de choses ? :)
+
+Et bien, cela vient du fait de la nature même de Maven, qui est constitué uniquement d'un système de plugins. Ces plugins sont activés sur certaines phases du cycle Maven, et s'ils ne sont pas disponibles localement (dans un répertoire de cache <code>[USERHOME]/.m2/</code>), ils sont automatiquement téléchargés, et activés.
+
+En lançant pour la premier fois la compilation de notre projet, c'est ce qu'il vient de se passer. Dans le log des opérations, on peut constater, entre autres, le téléchargement d'un plugin du nom de <code>plexus-compiler-javac-1.8.1.jar</code>: c'est le moteur de compilation de Maven pour les fichiers sources java.
+
+On peut finalement voir que notre compilation à réussi (le contraire eu été inquiétant :)
+
+Ok, ajoutons un peu de code pour voir de quoi Maven est capable !
+<h2>Les choses sérieuses</h2>
+La structure d'un pom est très importante et elle donne moulte information sur un projet.
+
+Reprenons le pom.xml standard et regardons de plus près les différents blocs:
+
+[caption id="attachment_794" align="aligncenter" width="336"]<a href="http://mcgivrer.files.wordpress.com/2014/04/maven-pom-xml-full-structure-overview.png"><img class="wp-image-794 size-full" src="http://mcgivrer.files.wordpress.com/2014/04/maven-pom-xml-full-structure-overview.png" alt="maven-pom-xml-full-structure-overview" width="336" height="544" /></a> Les différents blocs dans le fichier pom.xml de Maven.[/caption]

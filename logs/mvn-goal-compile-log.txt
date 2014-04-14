@@ -1,0 +1,93 @@
+$ mvn compile
+[INFO] Scanning for projects...
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] Building ZeLibrairie 0.0.1-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+Downloading: http://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-
+resources-plugin/2.5/maven-resources-plugin-2.5.pom
+Downloaded: http://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-r
+esources-plugin/2.5/maven-resources-plugin-2.5.pom (7 KB at 5.6 KB/sec)
+Downloading: http://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-
+plugins/19/maven-plugins-19.pom
+Downloaded: http://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-p
+lugins/19/maven-plugins-19.pom (11 KB at 19.1 KB/sec)
+Downloading: http://repo.maven.apache.org/maven2/org/apache/maven/maven-parent/1
+9/maven-parent-19.pom
+Downloaded: http://repo.maven.apache.org/maven2/org/apache/maven/maven-parent/19
+/maven-parent-19.pom (25 KB at 64.9 KB/sec)
+Downloading: http://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-
+resources-plugin/2.5/maven-resources-plugin-2.5.jar
+Downloaded: http://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-r
+esources-plugin/2.5/maven-resources-plugin-2.5.jar (26 KB at 58.5 KB/sec)
+Downloading: http://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-
+compiler-plugin/2.3.2/maven-compiler-plugin-2.3.2.pom
+Downloaded: http://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-c
+ompiler-plugin/2.3.2/maven-compiler-plugin-2.3.2.pom (8 KB at 15.8 KB/sec)
+Downloading: http://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-
+compiler-plugin/2.3.2/maven-compiler-plugin-2.3.2.jar
+Downloaded: http://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-c
+ompiler-plugin/2.3.2/maven-compiler-plugin-2.3.2.jar (29 KB at 32.3 KB/sec)
+[INFO]
+[INFO] --- maven-resources-plugin:2.5:resources (default-resources) @ zelibrairi
+e ---
+Downloading: http://repo.maven.apache.org/maven2/org/apache/maven/shared/maven-f
+iltering/1.0/maven-filtering-1.0.pom
+Downloaded: http://repo.maven.apache.org/maven2/org/apache/maven/shared/maven-fi
+ltering/1.0/maven-filtering-1.0.pom (6 KB at 26.4 KB/sec)
+Downloading: http://repo.maven.apache.org/maven2/org/apache/maven/shared/maven-s
+hared-components/16/maven-shared-components-16.pom
+Downloaded: http://repo.maven.apache.org/maven2/org/apache/maven/shared/maven-sh
+ared-components/16/maven-shared-components-16.pom (9 KB at 33.7 KB/sec)
+Downloading: http://repo.maven.apache.org/maven2/org/apache/maven/shared/maven-f
+iltering/1.0/maven-filtering-1.0.jar
+Downloaded: http://repo.maven.apache.org/maven2/org/apache/maven/shared/maven-fi
+ltering/1.0/maven-filtering-1.0.jar (42 KB at 60.2 KB/sec)
+[debug] execute contextualize
+[WARNING] Using platform encoding (Cp1252 actually) to copy filtered resources,
+i.e. build is platform dependent!
+[INFO] skip non existing resourceDirectory c:\Users\212391884\perso\projects\tut
+orials\maven\samples\zelibrairie\src\main\resources
+[INFO]
+[INFO] --- maven-compiler-plugin:2.3.2:compile (default-compile) @ zelibrairie -
+--
+Downloading: http://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-comp
+iler-api/1.8.1/plexus-compiler-api-1.8.1.pom
+Downloaded: http://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-compi
+ler-api/1.8.1/plexus-compiler-api-1.8.1.pom (805 B at 3.5 KB/sec)
+Downloading: http://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-comp
+iler/1.8.1/plexus-compiler-1.8.1.pom
+Downloaded: http://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-compi
+ler/1.8.1/plexus-compiler-1.8.1.pom (4 KB at 11.2 KB/sec)
+Downloading: http://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-comp
+iler-manager/1.8.1/plexus-compiler-manager-1.8.1.pom
+Downloaded: http://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-compi
+ler-manager/1.8.1/plexus-compiler-manager-1.8.1.pom (713 B at 2.3 KB/sec)
+Downloading: http://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-comp
+iler-javac/1.8.1/plexus-compiler-javac-1.8.1.pom
+Downloaded: http://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-compi
+ler-javac/1.8.1/plexus-compiler-javac-1.8.1.pom (710 B at 3.3 KB/sec)
+Downloading: http://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-comp
+ilers/1.8.1/plexus-compilers-1.8.1.pom
+Downloaded: http://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-compi
+lers/1.8.1/plexus-compilers-1.8.1.pom (2 KB at 6.0 KB/sec)
+Downloading: http://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-comp
+iler-api/1.8.1/plexus-compiler-api-1.8.1.jar
+Downloading: http://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-comp
+iler-manager/1.8.1/plexus-compiler-manager-1.8.1.jar
+Downloading: http://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-comp
+iler-javac/1.8.1/plexus-compiler-javac-1.8.1.jar
+Downloaded: http://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-compi
+ler-manager/1.8.1/plexus-compiler-manager-1.8.1.jar (6 KB at 16.4 KB/sec)
+Downloaded: http://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-compi
+ler-api/1.8.1/plexus-compiler-api-1.8.1.jar (20 KB at 42.6 KB/sec)
+Downloaded: http://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-compi
+ler-javac/1.8.1/plexus-compiler-javac-1.8.1.jar (13 KB at 26.8 KB/sec)
+[INFO] Nothing to compile - all classes are up to date
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 8.715s
+[INFO] Finished at: Mon Apr 14 10:52:35 CEST 2014
+[INFO] Final Memory: 6M/244M
+[INFO] ------------------------------------------------------------------------
