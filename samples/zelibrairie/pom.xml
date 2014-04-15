@@ -7,7 +7,14 @@
   <version>0.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
   
-  <!-- Profduct descirption-->
+  <!-- Properties for project -->
+  <properties>
+    <src.target>1.7</src.target>
+    <src.source>1.7</src.source>
+    <src.encodage>UTF-8</src.encodage>
+  </properties>
+
+  <!-- Profduct description-->
   <name>ZeLibrairie</name>
   <description>A demonstration librabry project to illustrate apache maven usage. </description>
   <url>http://www.bitbucket.org/webcontext/zelibrarie</url>
@@ -64,6 +71,22 @@
     </dependency>
 
   </dependencies>
+
+  <build>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.1</version>
+          <configuration>
+            <target>${src.target}</target>
+            <source>${src.source}</source>
+            <encodage>${src.encodage}</encodage>
+          </configuration>
+        </plugin>
+      </plugins>
+  </build>
+
 
   <scm>
   	<url>http://bitbucket.org/webcontext/tutorial-maven.git</url>

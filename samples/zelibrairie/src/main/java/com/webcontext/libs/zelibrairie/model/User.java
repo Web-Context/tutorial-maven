@@ -1,12 +1,9 @@
-/**
- * 
- */
 package com.webcontext.libs.zelibrairie.model;
 
 /**
  * User is a user modeling for a System connected user.
  * 
- * @author Frédéric Delorme<frederic.delorme@web-context.com>
+ * @author FrÃ©dÃ©ric Delorme<frederic.delorme@web-context.com>
  * 
  */
 public class User {
@@ -21,6 +18,19 @@ public class User {
 	 * Default Standard constructor.
 	 */
 	public User() {
+	}
+
+	/**
+	 * Default Standard constructor.
+	 */
+	public User(String username, String firstname, String lastname,
+			String email, String password) {
+
+		this.username = username;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.email = email;
+		this.password = password;
 	}
 
 	/**
