@@ -12,99 +12,155 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.webcontext.libs.zelibrairie.exception.EntityAlreadyExistsException;
 import com.webcontext.libs.zelibrairie.model.User;
 import com.webcontext.libs.zelibrairie.services.UserService;
 
 /**
- * Rest Service providing access to User entity.
- * will retrieve all occurence from UserService.
+ * Rest Service providing access to User entity. will retrieve all occurrence
+ * from UserService.
+ * 
+ * @author Frédéric Delorme<frederic.delorme@web-context.com>
  */
 @Path("/users")
 public class UserRestService {
-	
+
 	/**
 	 * Internal Service.
 	 */
-	private static UserService userService  = new UserService();
-
+	private static UserService userService = new UserService();
 
 	/**
 	 * Default constructor.
 	 */
-	public UserRestService(){
+	public UserRestService() {
 
 	}
 
 	/**
 	 * Retrieve all users from <code>User</code> entity.
+	 * <ul>
+	 * <li><code>OK</code> the data retrieve with success.
+	 * <li>
+	 * <li><code>NOT_FOUND</code> no data exists.
+	 * <li>
+	 * <li><code>INTERNAL_SERVER_ERROR</code> error during processing.
+	 * <li>
+	 * </ul>
 	 */
 	@Path("/")
 	@GET
-	@Produces({MediaType.APPLICATION_JSON})
-	public Response findAll(){
-		try{
+	@Produces({ MediaType.APPLICATION_JSON })
+	public Response findAll() {
+		try {
 			List<User> users = userService.findAll();
-			if(users==null){
+			if (users == null) {
 				return Response.status(Response.Status.NOT_FOUND).build();
-			}else{
+			} else {
 				return Response.ok().entity(users).build();
 			}
-		}catch(Exception e){
+		} catch (Exception e) {
 			return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
-			.entity(e).build();
+					.entity(e).build();
 		}
 	}
 
+	/**
+	 * Retrieve a User from persistence based on the <code>username</code>.
+	 * <ul>
+	 * <li><code>OK</code> the data is saved with success
+	 * <li>
+	 * <li><code>NOT_FOUND</code> this data does not exist
+	 * <li>
+	 * <li><code>INTERNAL_SERVER_ERROR</code> error during processing.
+	 * <li>
+	 * </ul>
+	 * 
+	 * @param username
+	 * @return
+	 */
 	@Path("/{username}")
 	@GET
-	@Produces({MediaType.APPLICATION_JSON})
-	public Response findByUsername(@PathParam("username") String username){
-		try{
+	@Produces({ MediaType.APPLICATION_JSON })
+	public Response findByUsername(@PathParam("username") String username) {
+		try {
 			User user = userService.findByUsername(username);
-			if(user==null){
+			if (user == null) {
 				return Response.status(Response.Status.NOT_FOUND).build();
-			}else{
+			} else {
 				return Response.ok().entity(user).build();
 			}
-		}catch(Exception e){
+		} catch (Exception e) {
 			return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
-			.entity(e).build();
+					.entity(e).build();
 		}
 	}
 
+	/**
+	 * Update the User to persistence.
+	 * <ul>
+	 * <li><code>OK</code> the data is saved with success
+	 * <li>
+	 * <li><code>NOT_FOUND</code> this data does not exist
+	 * <li>
+	 * <li><code>INTERNAL_SERVER_ERROR</code> error during processing.
+	 * <li>
+	 * </ul>
+	 * 
+	 * @param userupdate
+	 * @return
+	 */
 	@Path("/{username}")
 	@PUT
-	@Produces({MediaType.APPLICATION_JSON})
-	public Response update(@FormParam("user") User userupdate){
-		try{
+	@Produces({ MediaType.APPLICATION_JSON })
+	public Response update(@FormParam("user") User userupdate) {
+		try {
 			User user = userService.update(userupdate);
-			if(user==null){
+			if (user == null) {
 				return Response.status(Response.Status.NOT_FOUND).build();
-			}else{
+			} else {
 				return Response.ok().entity(user).build();
 			}
-		}catch(Exception e){
+		} catch (Exception e) {
 			return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
-			.entity(e).build();
+					.entity(e).build();
 		}
 	}
 
+	/**
+	 * Save a new User entity to persistence. The HTTP status code return would
+	 * be:
+	 * <ul>
+	 * <li><code>CREATED</code> the data is saved with success
+	 * <li>
+	 * <li><code>CONFLICT</code> this data already exists
+	 * <li>
+	 * <li><code>INTERNAL_SERVER_ERROR</code> error during processing.
+	 * <li>
+	 * </ul>
+	 * 
+	 * @param userSave
+	 * @return
+	 */
 	@Path("/")
 	@POST
-	@Produces({MediaType.APPLICATION_JSON})
-	public Response save(@FormParam("username") User username){
-		try{
-			User user = userService.add(username);
-			if(user==null){
+	@Produces({ MediaType.APPLICATION_JSON })
+	public Response save(@FormParam("user") User userSave) {
+		try {
+			User user = userService.add(userSave);
+			if (user == null) {
 				return Response.status(Response.Status.NOT_FOUND).build();
-			}else{
-				return Response.ok().entity(user).build();
+			} else {
+				return Response.status(Response.Status.CREATED).entity(user)
+						.build();
 			}
-		}catch(Exception e){
+		} catch (EntityAlreadyExistsException eaee) {
+			return Response.status(Response.Status.CONFLICT).entity(eaee)
+					.build();
+		} catch (Exception e) {
 			return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
-			.entity(e).build();
+					.entity(e).build();
 		}
 	}
-
 
 }

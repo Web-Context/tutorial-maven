@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.webcontext.libs.zelibrairie.exception.EntityAlreadyExistsException;
 import com.webcontext.libs.zelibrairie.model.User;
 
 /**
@@ -27,8 +28,12 @@ public class UserService {
 	 *            Add a new user.
 	 * @return
 	 */
-	public User add(User user) {
-		users.put(user.getUsername(), user);
+	public User add(User user) throws EntityAlreadyExistsException{
+		if(!users.containsKey(user.getUsername())){
+			users.put(user.getUsername(), user);
+		}else{
+			throw new EntityAlreadyExistsException("User "+user.getUsername()+" already exixts");
+		}
 		return user;
 	}
 
