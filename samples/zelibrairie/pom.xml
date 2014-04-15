@@ -1,101 +1,108 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  
-  <!-- Product identificaiton -->
-  <groupId>com.webcontext.apps</groupId>
-  <artifactId>zelibrairie</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <packaging>jar</packaging>
-  
-  <!-- Properties for project -->
-  <properties>
-    <src.target>1.7</src.target>
-    <src.source>1.7</src.source>
-    <src.encodage>UTF-8</src.encodage>
-  </properties>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-  <!-- Profduct description-->
-  <name>ZeLibrairie</name>
-  <description>A demonstration librabry project to illustrate apache maven usage. </description>
-  <url>http://www.bitbucket.org/webcontext/zelibrarie</url>
-  
-  <!-- Organization -->
-  <organization>
-    <name>WebContext</name>
-    <url>http://www.web-context.com/</url>
-  </organization>
+	<!-- Product identificaiton -->
+	<groupId>com.webcontext.apps</groupId>
+	<artifactId>zelibrairie</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
 
-  <!-- Publication year -->
-  <inceptionYear>2014</inceptionYear>
+	<!-- Properties for project -->
+	<properties>
+		<src.target>1.7</src.target>
+		<src.source>1.7</src.source>
+		<src.encodage>UTF-8</src.encodage>
+	</properties>
 
-  <!-- List of Core commiters -->
-  <developers>
-    <developer>
-      <id>fdelorme</id>
-      <name>Frédéric Delorme</name>
-      <organization>webcontext</organization>
-      <organizationUrl>http://www.web-context.com/</organizationUrl>
-      <roles>
-        <role>architect</role>
-      </roles>
-      <timezone>+1</timezone>
-    </developer>
-  </developers>
+	<!-- Profduct description -->
+	<name>ZeLibrairie</name>
+	<description>A demonstration librabry project to illustrate apache maven usage. </description>
+	<url>http://www.bitbucket.org/webcontext/zelibrarie</url>
 
-  <!-- Contributors
-  <contributors>
-    <contributor>
-        <name>Cae Fernandes</name>
-        <roles>
-          <role>developer</role>
-        </roles>
-        <timezone>-3</timezone>
-    </contributor>
-    ...
-  </contributors-->
+	<!-- Organization -->
+	<organization>
+		<name>WebContext</name>
+		<url>http://www.web-context.com/</url>
+	</organization>
 
-  <dependencies>
-    <!-- logging capability -->    
-    <dependency>
-      <groupId>log4j</groupId>
-      <artifactId>log4j</artifactId>
-      <version>1.2.17</version>
-    </dependency>
+	<!-- Publication year -->
+	<inceptionYear>2014</inceptionYear>
 
-    <!-- testing capability -->
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.11</version>
-      <scope>test</scope>
-    </dependency>
+	<!-- List of Core commiters -->
+	<developers>
+		<developer>
+			<id>fdelorme</id>
+			<name>Frédéric Delorme</name>
+			<organization>webcontext</organization>
+			<organizationUrl>http://www.web-context.com/</organizationUrl>
+			<roles>
+				<role>architect</role>
+			</roles>
+			<timezone>+1</timezone>
+		</developer>
+	</developers>
 
-  </dependencies>
+	<!-- Contributors <contributors> <contributor> <name>Cae Fernandes</name> 
+		<roles> <role>developer</role> </roles> <timezone>-3</timezone> </contributor> 
+		... </contributors -->
 
-  <build>
-      <plugins>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.1</version>
-          <configuration>
-            <target>${src.target}</target>
-            <source>${src.source}</source>
-            <encodage>${src.encodage}</encodage>
-          </configuration>
-        </plugin>
-      </plugins>
-  </build>
+	<dependencies>
+		<!-- logging capability -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+
+		<!-- testing capability -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- Rest service -->
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jaxrs</artifactId>
+			<version>3.0.8.Final</version>
+			<type>pom</type>
+		</dependency>
 
 
-  <scm>
-  	<url>http://bitbucket.org/webcontext/tutorial-maven.git</url>
-  	<connection>scm:git:git@bitbucket.org:webcontext/tutorial-maven.git</connection>
-  	<developerConnection>scm:git:git@bitbucket.org:webcontext/tutorial-maven.git</developerConnection>
-  	<tag>${project.version}</tag>
-  </scm>
-  <issueManagement>
-  	<system>bitbucket</system>
-  	<url>http://bitbucket.org/webcontext/tutorial-maven/issues</url>
-  </issueManagement>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<target>${src.target}</target>
+					<source>${src.source}</source>
+					<encodage>${src.encodage}</encodage>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+
+	<scm>
+		<url>http://github.com/web-context/tutorial-maven.git</url>
+		<connection>scm:git:git@github.com:web-context/tutorial-maven.git</connection>
+		<developerConnection>scm:git:git@github.com:web-context/tutorial-maven.git</developerConnection>
+		<tag>${project.version}</tag>
+	</scm>
+	<issueManagement>
+		<system>github</system>
+		<url>http://github.com/web-context/tutorial-maven/issues</url>
+	</issueManagement>
+	
+	<ciManagement>
+		<url>http://localhost:10090/jenkins/jobs/tutorial-maven</url>
+		<system>jenkins</system>
+	</ciManagement>
 </project>
