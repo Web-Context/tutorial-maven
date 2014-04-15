@@ -1,0 +1,47 @@
+[INFO] Scanning for projects...
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building ZeLibrairie 0.0.1-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ zelibrairie ---
+[INFO] Deleting /home/frederic/Projects/tutorials/tutorial-maven/samples/zelibrairie/target
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ zelibrairie ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] skip non existing resourceDirectory /home/frederic/Projects/tutorials/tutorial-maven/samples/zelibrairie/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ zelibrairie ---
+[INFO] Changes detected - recompiling the module!
+[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!
+[INFO] Compiling 2 source files to /home/frederic/Projects/tutorials/tutorial-maven/samples/zelibrairie/target/classes
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ zelibrairie ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] skip non existing resourceDirectory /home/frederic/Projects/tutorials/tutorial-maven/samples/zelibrairie/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:testCompile (default-testCompile) @ zelibrairie ---
+[INFO] Changes detected - recompiling the module!
+[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!
+[INFO] Compiling 1 source file to /home/frederic/Projects/tutorials/tutorial-maven/samples/zelibrairie/target/test-classes
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.12.4:test (default-test) @ zelibrairie ---
+[INFO] Surefire report directory: /home/frederic/Projects/tutorials/tutorial-maven/samples/zelibrairie/target/surefire-reports
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running com.webcontext.test.unit.libs.zelibraririe.UserServiceTest
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.067 sec
+
+Results :
+
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0
+
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 2.198s
+[INFO] Finished at: Tue Apr 15 02:49:08 CEST 2014
+[INFO] Final Memory: 16M/174M
+[INFO] ------------------------------------------------------------------------
