@@ -8,7 +8,7 @@
   <packaging>pom</packaging>
 
   <modules>
-    <module>basicpom</module>
+    <!--module>basicpom</module-->
     <module>zelibrairie</module>
   </modules>
 

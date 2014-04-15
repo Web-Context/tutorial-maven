@@ -1,4 +1,4 @@
-package com.webcontext.libs.services.ws;
+package com.webcontext.libs.zelibrairie.services.ws;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -6,15 +6,19 @@ import java.util.Set;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Application;
 
+import com.webcontext.libs.zelibrairie.model.User;
+import com.webcontext.libs.zelibrairie.services.UserService;
+
+
+
 @Path("/rest")
-public class GamesApplication extends Application {
+public class RestApplication extends Application {
 
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see javax.ws.rs.core.Application#getClasses()
 	 */
-	@Override
 	public Set<Class<?>> getClasses() {
 		
 		initializeData();
@@ -32,7 +36,7 @@ public class GamesApplication extends Application {
 		UserService userService = new UserService();
 
 		if(userService.count()==0){
-			userService.add(new User("admin",""))
+			userService.add(new User("admin","Admin","Istrator","admin@home","pwd"));
 		}
 	}
 }
