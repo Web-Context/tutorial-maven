@@ -1,6 +1,8 @@
 package com.webcontext.test.unit.libs.zelibraririe;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,6 +13,7 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import com.webcontext.libs.zelibrairie.exception.EntityAlreadyExistsException;
 import com.webcontext.libs.zelibrairie.model.User;
 import com.webcontext.libs.zelibrairie.services.UserService;
 
@@ -57,7 +60,11 @@ public class UserServiceTest {
 	public void test_1_add() {
 		User usernew = new User("usernew", "Usernew", "Newuser",
 				"new.user@mail.com", "password");
-		userService.add(usernew);
+		try {
+			userService.add(usernew);
+		} catch (EntityAlreadyExistsException e) {
+			fail("Unable to insert data");
+		}
 		assertEquals("Size of collection is not the right one.", 1,
 				userService.count());
 	}
@@ -68,29 +75,35 @@ public class UserServiceTest {
 		assertEquals("All users was not inserted !", 5, userService.count());
 
 		User user1 = userService.findByUsername("user1");
-		assertTrue("User not found", user1!=null);
+		assertTrue("User not found", user1 != null);
 		assertEquals("User not the right one.", "User1", user1.getLastname());
 	}
-	
+
 	@Test
 	public void test_3_AddListUserAndDelete() {
-		userService.add(userstest.values());
 		
+		userService.add(userstest.values());
+
 		User user1 = userService.findByUsername("user1");
 		userService.delete(user1);
 		User isUserDeleted = userService.findByUsername("user1");
-		assertTrue("User has not bean deleted", isUserDeleted==null);
+		assertTrue("User has not bean deleted", isUserDeleted == null);
 	}
+
 	@Test
 	public void test_4_update() {
 		User usernew = new User("usernew", "Usernew", "Newuser",
 				"new.user@mail.com", "password");
-		userService.add(usernew);
+		try {
+			userService.add(usernew);
+		} catch (EntityAlreadyExistsException e) {
+			fail("Unable to insert data");
+		}
 		User last = userService.findByUsername("usernew");
 		last.setFirstname("Toto");
 		User modified = userService.update(last);
-		
-		assertEquals("USer was not modified","Toto",modified.getFirstname());
+
+		assertEquals("USer was not modified", "Toto", modified.getFirstname());
 	}
 
 }
