@@ -1,4 +1,4 @@
-package com.webcontext.libs.zelibrairie.services.ws;
+package com.webcontext.libs.services.ws;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -6,11 +6,8 @@ import java.util.Set;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Application;
 
-import com.webcontext.libs.zelibrairie.model.User;
-import com.webcontext.libs.zelibrairie.services.UserService;
-
 @Path("/rest")
-public class RestApplication extends Application {
+public class GamesApplication extends Application {
 
 	/*
 	 * (non-Javadoc)
@@ -35,7 +32,7 @@ public class RestApplication extends Application {
 		UserService userService = new UserService();
 
 		if(userService.count()==0){
-			userService.add(new User("admin","Admin","Istrator","admin@localhost.home","psswd"));
+			userService.add(new User("admin",""))
 		}
 	}
 }
