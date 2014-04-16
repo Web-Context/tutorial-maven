@@ -6,7 +6,7 @@
 	<groupId>com.webcontext.apps</groupId>
 	<artifactId>restwebapp</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<!-- Properties for project -->
 	<properties>
@@ -18,7 +18,7 @@
 	<!-- Profduct description -->
 	<name>RestWebApp</name>
 	<description>A demonstration Rest Oriented WebApp project to illustrate apache maven usage. </description>
-	<url>http://www.bitbucket.org/webcontext/zelibrarie</url>
+	<url>http://github.com/web-context/tutorial-maven</url>
 
 	<!-- Organization -->
 	<organization>
@@ -81,6 +81,14 @@
 		</dependency>
 
 
+		<!-- Jax-RS implementation -->
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jaxrs</artifactId>
+			<version>3.0.8.Final</version>
+		</dependency>
+
+
 		<!-- Arquillian -->
 		<dependency>
 			<groupId>org.jboss.arquillian.container</groupId>
@@ -109,12 +117,7 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- Jax-RS implementation -->
-		<dependency>
-			<groupId>org.jboss.resteasy</groupId>
-			<artifactId>resteasy-jaxrs</artifactId>
-			<version>3.0.8.Final</version>
-		</dependency>
+
 
 	</dependencies>
 
