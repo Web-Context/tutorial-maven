@@ -1,30 +1,61 @@
-<h1>Dans le gras du sujet</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Maven : step 2 - Dans le gras du sujet</title>
+	<link rel="stylesheet" href="illustrations/doc.css" />
+</head>
+<body>
+<div class="markdown-body">
+	<h1>Dans le gras du sujet</h1>
 
-Il faut bien avouer que le premier article était TRES succinct. Je vous propose d'aborder plus sérieusement le sujet.
+	Il faut bien avouer que le premier article était TRES succinct. Je vous
+	propose d'aborder plus sérieusement le sujet.
 
-<h2>Gooooooaaal !</h2>
-Commençons par le début: les "goals" (non, rien à voir avec le foot, quoique ... )  J'ai évoqué dans la première partie le fait que Maven couvrait toutes les phases de la production logicielle. Et bien c'est exactement le cas.
+	<h2>Gooooooaaal !</h2>
 
-Laissez moi illustrer (avec un peu d'inspiration du livre référence "<a title="Aller sur le site Amazon.com pour contempler ce bô livre" href="http://www.amazon.com/gp/product/0596517335" target="_blank">Maven: the definitive guide</a>", je l'avoue) l'exemple d'un projet java consistant à créer une librairie livrable sous forme de jar.
+	Commençons par le début: les "goals" (non, rien à voir avec le foot,
+	quoique ... )  J'ai évoqué dans la première partie le fait que Maven
+	couvrait toutes les phases de la production logicielle. Et bien c'est
+	exactement le cas. Laissez moi illustrer (avec un peu d'inspiration du
+	livre référence "
+	<a title="Aller sur le site Amazon.com pour contempler ce bô livre"
+		href="http://www.amazon.com/gp/product/0596517335" target="_blank">Maven:
+		the definitive guide</a>", je l'avoue) l'exemple d'un projet java
+	consistant à créer une librairie livrable sous forme de jar. Commençons
+	par le début, appelons notre librairie ZeLibraire, publiée par moi même
+	et qui, malencontreusement ne sert a rien d'autre que d'être un
+	exemple par pour cette série d'article. Nous allons donc produire un
+	beau logiciel à l'aide de maven. pour cela, nous devrons, compiler,
+	gérer des dépendances, faire des tests (par là j'entends les jouer en
+	automatique) et enfin, si tout cela fonctionne, nous pourrons le
+	packager sous la forme d'un JAR. Ensuite nous verrons que, afin de
+	livrer cette librairie de façon propre et élégante, nous pourrons
+	assemble sources, documentation et jar de façon très propre (limite
+	professionnel oserais-je, et cela tombe bien, c'est à cela que
+	Maven sert). Voila un premier schéma (chouette hein ?) qui explique les
+	principales phases que nous allons activer pour notre projet
+	Zelibrairie.
 
-Commençons par le début, appelons notre librairie ZeLibraire, publiée par moi même et qui, malencontreusement ne sert a rien d'autre que d'être un exemple par pour cette série d'article.
+	<a href="http://mcgivrer.files.wordpress.com/2014/04/maven-phases-vs-goals.png"><img
+		class="aligncenter wp-image-790 size-large"
+		src="http://mcgivrer.files.wordpress.com/2014/04/maven-phases-vs-goals.png?w=750"
+		alt="maven-phases-vs-goals" width="750" height="562" /></a>
+		
+	Bon, un peu	d'explication:  sur la gauche, en bleu, les phases gérées par Maven,
+	sur la droite, les "Goals" activables correspondants. Ok, nous voilà
+	bien avancés, nous ne savons toujours pas ce qu'est un "goal". Un goal
+	est en fait une action que l'on peut lancer depuis la ligne de commande
+	mvn.  (NDR: Ah ben quand même, il a lâcher le morceau :). Bon, donc
+	maintenant, on commence à entrevoir quelques bribes de choses
+	compréhensible.
 
-Nous allons donc produire un beau logiciel à l'aide de maven. pour cela, nous devrons, compiler, gérer des dépendances, faire des tests (par là j'entends les jouer en automatique) et enfin, si tout cela fonctionne, nous pourrons le packager sous la forme d'un JAR. Ensuite nous verrons que, afin de livrer cette librairie de façon propre et élégante, nous pourrons assemble sources, documentation et jar de façon très propre (limite professionnel oserais-je, et cela tombe bien, c'est à cela que Maven sert).
+	<h2>A l'attaque des pom's</h2>
 
-Voila un premier schéma (chouette hein ?) qui explique les principales phases que nous allons activer pour notre projet Zelibrairie.
-
-<a href="http://mcgivrer.files.wordpress.com/2014/04/maven-phases-vs-goals.png"><img class="aligncenter wp-image-790 size-large" src="http://mcgivrer.files.wordpress.com/2014/04/maven-phases-vs-goals.png?w=750" alt="maven-phases-vs-goals" width="750" height="562" /></a>Bon, un peu d'explication:  sur la gauche, en bleu, les phases gérées par Maven, sur la droite, les "Goals" activables correspondants.
-
-Ok, nous voilà bien avancés, nous ne savons toujours pas ce qu'est un "goal".
-
-Un goal est en fait une action que l'on peut lancer depuis la ligne de commande mvn.  (NDR: Ah ben quand même, il a lâcher le morceau :). Bon, donc maintenant, on commence à entrevoir quelques bribes de choses compréhensible.
-
-<h2>A l'attaque des pom's</h2>
-
-Si je veux commencer à créer mon projet , voilà à quoi ressemble les premières lignes de mon fichier de projet maven:
-
-file: <strong>pom.xml</strong>
-<pre>&lt;project xmlns="http://maven.apache.org/POM/4.0.0" 
+	Si je veux commencer à créer mon projet , voilà à quoi ressemble les
+	premières lignes de mon fichier de projet maven: file:
+	<strong>pom.xml</strong>
+	<pre class="xml">&lt;project xmlns="http://maven.apache.org/POM/4.0.0" 
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
     http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
@@ -42,23 +73,39 @@ file: <strong>pom.xml</strong>
   &lt;/organization&gt;
 &lt;/project&gt;
 </pre>
-Nous avons maintenant indiqué que le projet s'appellerait <code>Zelibrairie</code>, que le nom maven du projet serait <code>zelibrairie</code> (artifactId), qu'il serait publié sous le groupe <code>com.webcontext.apps</code> (groupId). On trouve également une <code>version</code> du logiciel qui servicra a suivre la vie du dit logiciel. on trouve également des champs <code>description</code> et <code>organisation</code> qui serviront a documenter le projet lorsque celui-ci sera publié sur un dépôt officiel Maven (que nous découvrirons dans la phase de release, donc plus tard, dans un prochain article).
+	Nous avons maintenant indiqué que le projet s'appellerait
+	<code>Zelibrairie</code>
+	, que le nom maven du projet serait
+	<code>zelibrairie</code>
+	(artifactId), qu'il serait publié sous le groupe
+	<code>com.webcontext.apps</code>
+	(groupId). On trouve également une
+	<code>version</code>
+	du logiciel qui servicra a suivre la vie du dit logiciel. on trouve
+	également des champs
+	<code>description</code>
+	et
+	<code>organisation</code>
+	qui serviront a documenter le projet lorsque celui-ci sera publié sur
+	un dépôt officiel Maven (que nous découvrirons dans la phase de
+	release, donc plus tard, dans un prochain article).
 
 
-<h2>Super Structure</h2>
+	<h2>Super Structure</h2>
 
-D'ailleurs, je n'ai pas expliqué la structure d'un projet dans les détails. Commençons par créer notre répertoire de travail :
-<pre>$ mkdir zelibrairie
+	D'ailleurs, je n'ai pas expliqué la structure d'un projet dans les
+	détails. Commençons par créer notre répertoire de travail :
+	<pre>$ mkdir zelibrairie
 $ cd zelibrairie
 </pre>
-Ensuite, nous devons créer la struture du projet:
-<pre>$ mkdir -P zelibrairie/src/main/java
+	Ensuite, nous devons créer la struture du projet:
+	<pre>$ mkdir -P zelibrairie/src/main/java
 $ mkdir -P zelibrairie/src/test/java
 </pre>
-et ensuite, à l'aide de votre éditeur de code préféré, créé le fichier pom.xml en copiant le contenu de l'exemple précédemment indiqué.
-
-vous devriez obtenir le structure ci-dessous:
-<pre>zelibrairie      # répertoire de base du projet
+	et ensuite, à l'aide de votre éditeur de code préféré, créé le fichier
+	pom.xml en copiant le contenu de l'exemple précédemment indiqué. vous
+	devriez obtenir le structure ci-dessous:
+	<pre class="diagram">zelibrairie      # répertoire de base du projet
   |_ src              # sources du projet découpées en deux groupes
   |  |_ main          # les sources a proprement parlé du code du projet
   |  |  |_ java       # - les classes java dans leurs packages
@@ -68,12 +115,13 @@ vous devriez obtenir le structure ci-dessous:
 </pre>
 
 
-<h2>Léon le nettoyeur</h2>
+	<h2>Léon le nettoyeur</h2>
 
-Donc, si nous lançons la commande suivante : <code>mvn clean</code>
+	Donc, si nous lançons la commande suivante :
+	<code>mvn clean</code>
 
-On obtient alors, la sortie suivante:
-<pre>$ mvn clean
+	On obtient alors, la sortie suivante:
+	<pre class="console">$ mvn clean
 [INFO] Scanning for projects...
 [INFO]                                                                         
 [INFO] ------------------------------------------------------------------------
@@ -89,19 +137,20 @@ On obtient alors, la sortie suivante:
 [INFO] Final Memory: 5M/108M
 [INFO] ------------------------------------------------------------------------
 </pre>
-Un répertoire <code>target</code> sera créé dès que nous exécuterons la commande de compilation; c'est là que le résultat du travail sera produit.
+	Un répertoire
+	<code>target</code>
+	sera créé dès que nous exécuterons la commande de compilation; c'est là
+	que le résultat du travail sera produit.
 
-<h3>Compilator, le retour</h3>
+	<h3>Compilator, le retour</h3>
 
-
-
-Même sans code, vous pouvez lancer une petite compilation :
-<pre>$ mvn compile
+	Même sans code, vous pouvez lancer une petite compilation :
+	<pre class="console">$ mvn compile
 </pre>
 
-donnant lieu à la sortie console suivante :
+	donnant lieu à la sortie console suivante :
 
-<pre>$ mvn compile
+	<pre class="console">$ mvn compile
 [INFO] Scanning for projects...
 [INFO]
 [INFO] ------------------------------------------------------------------------
@@ -123,47 +172,108 @@ ler-javac/1.8.1/plexus-compiler-javac-1.8.1.jar (13 KB at 26.8 KB/sec)
 [INFO] ------------------------------------------------------------------------
 </pre>
 
-Mais comment se fait-il que la compilation d'aucun code produise autant de choses ? :)
+	Mais comment se fait-il que la compilation d'aucun code produise autant
+	de choses ? :) Et bien, cela vient du fait de la nature même de Maven,
+	qui est constitué uniquement d'un système de plugins. Ces plugins sont
+	activés sur certaines phases du cycle Maven, et s'ils ne sont pas
+	disponibles localement (dans un répertoire de cache
+	<code>[USERHOME]/.m2/</code>
+	), ils sont automatiquement téléchargés, et activés. En lançant pour la
+	premier fois la compilation de notre projet, c'est ce qu'il vient de se
+	passer. Dans le log des opérations, on peut constater, entre autres, le
+	téléchargement d'un plugin du nom de
+	<code>plexus-compiler-javac-1.8.1.jar</code>
+	: c'est le moteur de compilation de Maven pour les fichiers sources
+	java. On peut finalement voir que notre compilation à réussi (le
+	contraire eu été inquiétant :) Ok, ajoutons un peu de code pour voir de
+	quoi Maven est capable !
 
-Et bien, cela vient du fait de la nature même de Maven, qui est constitué uniquement d'un système de plugins. Ces plugins sont activés sur certaines phases du cycle Maven, et s'ils ne sont pas disponibles localement (dans un répertoire de cache <code>[USERHOME]/.m2/</code>), ils sont automatiquement téléchargés, et activés.
+	<h2>Les choses sérieuses</h2>
 
-En lançant pour la premier fois la compilation de notre projet, c'est ce qu'il vient de se passer. Dans le log des opérations, on peut constater, entre autres, le téléchargement d'un plugin du nom de <code>plexus-compiler-javac-1.8.1.jar</code>: c'est le moteur de compilation de Maven pour les fichiers sources java.
+	La structure d'un pom est très importante et elle donne moulte
+	information sur un projet. Reprenons le
+	<code>pom.xml</code>
+	standard et regardons de plus près les différents blocs: 
+	
+	[caption id="attachment_794" align="aligncenter" width="400"]
+	<a
+		href="http://mcgivrer.files.wordpress.com/2014/04/maven-pom-xml-full-structure-overview.png"><img
+		class="wp-image-794"
+		src="http://mcgivrer.files.wordpress.com/2014/04/maven-pom-xml-full-structure-overview.png"
+		alt="maven-pom-xml-full-structure-overview" width="400" height="648" /></a>
+	Les différents blocs dans le fichier pom.xml de Maven.[/caption] 
+	
+	
+	Après avoir découvert ensemble la partie déclaration administrative, nous
+	devons voir de plus près la partie
+	<strong>dependencies</strong>. Les "dependencies" sont la déclaration
+	des librairies nécessaires à l'exécution de votre programme. Ces
+	dépendances se retrouveront sur le "chemin de classe" (oui, c'est
+	curieux, le classpath en français). et en fonction du paramètre
+	<code>scope</code>
+	, la librairie sera présente dans le classpath de compilation, de test,
+	ou de runtime. Il est également possible de d&clarer des dépendances
+	dites "systèmes", elles seront packagée dans l'application finale,non
+	pas depuis le repository (que nous découvrirons et expliquerons plus
+	tard) mais depuis un chemin fixe, par exemple
+	<code>c:\meslibrairies\monjar.jar</code>
+	.
 
-On peut finalement voir que notre compilation à réussi (le contraire eu été inquiétant :)
+	<h3>les différents scopes</h3>
 
-Ok, ajoutons un peu de code pour voir de quoi Maven est capable !
+	<table>
+		<tr>
+			<th>Scope</th>
+			<th>Description</th>
+		</tr>
+		<tr>
+			<td><code>compile</code></td>
+			<td>La dépendance sera ajoutée au classpath dans tous les cas</td>
+		</tr>
+		<tr>
+			<td><code>runtime</code></td>
+			<td>la dépendance sera package avec l'application mais n'est pas
+				nécessaire à la compilation.</td>
+		</tr>
+		<tr>
+			<td><code>test</code></td>
+			<td>cette fois, la dépendance sera présente uniquement lors de
+				la phase d'execution des tests (voir le graphe plu haut pour revoir
+				les phases/goals de maven</td>
+		</tr>
+		<tr>
+			<td><code>system</code></td>
+			<td>La dépendance système a la particularité</td>
+		</tr>
+		<tr>
+			<td><code>provided</code></td>
+			<td>La dépendance est intégrée au classpath pour la compilation
+				mais ne sera pas packagée car réputée fournie par l'environnement
+				d'execution de l'application, le conteneur web dans le cas d'une
+				application, par exemple.</td>
+		</tr>
+		<tr>
+			<td><code>import</code></td>
+			<td>ce scope n'est disponible que pour une dépendance de type <code>pom</code>.
+				l'ensemble des dépendances mentionnées dans le pom référencé comme
+				dépendances seront portées au classpath et packagée dans
+				l'application.
+			</td>
+		</tr>
+	</table>
 
-<h2>Les choses sérieuses</h2>
+	Nous disions vouloir construire une premier application, donc ? non ?
 
-La structure d'un pom est très importante et elle donne moulte information sur un projet.
+	Ajoutons les dépendances de base nécessaire à notre petite code party:
+	à savoir l'indispensable logger
+	<code>Log4J</code>
+	, ainsi que le non moins indispensable
+	<code>JUnit</code>
+	ce qui nous permettra de jouer avec les fameux scopes et permettra de
+	mieux comprendre leur intérêt. Donc, éditons notre fichier POM pour
+	ajouter les dites dépendances:
 
-Reprenons le <code>pom.xml</code> standard et regardons de plus près les différents blocs:
-
-[caption id="attachment_794" align="aligncenter" width="400"]<a href="http://mcgivrer.files.wordpress.com/2014/04/maven-pom-xml-full-structure-overview.png"><img class="wp-image-794" src="http://mcgivrer.files.wordpress.com/2014/04/maven-pom-xml-full-structure-overview.png" alt="maven-pom-xml-full-structure-overview" width="400" height="648" /></a> Les différents blocs dans le fichier pom.xml de Maven.[/caption]
-
-Après avoir découvert ensemble la partie déclaration administrative, nous devons voir de plus près la partie <strong>dependencies</strong>.
-
-Les "dependencies" sont la déclaration des librairies nécessaires à l'exécution de votre programme. Ces dépendances se retrouveront sur le "chemin de classe" (oui, c'est curieux, le classpath en français). et en fonction du paramètre <code>scope</code>, la librairie sera présente dans le classpath de compilation, de test, ou de runtime. Il est également possible de d&clarer des dépendances dites "systèmes", elles seront packagée dans l'application finale,non pas depuis le repository (que nous découvrirons et expliquerons plus tard) mais depuis un chemin fixe, par exemple <code>c:\meslibrairies\monjar.jar</code>. 
-
-<h3>les différents scopes</h3>
-
-<table>
-  <tr><th>Scope</th><th>Description</th></tr>
-  <tr><td><code>compile</code></td><td>La dépendance sera ajoutée au classpath dans tous les cas</td></tr>
-  <tr><td><code>runtime</code></td><td>la dépendance sera package avec l'application mais n'est pas nécessaire à la compilation.</td></tr>
-  <tr><td><code>test</code></td><td>cette fois, la dépendance sera présente uniquement lors de la phase d'execution des tests (voir le graphe plu haut pour revoir les phases/goals de maven</td></tr>
-  <tr><td><code>system</code></td><td>La dépendance système a la particularité</td></tr>
-  <tr><td><code>provided</code></td><td>La dépendance est intégrée au classpath pour la compilation mais ne sera pas packagée car réputée fournie par l'environnement d'execution de l'application, le conteneur web dans le cas d'une application, par exemple.</td></tr>
-  <tr><td><code>import</code></td><td>ce scope n'est disponible que pour une dépendance de type <code>pom</code>. l'ensemble des dépendances mentionnées dans le pom référencé comme dépendances seront portées au classpath et packagée dans l'application.</td></tr>
-</table>
-
-Nous disions vouloir construire une premier application, donc ? non ?
-
-Ajoutons les dépendances de base nécessaire à notre petite code party: à savoir l'indispensable logger <code>Log4J</code>, ainsi que le non moins indispensable <code>JUnit</code> ce qui nous permettra de jouer avec les fameux scopes et permettra de mieux comprendre leur intérêt.
-
-Donc, éditons notre fichier POM pour ajouter les dites dépendances:
-
-<pre>
+	<pre class="xml">
 &lt;project&gt;
   ...
   &lt;groupId&gt;&lt;/groupId&gt;
@@ -192,11 +302,16 @@ Donc, éditons notre fichier POM pour ajouter les dites dépendances:
 &lt;/project&gt;
 </pre>
 
-<h3>Configurador del Compeladores</h3>
+	<h3>Configurador del Compeladores</h3>
 
-Ensuite concentrons nous sur la compilation. Nousouhaitons préciser que l'application doit être compilée sur un JDK 1.7 et que nous voulons nous assurer que les sources soient bien encodés en UTF-8: c'est le plugin maven special <code>maven-compiler-plugin</code> qui a la charcge de vérifier et activer cela:
+	Ensuite concentrons nous sur la compilation. Nousouhaitons préciser que
+	l'application doit être compilée sur un JDK 1.7 et que nous voulons
+	nous assurer que les sources soient bien encodés en UTF-8: c'est le
+	plugin maven special
+	<code>maven-compiler-plugin</code>
+	qui a la charcge de vérifier et activer cela:
 
-<pre>  &lt;build&gt;
+	<pre class="xml">  &lt;build&gt;
       &lt;plugins&gt;
         &lt;plugin&gt;
           &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
@@ -213,19 +328,28 @@ Ensuite concentrons nous sur la compilation. Nousouhaitons préciser que l'appli
 </pre>
 
 
-Nous utilisons ici une version 3.1 du plugin. nous précisons l'encodage des fichiers et le JDK a utiliser.
+	Nous utilisons ici une version 3.1 du plugin. nous précisons l'encodage
+	des fichiers et le JDK a utiliser.
 
-<h3>Application à 2 classes</h3>
+	<h3>Application à 2 classes</h3>
 
-OK, créons une ou deux classes (en fait deux) dans le répertoire <code>src/main/java</code> en respectant biensur le chemin de package <code>com.webcontext.libs.zelibrairie</code> pour pouvoir faire quelques tests depuis l'autre répertoire <code>src/test/java</code>:
+	OK, créons une ou deux classes (en fait deux) dans le répertoire
+	<code>src/main/java</code>
+	en respectant biensur le chemin de package
+	<code>com.webcontext.libs.zelibrairie</code>
+	pour pouvoir faire quelques tests depuis l'autre répertoire
+	<code>src/test/java</code>
+	: nota: les classes ont été volontairemetn simplifiées dans l'article
+	et sont bien complète sur le repository github
+	(http://github.com/Web-Context/tutorial-maven ) 1. une entité digne de
+	ce nom pour modélisé un User (oh c'est super original, je sais) :
 
-nota: les classes ont été volontairemetn simplifiées dans l'article et sont bien complète sur le repository github (http://github.com/Web-Context/tutorial-maven )
+	<p>
+		file:
+		<code>com.webcontext.libs.zelibrairie.model.User</code>
+	</p>
 
-1. une entité digne de ce nom pour modélisé un User (oh c'est super original, je sais) :
-
-<p>file:<code>com.webcontext.libs.zelibrairie.model.User</code></p>
-
-<pre>public class User{
+	<pre class="java">public class User{
     public String username;
     public String lastname;
     public String firstname;
@@ -256,14 +380,18 @@ nota: les classes ont été volontairemetn simplifiées dans l'article et sont b
   }
 
 }
-</pre>  
+</pre>
 
-2. un service de gestion de ces utilisateurs :
+	2. un service de gestion de ces utilisateurs :
 
-<p>file:<code>com.webcontext.libs.zelibrairie.services.UserService</code></p>
+	<p>
+		file:
+		<code>com.webcontext.libs.zelibrairie.services.UserService</code>
+	</p>
 
-<pre>public class UserService {
-  private static Map<String, User> users = new HashMap<String, User>();
+	<pre class="java">public class UserService {
+  private static Map<String , User> users = new HashMap<String
+			, User>();
 
   public User add(User user) {
     users.put(user.getUsername(), user);
@@ -299,25 +427,35 @@ nota: les classes ont été volontairemetn simplifiées dans l'article et sont b
     return users.size();
   }
 
-}</pre>
+}
+	</pre>
 
 
-<h3>Testator</h3>
+	<h3>Testator</h3>
 
-Nos classes applicatives étant prêtes, nous allons nous pencher sur notre classe de test du service <code>UserService</code>, dans le réeprtoir <code>src/test/java</code>, donc:
+	Nos classes applicatives étant prêtes, nous allons nous pencher sur
+	notre classe de test du service
+	<code>UserService</code>
+	, dans le réeprtoir
+	<code>src/test/java</code>
+	, donc:
 
-<p>file:<code>com.webcontext.test.unit.libs.zelibrairie.services.UserService</code></p>
+	<p>
+		file:
+		<code>com.webcontext.test.unit.libs.zelibrairie.services.UserService</code>
+	</p>
 
-<pre>@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+	<pre class="java">@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class UserServiceTest {
 
-  private static Map<String, User> userstest = new HashMap<String, User>();
+  private static Map<String , User> userstest = new HashMap<String
+			, User>();
   private static UserService userService = new UserService();
 
   @Before
   public void setUp() throws Exception {
     userService = new UserService();
-    userstest = new HashMap<String, User>();
+    userstest = new HashMap<String , User>();
     // add some user
     userstest.put("user1", new User("user1", "User", "User1",
         "user1@mail.com", "password"));
@@ -376,18 +514,24 @@ public class UserServiceTest {
   }
 
 }
-</pre>
+
+	</pre>
 
 
-<h2>Test test test !</h2>
+	<h2>Test test test !</h2>
 
-Maintenant, ne faiblissons pas, compilons et testons
+	Maintenant, ne faiblissons pas, compilons et testons
 
-<pre>$ mvn clean test</pre>
+	<pre>$ mvn clean test</pre>
 
-En laçant cette commande, on nettoie le projet, on compile tous les sources, en scope <code>compile</code> et <code>test</code>. Enfin, les tests Junit sont executés :
+	En laçant cette commande, on nettoie le projet, on compile tous les
+	sources, en scope
+	<code>compile</code>
+	et
+	<code>test</code>
+	. Enfin, les tests Junit sont executés :
 
-<pre>[INFO] Scanning for projects...
+	<pre class="console">[INFO] Scanning for projects...
 [INFO]                                                                         
 [INFO] ------------------------------------------------------------------------
 [INFO] Building ZeLibrairie 0.0.1-SNAPSHOT
@@ -437,20 +581,23 @@ Tests run: 4, Failures: 0, Errors: 0, Skipped: 0
 
 </pre>
 
-Vous pouvez voir que le projet a bien été compilé et que les tests se sont correctement exécutés !
+	Vous pouvez voir que le projet a bien été compilé et que les tests se
+	sont correctement exécutés ! Voila, maven a procédé à la compilation de
+	nos sources, et a vérifié celui-ci en jouant les tests unitaires. Nous
+	irons encore plus loin dans le prochain article en expliquant ce que
+	devient notre projet après compilation et test.
 
-Voila, maven a procédé à la compilation de nos sources, et a vérifié celui-ci en jouant les tests unitaires.
+	<h2>Et mon Jar dans tout ça ?</h2>
 
-Nous irons encore plus loin dans le prochain article en expliquant ce que devient notre projet après compilation et test.
+	L'ultime étape de notre article est de générer une archive java
+	contenant notre bibliothèque. ur cela, nous allons ajouter un nouveau
+	plugin Maven, le plugin de generation du jar (sic):
+	<code>maven-jar-plugin</code>
+	(re sic). Ajoutons donc les lignes suivantes à notre bonne vieille
+	<code>pom.xml</code>
+	, à la suite des autres plugins déjà présents :
 
-<h2>Et mon Jar dans tout ça ?</h2>
-
-L'ultime étape de notre article est de générer une archive java contenant notre bibliothèque. ur cela, nous allons ajouter 
-un nouveau plugin Maven, le plugin de generation du jar (sic): <code>maven-jar-plugin</code> (re sic).
-
-Ajoutons donc les lignes suivantes à notre bonne vieille <code>pom.xml</code>, à la suite des autres plugins déjà présents :
-
-<pre>&lt;!-- Configuration du jar --&gt;
+	<pre class="xml">&lt;!-- Configuration du jar --&gt;
 &lt;plugin&gt;
 	&lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
 	&lt;artifactId&gt;maven-jar-plugin&lt;/artifactId&gt;
@@ -459,6 +606,7 @@ Ajoutons donc les lignes suivantes à notre bonne vieille <code>pom.xml</code>, 
 </pre>
 
 
-
-
-<em>To be continued ...</em>
+	<em>To be continued ...</em>
+	</div>
+</body>
+</html>
