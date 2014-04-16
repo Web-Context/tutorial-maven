@@ -743,10 +743,16 @@ le plugin va réaliser les tags de version.</li>
 de version</li>
 </ul>
  
-pour réaliser la release, nous devons faire les chose en deux étapes:
+Pour réaliser la release, nous devons faire les choses en deux étapes:
 
-Préparer la release, permet de packager dans la bonne version: le versionning <code>0.0.1-SNAPSHOT</code>code> 
-sera remplacé par la version "release", à savoir <code>0.0.1</code>.
+<ol>
+<li>Préparer la release, permet de packager dans la bonne version: le versionning <code>0.0.1-SNAPSHOT</code>code> 
+sera remplacé par la version "release", à savoir <code>0.0.1</code></li>
+<li>Faire la release, c'est a dire pousser les sources et la tagger, en pousser les composants (artefacts) vers le gestionnaire de composant
+ (par exemple, Nexus, Artifactory ou encore Archiva).</li>
+</ol>
+
+
 	<em>To be continued ...</em>
 	</div>
 </body>
