@@ -39,11 +39,14 @@
 		<p>Voila un premier schéma (chouette hein ?) qui explique les
 			principales phases que nous allons activer pour notre projet
 			Zelibrairie.</p>
-		<a
-			href="http://mcgivrer.files.wordpress.com/2014/04/maven-phases-vs-goals.png"><img
-			class="aligncenter wp-image-790 size-large"
-			src="http://mcgivrer.files.wordpress.com/2014/04/maven-phases-vs-goals.png?w=750"
-			alt="maven-phases-vs-goals" width="750" height="562" /></a>
+		<figure>
+			<a
+				href="http://mcgivrer.files.wordpress.com/2014/04/maven-phases-vs-goals.png"><img
+				class="aligncenter wp-image-790 size-large"
+				src="http://mcgivrer.files.wordpress.com/2014/04/maven-phases-vs-goals.png?w=750"
+				alt="maven-phases-vs-goals" /></a>
+			<figcaption>Phases et goals de Apache Maven.</figcaption>
+		</figure>
 		<p>Bon, un peu d'explication:</p>
 		<p>
 			 sur la gauche, en <span style="color: blue; font-weight: bold;">bleu</span>
@@ -83,7 +86,8 @@
   &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
   &lt;packaging&gt;jar&lt;/packaging&gt;
   &lt;name&gt;ZeLibrairie&lt;/name&gt;
-  &lt;description&gt;A demonstration librabry project to illustrate apache maven usage. &lt;/description&gt;
+  &lt;description&gt;A demonstration librabry project to illustrate 
+  apache maven usage. &lt;/description&gt;
   &lt;url&gt;http://www.bitbucket.org/webcontext/zelibrairie&lt;/url&gt;
   &lt;organization&gt;
     &lt;name&gt;WebContext&lt;/name&gt;
@@ -100,33 +104,37 @@
 			<code>com.webcontext.apps</code>
 			(groupId). On trouve également une
 			<code>version</code>
-			du logiciel qui servicra a suivre la vie du dit logiciel. on trouve
+			du logiciel qui servira à suivre la vie du dit logiciel. on trouve
 			également des champs
 			<code>description</code>
 			et
 			<code>organisation</code>
-			qui serviront a documenter le projet lorsque celui-ci sera publié sur
+			qui serviront à documenter le projet lorsque celui-ci sera publié sur
 			un dépôt officiel Maven (que nous découvrirons dans la phase de
-			release, donc plus tard, dans un prochain article).
+			release, donc plus loin dans cet article).
 		</p>
 
 
 		<h2>Super Structure</h2>
 
-		<p>D'ailleurs, je n'ai pas expliqué la structure d'un projet dans
-			les détails. Commençons par créer notre répertoire de travail :</p>
-		<pre>$ mkdir zelibrairie
+		<p>Nous n'avons pas encore expliqué la structure d'un projet dans
+			les détails. Afin de l'illustrer, commençons par créer notre
+			répertoire de travail :</p>
+		<pre class="console">$ mkdir zelibrairie
 $ cd zelibrairie
 </pre>
-		<p>Ensuite, nous devons créer la struture du projet:</p>
-		<pre>$ mkdir -P zelibrairie/src/main/java
-$ mkdir -P zelibrairie/src/test/java
+		<p>Ensuite, créons la structure du projet:</p>
+		<pre class="console">$ mkdir -p zelibrairie/src/main/java
+$ mkdir -p zelibrairie/src/test/java
 </pre>
-		<p>et ensuite, à l'aide de votre éditeur de code préféré, créé le
-			fichier pom.xml en copiant le contenu de l'exemple précédemment
-			indiqué. vous devriez obtenir le structure ci-dessous:</p>
-
-		<pre class="diagram">zelibrairie      # répertoire de base du projet
+		<p>
+			A l'aide de notre éditeur de code préféré, créons le fichier
+			<code>pom.xml</code>
+			en copiant le contenu de l'exemple précédemment indiqué. Nous
+			obtenons la structure ci-dessous:
+		</p>
+		<figure>
+			<pre class="diagram">zelibrairie      # répertoire de base du projet
   |_ src              # sources du projet découpées en deux groupes
   |  |_ main          # les sources a proprement parlé du code du projet
   |  |  |_ java       # - les classes java dans leurs packages
@@ -134,17 +142,18 @@ $ mkdir -P zelibrairie/src/test/java
   |  |  |_ java       # - les parties java pour l'exécution de ce tests
   |_ pom.xml          # le fichier de description du projet Maven.
 </pre>
-
+			<figcaption>Structure des sources d'un projet "Mavenisé"</figcaption>
+		</figure>
 
 		<h2>Léon le nettoyeur</h2>
 
 		<p>
-			Donc, si nous lançons la commande suivante :
-			<code>mvn clean</code>
-			:
+			Executons maintenant la commande d'exécution du goal
+			<code>clean</code>
 		</p>
 
-		On obtient alors, la sortie suivante:
+		<p>Sur la console, nous pourons lire:</p>
+
 		<pre class="console">$ mvn clean
 [INFO] Scanning for projects...
 [INFO]                                                                         
@@ -205,35 +214,41 @@ ler-javac/1.8.1/plexus-compiler-javac-1.8.1.jar (13 KB at 26.8 KB/sec)
 		<p>
 			Ces plugins sont activés sur certaines phases du cycle Maven, et
 			s'ils ne sont pas disponibles localement (dans un répertoire de cache
-			<code>[USERHOME]/.m2/</code>
+			<code>[USERHOME]/.m2/repository</code>
 			), ils sont automatiquement téléchargés, et activés.
 		</p>
 		<p>
 			En lançant pour la premier fois la compilation de notre projet, c'est
-			ce qu'il vient de se passer. Dans le log des opérations, on peut
+			ce qu'il vient de se passer. Dans le log des opérations, nous pouvons
 			constater, entre autres, le téléchargement d'un plugin du nom de
 			<code>plexus-compiler-javac-1.8.1.jar</code>
 			: c'est le moteur de compilation de Maven pour les fichiers sources
 			java.
 		</p>
-		<p>On peut finalement voir que notre compilation à réussi (le
-			contraire eu été inquiétant :) Ok, ajoutons un peu de code pour voir
-			de quoi Maven est capable !</p>
+		<p>nous pouvons finalement voir que notre compilation à réussi (le
+			contraire eu été inquiétant :)</p>
+		<p>Ok, ajoutons un peu de code pour voir de quoi Maven est capable
+			!</p>
 
 		<h2>Les choses sérieuses</h2>
 
+		<p>La structure d'un pom est très importante et elle donne moulte
+			information sur un projet, non seulement à l'outil Maven, mais aux
+			développeurs.</p>
 		<p>
-			La structure d'un pom est très importante et elle donne moulte
-			information sur un projet. Reprenons le
+			Reprenons le
 			<code>pom.xml</code>
 			standard et regardons de plus près les différents blocs:
 		</p>
-		[caption id="attachment_794" align="aligncenter" width="400"] <a
-			href="http://mcgivrer.files.wordpress.com/2014/04/maven-pom-xml-full-structure-overview.png"><img
-			class="wp-image-794"
-			src="http://mcgivrer.files.wordpress.com/2014/04/maven-pom-xml-full-structure-overview.png"
-			alt="maven-pom-xml-full-structure-overview" width="400" height="648" /></a>
-		Les différents blocs dans le fichier pom.xml de Maven.[/caption]
+		<figure>
+			<a
+				href="http://mcgivrer.files.wordpress.com/2014/04/maven-pom-xml-full-structure-overview.png"><img
+				class="wp-image-794"
+				src="http://mcgivrer.files.wordpress.com/2014/04/maven-pom-xml-full-structure-overview.png"
+				alt="maven-pom-xml-full-structure-overview" /></a>
+			<figcaption>Les différents blocs dans le fichier pom.xml
+				de Maven.</figcaption>
+		</figure>
 		<p>
 			Après avoir découvert ensemble la partie déclaration administrative,
 			nous devons voir de plus près la partie <strong>dependencies</strong>.
@@ -391,7 +406,7 @@ ler-javac/1.8.1/plexus-compiler-javac-1.8.1.jar (13 KB at 26.8 KB/sec)
 
 		<p>
 			file:
-			<code>com.webcontext.libs.zelibrairie.model.User</code>
+			<code>com.webcontext.libs.zelibrairie.model.User(.java)</code>
 		</p>
 
 		<pre class="java">public class User{
@@ -433,7 +448,7 @@ ler-javac/1.8.1/plexus-compiler-javac-1.8.1.jar (13 KB at 26.8 KB/sec)
 
 		<p>
 			file:
-			<code>com.webcontext.libs.zelibrairie.services.UserService</code>
+			<code>com.webcontext.libs.zelibrairie.services.UserService(.java)</code>
 		</p>
 
 		<pre class="java">public class UserService {
@@ -479,32 +494,6 @@ ler-javac/1.8.1/plexus-compiler-javac-1.8.1.jar (13 KB at 26.8 KB/sec)
 		
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		</pre>
 
 
@@ -521,7 +510,7 @@ ler-javac/1.8.1/plexus-compiler-javac-1.8.1.jar (13 KB at 26.8 KB/sec)
 
 		<p>
 			file:
-			<code>com.webcontext.test.unit.libs.zelibrairie.services.UserService</code>
+			<code>com.webcontext.test.unit.libs.zelibrairie.services.UserService(.java)</code>
 		</p>
 
 		<pre class="java">@FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -593,36 +582,7 @@ public class UserServiceTest {
   }
 
 }
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		</pre>
+</pre>
 
 
 		<h2>Test test test !</h2>
@@ -633,12 +593,12 @@ public class UserServiceTest {
 </pre>
 
 		<p>
-			En laçant cette commande, on nettoie le projet, on compile tous les
-			sources, en scope
+			En laçant cette commande, maven nettoie le projet, et compile tous
+			les sources, en scope
 			<code>compile</code>
 			et
 			<code>test</code>
-			. Enfin, les tests Junit sont executés :
+			. Enfin, les tests JUnit présents sont exécutés :
 		</p>
 
 		<pre class="console">[INFO] Scanning for projects...
@@ -691,12 +651,12 @@ Tests run: 4, Failures: 0, Errors: 0, Skipped: 0
 
 </pre>
 
-		<p>Vous pouvez voir que le projet a bien été compilé et que les
-			tests se sont correctement exécutés !</p>
+		<p>Le projet a bien été compilé et les tests se sont correctement
+			exécutés !</p>
 		<p>Maven a procédé à la compilation de nos sources, et a vérifié
-			celui-ci en jouant les tests unitaires. Nous irons encore plus loin
-			dans le prochain article en expliquant ce que devient notre projet
-			après compilation et test.</p>
+			le projet en jouant les tests unitaires.</p>
+		<p>Nous irons encore plus loin dans la suite de l'article en
+			expliquant ce que devient notre projet après compilation et test.</p>
 
 		<h2>Et mon Jar dans tout ça ?</h2>
 
@@ -726,9 +686,8 @@ Tests run: 4, Failures: 0, Errors: 0, Skipped: 0
 			l'apparition d'un
 			<code>JAR</code>
 			. C'est le résultat de la compilation et du packaging réalisé par
-			maven et le plugin JAR:
+			maven via le plugin JAR:
 		</p>
-		p>
 
 		<pre class="console">$ ll target
 total 40
@@ -750,14 +709,13 @@ drwxr-xr-x 3 frederic frederic 4096 avril 16 19:14 test-classes/
 			à Maven. Nous allons réaliser cela à l'aide 3 nouveaux plugins:</p>
 
 		<ul>
-			<li><code>maven-javadoc-plugin</code> pour produire la
+			<li><strong>maven-javadoc-plugin</strong> pour produire la
 				documentation au format javadoc de notre API,</li>
-			<li><code>maven-src-plugin</code> pour livrer les sources avec
+			<li><strong>maven-src-plugin</strong> pour livrer les sources avec
 				notre applciation</li>
-			<li><code>maven-javadoc-plugin</code> pour faire la release et
+			<li><strong>maven-release-plugin</strong> pour faire la release et
 				la livraison de cette application sur un dépôt de type maven.</li>
 		</ul>
-
 
 		<h2>La release !</h2>
 
@@ -766,7 +724,7 @@ drwxr-xr-x 3 frederic frederic 4096 avril 16 19:14 test-classes/
 		<p>Commençons par le premier step, à savoir, la documentation de
 			notre librairie.</p>
 		<p>
-			Comme nous l'avons remarqué tout passant par des plugin, ajoutons
+			Comme nous l'avons remarqué, tout passant par des plugins, ajoutons
 			notre nouveau plugin au fichier
 			<code>pom.xml</code>
 			de notre projet:
@@ -840,7 +798,7 @@ drwxr-xr-x  3 frederic frederic  4096 avril 16 19:27 test-classes/
 
 		<p>
 			Ce qui produira le fichier
-			<code>zelibrairie-0.0.1-SNAPSHOT-javadoc.jar</code>
+			<code>zelibrairie-0.0.1-SNAPSHOT-sources.jar</code>
 			. Ok, l'étape finale nécessite un peu plus de configuration : la
 			RELEASE !
 		</p>
@@ -928,7 +886,7 @@ drwxr-xr-x  3 frederic frederic  4096 avril 16 19:27 test-classes/
 
 		<blockquote class="info">
 			<strong>Note</strong><br />Attention, les modifications doivent
-			toutes avoir été commitées (via git/svn) sinon, la préparatoin de la
+			toutes avoir été commitées (via git/svn) sinon, la préparation de la
 			release est refusée.
 		</blockquote>
 
