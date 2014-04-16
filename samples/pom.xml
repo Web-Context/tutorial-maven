@@ -10,6 +10,7 @@
   <modules>
     <!--module>basicpom</module-->
     <module>zelibrairie</module>
+    <module>restwebapp</module>
   </modules>
 
   <scm>

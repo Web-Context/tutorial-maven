@@ -2,9 +2,9 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<!-- Product identification -->
+	<!-- Product identificaiton -->
 	<groupId>com.webcontext.apps</groupId>
-	<artifactId>zelibrairie</artifactId>
+	<artifactId>restwebapp</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
@@ -16,8 +16,8 @@
 	</properties>
 
 	<!-- Profduct description -->
-	<name>ZeLibrairie</name>
-	<description>A demonstration librabry project to illustrate apache maven usage. </description>
+	<name>RestWebApp</name>
+	<description>A demonstration Rest Oriented WebApp project to illustrate apache maven usage. </description>
 	<url>http://www.bitbucket.org/webcontext/zelibrarie</url>
 
 	<!-- Organization -->
@@ -43,6 +43,19 @@
 		</developer>
 	</developers>
 
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.jboss.arquillian</groupId>
+				<artifactId>arquillian-bom</artifactId>
+				<version>1.0.0.Final</version>
+				<scope>import</scope>
+				<type>pom</type>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+
 	<dependencies>
 		<!-- logging capability -->
 		<dependency>
@@ -58,11 +71,55 @@
 			<version>4.11</version>
 			<scope>test</scope>
 		</dependency>
+
+		<!-- jetty server -->
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-webapp</artifactId>
+			<version>9.1.4.v20140401</version>
+			<scope>test</scope>
+		</dependency>
+
+
+		<!-- Arquillian -->
+		<dependency>
+			<groupId>org.jboss.arquillian.container</groupId>
+			<artifactId>arquillian-jetty-embedded-9</artifactId>
+			<version>1.0.0.CR2</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.shrinkwrap</groupId>
+			<artifactId>shrinkwrap-extension-jetty</artifactId>
+			<version>1.0.0-alpha-10</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jboss.arquillian.junit</groupId>
+			<artifactId>arquillian-junit-core</artifactId>
+			<version>1.1.4.Final</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.jayway.restassured</groupId>
+			<artifactId>rest-assured</artifactId>
+			<version>2.3.1</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- Jax-RS implementation -->
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jaxrs</artifactId>
+			<version>3.0.8.Final</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
 		<plugins>
-			<!-- Configuration de la compilation -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -73,37 +130,9 @@
 					<encodage>${src.encodage}</encodage>
 				</configuration>
 			</plugin>
-			
-			<!-- Configuration de l'encodage des ressources -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-resources-plugin</artifactId>
-				<version>2.6</version>
-				<configuration>
-					<encodage>${src.encodage}</encodage>
-				</configuration>
-			</plugin>
-			
-			<!-- Configuration du jar -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<version>2.4</version>
-				<configuration>
-					<includes>
-						<include>com/web/context**</include>
-					</includes>
-				</configuration>
-			</plugin>
-			
-			<!-- packaging de la release -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-release-plugin</artifactId>
-				<version>2.5</version>					
-			</plugin>
 		</plugins>
 	</build>
+
 
 	<scm>
 		<url>http://bitbucket.org/webcontext/tutorial-maven.git</url>
@@ -111,10 +140,8 @@
 		<developerConnection>scm:git:git@bitbucket.org:webcontext/tutorial-maven.git</developerConnection>
 		<tag>${project.version}</tag>
 	</scm>
-	
 	<issueManagement>
 		<system>bitbucket</system>
 		<url>http://bitbucket.org/webcontext/tutorial-maven/issues</url>
 	</issueManagement>
-	
 </project>

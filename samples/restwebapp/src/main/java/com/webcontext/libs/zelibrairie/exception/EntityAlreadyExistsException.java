@@ -10,17 +10,13 @@ package com.webcontext.libs.zelibrairie.exception;
  * 
  */
 public class EntityAlreadyExistsException extends Exception {
-	
-	/**
-	 * Serial UID 
-	 */
-	private static final long serialVersionUID = 9072153594691464692L;
 
 	/**
 	 * 
 	 */
 	public EntityAlreadyExistsException() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -32,6 +28,7 @@ public class EntityAlreadyExistsException extends Exception {
 	public EntityAlreadyExistsException(String message, Throwable cause,
 			boolean enableSuppression, boolean writableStackTrace) {
 		super(message, cause, enableSuppression, writableStackTrace);
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -40,6 +37,7 @@ public class EntityAlreadyExistsException extends Exception {
 	 */
 	public EntityAlreadyExistsException(String message, Throwable cause) {
 		super(message, cause);
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -47,6 +45,7 @@ public class EntityAlreadyExistsException extends Exception {
 	 */
 	public EntityAlreadyExistsException(String message) {
 		super(message);
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -54,6 +53,7 @@ public class EntityAlreadyExistsException extends Exception {
 	 */
 	public EntityAlreadyExistsException(Throwable cause) {
 		super(cause);
+		// TODO Auto-generated constructor stub
 	}
 
 }

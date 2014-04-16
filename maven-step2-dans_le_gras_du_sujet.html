@@ -437,10 +437,28 @@ Tests run: 4, Failures: 0, Errors: 0, Skipped: 0
 
 </pre>
 
-Vous pouvez voir que le projet abien compilé et que les tests se sont correctement déroulés !
+Vous pouvez voir que le projet a bien été compilé et que les tests se sont correctement exécutés !
 
-Voila, maven nous à compilé le projet et vérifié celui-ci en jouant les tests unitaires.
+Voila, maven a procédé à la compilation de nos sources, et a vérifié celui-ci en jouant les tests unitaires.
 
 Nous irons encore plus loin dans le prochain article en expliquant ce que devient notre projet après compilation et test.
+
+<h2>Et mon Jar dans tout ça ?</h2>
+
+L'ultime étape de notre article est de générer une archive java contenant notre bibliothèque. ur cela, nous allons ajouter 
+un nouveau plugin Maven, le plugin de generation du jar (sic): <code>maven-jar-plugin</code> (re sic).
+
+Ajoutons donc les lignes suivantes à notre bonne vieille <code>pom.xml</code>, à la suite des autres plugins déjà présents :
+
+<pre>&lt;!-- Configuration du jar --&gt;
+&lt;plugin&gt;
+	&lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+	&lt;artifactId&gt;maven-jar-plugin&lt;/artifactId&gt;
+	&lt;version&gt;2.4&lt;/version&gt;
+&lt;/plugin&gt;
+</pre>
+
+
+
 
 <em>To be continued ...</em>

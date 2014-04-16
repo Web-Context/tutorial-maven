@@ -92,10 +92,10 @@ public class UserServiceTest {
 
 	@Test
 	public void test_4_update() {
-		User userupdate = new User("userupdate", "Usernew", "Newuser",
+		User usernew = new User("usernew", "Usernew", "Newuser",
 				"new.user@mail.com", "password");
 		try {
-			userService.add(userupdate);
+			userService.add(usernew);
 		} catch (EntityAlreadyExistsException e) {
 			fail("Unable to insert data");
 		}
