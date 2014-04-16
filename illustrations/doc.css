@@ -1,338 +1,296 @@
-@CHARSET "UTF-8";
-
-html>* {
-	padding: 0px;
-	margin: 0px;
+@Charset("UTF-8");
+html > * {
+	padding:0px;
+	margin:0px;
 }
-
 body {
-	width: 80%;
-	margin: 0% 10%;
+  width: 80%;
+  margin: 0% 10%;
 }
 /**
  * Modificaiton du titre de l'article.
  */
 .markdown-body h1 {
-	font-size: 60px;
-	border-bottom: 1px dotted #000;
+  font-size: 60px;
+  border-bottom:1px dotted #000;
 }
 
-.markdown-body code {
-	border: none;
-	background-color: transparent;
+.markdown-body code{
+  border:none;
+  background-color: transparent;
 }
-
 .tiny {
-	text-align: center;
-	width: 150px;
+  text-align:center;
+  width:150px;
 }
-
 .mini {
-	text-align: center;
-	width: 300px;
+  text-align:center;
+  width:300px;
 }
-
 .medium {
-	text-align: center;
-	width: 600px;
+  text-align:center;
+  width:600px;
 }
-
-.large {
-	text-align: center;
-	width: 90%;
+.large{
+  text-align:center;
+  width:90%;
 }
-
 .full {
-	text-align: center;
-	width: 100%;
+  text-align:center;
+  width:100%;
 }
-
 .left {
-	float: left;
+  float:left;
 }
-
 .right {
-	float: right;
+  float:right;
 }
-
 .shadow img {
-	box-shadow: 4px 4px 8px #666;
-	padding: 4px;
+  box-shadow:4px 4px 8px #666;
+  padding:4px;
 }
 /**
  * Document Title and Subtitle
  */
-p.title {
-	font-size: 24pt;
-	font-weight: bold;
+p.title{
+  font-size:24pt;
+  font-weight: bold;
 }
-
-p.subtitle {
-	font-size: 18pt;
-	font-weight: bold;
+p.subtitle{
+  font-size:18pt;
+  font-weight: bold;
 }
 /**
  * Code samples.
  */
 pre {
-	margin: 4%;
+  margin:4%;
 }
-
-pre.xml {
-	border: 1px solid #363;
-	border-left: 6px solid #363;
-	background-color: #efe;
-	margin: 4%;
-	margin-bottom: 5px;
+pre.xml{
+  border:1px solid #363;
+  border-left:6px solid #363;
+  background-color:#efe;
+  margin:4%;
+  margin-bottom:5px;
 }
-
 pre.diagram {
-	width: *;
-	background-color: #fff;
-	box-shadow: 4px 4px 8px #666;
-	font-size: 9pt;
-	padding: 2%;
-	margin: 4%;
-	text-align: left;
-	margin-bottom: 5px;
+  width:*;
+  background-color:#fff;
+  box-shadow:4px 4px 8px #666;
+  font-size:9pt;
+  padding:2%;
+  margin:4%;
+  text-align: left;
+  margin-bottom:5px;
 }
-
 pre.java {
-	border: 1px solid #336;
-	border-left: 6px solid #336;
-	background-color: #eef;
-	margin: 4%;
-	margin-bottom: 5px;
+  border:1px solid #336;
+  border-left:6px solid #336;
+  background-color:#eef;
+  margin:4%;
+  margin-bottom:5px;
 }
-
 pre.properties {
-	border: 1px solid #663;
-	border-left: 6px solid #663;
-	background-color: #ffe;
-	margin: 4%;
-	margin-bottom: 5px;
+  border:1px solid #663;
+  border-left:6px solid #663;
+  background-color:#ffe;
+  margin:4%;
+  margin-bottom:5px;
 }
-
-pre.console {
-	border: 1px solid #666;
-	background-color: #000;
-	color: #fff;
-	margin: 4%;
-	margin-bottom: 5px;
+pre.console{
+  border:1px solid #666;
+  background-color:#000;
+  color:#fff;
+  margin:4%;
+  margin-bottom:5px;
 }
 
 /**
  * Numérotation des titres et figures
- */
-body {
-	counter-reset: figures 0 section 0 subsection 1 composite 1 detail 1
-		notes 0;
+ */  
+body{
+  text-align: justify;
+  counter-reset: figures 0 section 0 subsection 1 composite 1  detail 1 notes 0;
 }
-
 .markdown-body h1 {
-	counter-reset: subsection figures;
-	font-size: 18pt;
+  counter-reset: subsection figures;
+  font-size:18pt;
 }
-
 .markdown-body h2 {
-	counter-reset: composite;
-	font-size: 16pt;
+  counter-reset: composite;
+  font-size:16pt;
 }
-
 .markdown-body h3 {
-	counter-reset: detail;
-	font-size: 14pt;
+  counter-reset: detail;
+  font-size:14pt;
 }
-
 .markdown-body h4 {
-	font-size: 12pt;
+  font-size:12pt;
 }
 /* Update H1 counter*/
 .markdown-body h1:before {
-	counter-increment: section;
-	content: counter(section) ". ";
+ counter-increment: section;
+ content: counter(section) ". ";
 }
 /* update H2 counter*/
-.markdown-body h2:before {
-	counter-increment: subsection;
-	content: counter(section) "." counter(subsection) ". ";
+.markdown-body h2:before{
+ counter-increment: subsection;
+ content: counter(section) "." counter(subsection) ". ";
 }
 /* update H3 counter*/
-.markdown-body h3:before {
-	counter-increment: composite;
-	content: counter(section) "." counter(subsection) "." counter(composite)
-		". ";
+.markdown-body h3:before{
+ counter-increment: composite;
+ content: counter(section) "." counter(subsection) "." counter(composite) ". ";
 }
 /* update H4 */
-.markdown-body h4:before {
-	counter-increment: detail;
-	content: counter(section) "." counter(subsection) "." counter(composite)
-		"." counter(detail) ". ";
+.markdown-body h4:before{
+ counter-increment: detail;
+ content: counter(section) "." counter(subsection) "." counter(composite) "." counter(detail) ". ";
 }
 /* set H5 mark. */
 .markdown-body h5:before {
-	content: " » ";
+  content:" » ";
 }
 /*
  * define a legend for a figure.
  */
 .figure {
-	text-align: center;
-	font-size: 8pt;
+  text-align:center;
+  font-size:8pt;
 }
-
 .figure:before {
-	counter-increment: figures;
-	content: "figure " counter(section) "." counter(figures) " - ";
+ counter-increment: figures;
+ content: "figure " counter(section) "." counter(figures) " - ";
 }
 
 /* 
  * Extrait de code et commandes shell
  */
-pre {
-	margin-left: 24px;
+pre{
+  margin-left:24px;
 }
-
 pre.shell {
-	background-color: #000;
-	color: #fff;
-	border: none;
+  background-color:#000;
+  color:#fff;
+  border:none;
 }
-
 pre.javascript {
-	border-left-size: 4px;
+  border-left-size:4px;
 }
 
 /**
  * Mise en valeur des notes/remarque, info et warning
  */
-blockquote.alert,blockquote.comment,blockquote.git,blockquote.info,blockquote.trick
-	{
-	display: block;
-	padding: 8px 4px;
-	padding-left: 48px;
-	border-radius: 8px;
-	box-shadow: 4px 4px 8px #333;
-	border: 0px;
-	background-repeat: no-repeat;
-	background-position: 4px 4px;
-	color: black;
-	margin: 1em;
-	font-size: 12pt;
-	font-family: serif;
-	width: 60%;
-	margin-left: 10%;
-}
+blockquote.alert, 
+blockquote.comment,
+blockquote.git,
+blockquote.info, 
+blockquote.trick
+{
 
+  display:block;
+  padding:8px 4px;
+  padding-left: 48px;
+  border-radius: 8px;
+  box-shadow: 4px 4px 8px #333;
+  border:0px;
+  background-repeat: no-repeat;
+  background-position: 4px 4px;
+  color:black;
+  margin:1em;
+  font-size:12pt;
+  font-family:serif;
+  width:60%;
+  margin-left:10%;
+}
 blockquote p {
-	display: block;
-	padding-left: 10px;
-	padding-right: 48px;
-	margin: 0.5em;
-	border-left: 1px dotted black;
-	text-align: justify;
+  display:block;
+  padding-left: 10px;
+  padding-right: 48px;
+  margin:0.5em;
+  border-left:1px dotted black;
+  text-align:justify;
+
 }
 /* 
  * Numérotation des notes
  */
 blockquote:before {
-	position: relative;
-	counter-increment: notes;
-	content: "#" counter(notes);
-	font-size: 8pt;
-	background-color: #fff;
-	color: #000;
-	/*border:1px solid #bbb;*/
-	border-radius: 16px;
-	/*box-shadow:inset 2px 2px 2px #666;*/
-	float: right;
-	padding: 2px;
-	min-width: 24px;
-	margin-right: 4px;
-	text-align: center;
-	vertical-align: middle;
-	font-style: italic;
-	font-family: sans-serif;
-	bottom: 4px;
+  position:relative;
+  counter-increment: notes;
+  content: "#"counter(notes);
+  font-size:8pt;
+  background-color:#fff;
+  color:#000;
+  /*border:1px solid #bbb;*/
+  border-radius:16px;
+  /*box-shadow:inset 2px 2px 2px #666;*/
+  float:right;
+  padding:2px;
+  min-width:24px;
+  margin-right:4px;
+  text-align:center;
+  vertical-align: middle;
+  font-style: italic;
+  font-family: sans-serif;
+  bottom:4px;
 }
 
 blockquote p b {
-	color: black;
+  color:black;
 }
 
-blockquote.git {
-	background-color: #eee;
-	background-image: url("images/git-info.png");
+blockquote.git{  
+  background-color:#eee;
+  background-image:url("images/git-info.png");
 }
 
-blockquote.info {
-	background-color: #cef;
-	background-image: url("images/info.png");
+blockquote.info{  
+  background-color:#cef;
+  background-image:url("images/info.png");
 }
-
-blockquote.info p:before {
-	color: #cef;
+blockquote.info p:before{
+  color:#cef;
 }
-
-blockquote.trick {
-	background-color: #cfe;
-	background-image: url("images/ok.png");
+blockquote.trick{  
+  background-color:#cfe;
+  background-image:url("images/ok.png");
 }
-
-blockquote.trick p:before {
-	color: #cfe;
+blockquote.trick p:before{
+  color:#cfe;
 }
-
-blockquote.alert {
-	background-color: #f99;
-	background-image: url("images/alert.png");
+blockquote.alert{  
+  background-color:#f99;
+  background-image:url("images/alert.png");
 }
-
-blockquote.alert p:before {
-	color: #f99;
+blockquote.alert p:before{
+  color:#f99;
 }
-
-blockquote.comment {
-	background-color: #ffe;
-	background-image: url("images/comment.png");
+blockquote.comment{  
+  background-color:#ffe;
+  background-image:url("images/comment.png");
 }
-
-blockquote.comment p:before {
-	color: #ffe;
+blockquote.comment p:before{
+  color:#ffe;
 }
-
-blockquote code {
-	background-color: transparent;
-	color: #000;
-	font-weight: bold;
-	font-style: italic;
-	border: 0px;
+blockquote code{
+  background-color:transparent;
+  color:#000;
+  font-weight:bold;
+  font-style:italic;
+  border:0px;
 }
 /*----- VCard ! -----*/
 .cardbook {
-	margin: 10px;
-	padding: 10px;
+  margin:10px;
+  padding:10px;
 }
-
 .vcard {
-	float: left;
-	border: 1px dotted #ddd;
-	padding: 10px;
-	margin: 5px;
-	width: 360px;
-	height: 160px;
+  float:left;border:1px dotted #ddd;padding:10px;margin:5px;width:360px;height:160px;
 }
-
-.vcard img {
-	width: 80px;
-	float: left;
+.vcard img{
+  width:80px;float:left;
 }
-
 .vcard div {
-	margin-left: 100px;
-	margin-bottom: 50px;
-}
-
-p {
-	text-align: justify;
+  margin-left: 100px;margin-bottom:50px;
 }
