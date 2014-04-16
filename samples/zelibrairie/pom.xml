@@ -1,11 +1,10 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<!-- Product identification -->
 	<groupId>com.webcontext.apps</groupId>
 	<artifactId>zelibrairie</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<packaging>jar</packaging>
 
 	<!-- Properties for project -->
@@ -96,6 +95,22 @@
 				</configuration>
 			</plugin>
 			
+			<!-- Packaging de la javadoc -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.9.1</version>
+			</plugin>
+
+			<!-- Packaging des sources -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>2.2.1</version>
+			</plugin>
+
+
+			
 			<!-- packaging de la release -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -105,16 +120,13 @@
 		</plugins>
 	</build>
 
+	<!-- Gestionaire de version -->
 	<scm>
 		<url>http://bitbucket.org/webcontext/tutorial-maven.git</url>
 		<connection>scm:git:git@bitbucket.org:webcontext/tutorial-maven.git</connection>
 		<developerConnection>scm:git:git@bitbucket.org:webcontext/tutorial-maven.git</developerConnection>
-		<tag>${project.version}</tag>
+		<tag>zelibrairie-0.0.1</tag>
 	</scm>
 	
-	<issueManagement>
-		<system>bitbucket</system>
-		<url>http://bitbucket.org/webcontext/tutorial-maven/issues</url>
-	</issueManagement>
 	
 </project>

@@ -605,7 +605,148 @@ Tests run: 4, Failures: 0, Errors: 0, Skipped: 0
 &lt;/plugin&gt;
 </pre>
 
+Si vous regarder dans le répertoire <code>target</code> après une construction de votre projet, nous pouvons observer 
+l'apparition d'un <code>JAR</code>. C'est le résultat de la compilation et du packaging réalisé par maven et le plugin JAR: 
 
+<pre class="console">$ ll target
+total 40
+drwxr-xr-x 9 frederic frederic 4096 avril 16 19:14 ./
+drwxr-xr-x 5 frederic frederic 4096 avril 16 19:14 ../
+drwxr-xr-x 3 frederic frederic 4096 avril 16 19:14 classes/
+drwxr-xr-x 3 frederic frederic 4096 avril 16 19:14 generated-sources/
+drwxr-xr-x 3 frederic frederic 4096 avril 16 19:14 generated-test-sources/
+drwxr-xr-x 2 frederic frederic 4096 avril 16 19:14 maven-archiver/
+drwxr-xr-x 3 frederic frederic 4096 avril 16 19:14 maven-status/
+drwxr-xr-x 2 frederic frederic 4096 avril 16 19:14 surefire-reports/
+drwxr-xr-x 3 frederic frederic 4096 avril 16 19:14 test-classes/
+-rw-r--r-- 1 frederic frederic 2298 avril 16 19:14 zelibrairie-0.0.1-SNAPSHOT.jar
+</pre>
+
+Nous avons produit notre logiciel, nous l'avons packagé en JAR. il ne nous reste plus qu'à l'estampiller comme une release.
+
+Et bien cela tombe bien, nous pouvons aussi confier cette tâche à Maven.
+
+Nous allons réaliser cela à l'aide 3 nouveaux plugins:
+
+<ul>
+	<li><code>maven-javadoc-plugin</code> pour produire la documentation au format javadoc de notre API,</li>
+	<li><code>maven-src-plugin</code> pour livrer les sources avec notre applciation</li>
+	<li><code>maven-javadoc-plugin</code> pour faire la release et la livraison de cette application sur un dépôt de type maven.</li>
+</ul> 
+
+
+<h2>La release !</h2>
+
+<h3>Documentons, documentons !</h3>
+
+Commençons par le premier step, à savoir, la documentation de notre librairie. Comme nous l'avons remarqué tout 
+passant par des plugin, ajoutons notre nouveau plugin au fichier <code>pom.xml</code> de notre projet:
+
+<pre class="xml">
+	&lt;plugin&gt;
+		&lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+		&lt;artifactId&gt;maven-javadoc-plugin&lt;/artifactId&gt;
+		&lt;version&gt;2.9.1&lt;/version&gt;
+	&lt;/plugin&gt;			
+</pre>
+
+Relançons la compilation avec une commande que nous connaissons maintenant, mais ajoutons un goal supplémentaire:
+
+<pre class="console">
+$ mvn clean install javadoc:jar
+</pre>
+
+
+si vous regarder dans le répertoire <code>target</code>, un nouveau jar a fait son apparition :
+<pre class="console">$ ll target
+total 116
+drwxr-xr-x 12 frederic frederic  4096 avril 16 19:29 ./
+drwxr-xr-x  5 frederic frederic  4096 avril 16 19:27 ../
+drwxr-xr-x  4 frederic frederic  4096 avril 16 19:29 apidocs/
+drwxr-xr-x  3 frederic frederic  4096 avril 16 19:27 classes/
+drwxr-xr-x  3 frederic frederic  4096 avril 16 19:27 generated-sources/
+drwxr-xr-x  3 frederic frederic  4096 avril 16 19:27 generated-test-sources/
+drwxr-xr-x  2 frederic frederic  4096 avril 16 19:28 javadoc-bundle-options/
+drwxr-xr-x  2 frederic frederic  4096 avril 16 19:27 maven-archiver/
+drwxr-xr-x  3 frederic frederic  4096 avril 16 19:27 maven-status/
+drwxr-xr-x  3 frederic frederic  4096 avril 16 19:28 site/
+drwxr-xr-x  2 frederic frederic  4096 avril 16 19:27 surefire-reports/
+drwxr-xr-x  3 frederic frederic  4096 avril 16 19:27 test-classes/
+-rw-r--r--  1 frederic frederic  2323 avril 16 19:27 zelibrairie-0.0.1-SNAPSHOT.jar
+-rw-r--r--  1 frederic frederic 64253 avril 16 19:29 zelibrairie-0.0.1-SNAPSHOT-javadoc.jar
+</pre>
+
+Le fichier <code>zelibrairie-0.0.1-SNAPSHOT-javadoc.jar</code> a été généré par le plugin javadoc. 
+Ainsi, la documentation est prête.
+
+<h3>La source du savoir</h3>
+
+Tout bon packaging de logiciel doit être accompagné de ses sources.
+
+<pre class="xml">
+	&lt;plugin&gt;
+		&lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+		&lt;artifactId&gt;maven-source-plugin&lt;/artifactId&gt;
+		&lt;version&gt;2.2.1&lt;/version&gt;
+	&lt;/plugin&gt;			
+</pre>
+
+a lancer avec encore une fois un appel à <code>mvn</code>:
+
+<pre class="console">$ mvn source:jar
+</pre>
+
+Ce qui produira le fichier <code>zelibrairie-0.0.1-SNAPSHOT-javadoc.jar</code>.
+
+
+Ok, l'étape finale nécessite un peu plus de configuration : la RELEASE !
+
+<h3>Relachement du stress</h3>
+
+La touche finale est la livraison ou delivery, le dernier petit coup de stress avant la fin du projet.
+
+Là aussi, Maven va nous donner un bon coup de main avec le plugin <code>maven-release-plugin</code>.
+
+<pre class="xml">
+	&lt;plugin&gt;
+		&lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+		&lt;artifactId&gt;maven-release-plugin&lt;/artifactId&gt;
+		&lt;version&gt;2.5&lt;/version&gt;
+	&lt;/plugin&gt;			
+</pre>
+
+
+Mais pour que celui-ci soit opérationnel, nous devons indiquer plusieurs choses:
+
+1. le repository des sources di projet, a travers lequel il va pouvoir versionner et tagger notre livraison,
+2. comment accèder à ce repository
+3. comment versionner.
+
+tout cela est fait à travers l'entrée suivante dan le pom.xml:
+
+<pre class="xml">
+	&lt;scm&gt;
+		&lt;url&gt;http://bitbucket.org/webcontext/tutorial-maven.git&lt;/url&gt;
+		&lt;connection&gt;scm:git:git@bitbucket.org:webcontext/tutorial-maven.git&lt;/connection&gt;
+		&lt;developerConnection&gt;scm:git:git@bitbucket.org:webcontext/tutorial-maven.git&lt;/developerConnection&gt;
+		&lt;tag&gt;${project.version}&lt;/tag&gt;
+	&lt;/scm&gt;
+</pre> 
+
+où:
+<ul>
+<li>l'<code>url</code> indique le chemin sur le net où l'on peut consulter le repository versioné du projet,</li>
+<li>la <code>connection</code> est l'url du dépôt sur lequel les sources sont stockées. c'est sur cette url que 
+le plugin va réaliser les tags de version.</li>
+<li><code>developperConnection</code> est l'url dans le dépôt de la branche de développement.</li>
+<li><code>tag</code> est le template de marqage des release: ${project.version} permet de récupérer le numéro 
+de version</li>
+</ul>
+ 
+pour réaliser la release, nous devons faire les chose en deux étapes:
+
+Préparer la release, permet de packager dans la bonne version: le versionning <code>0.0.1-SNAPSHOT</code>code> 
+sera remplacé par la version "release", à savoir <code>0.0.1</code>.
 	<em>To be continued ...</em>
 	</div>
 </body>
