@@ -1,4 +1,4 @@
-package com.webcontext.libs.zelibrairie.model;
+package com.webcontext.libs.restwebapp.model;
 
 /**
  * User is a user modeling for a System connected user.

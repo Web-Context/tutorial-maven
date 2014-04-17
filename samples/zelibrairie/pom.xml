@@ -117,4 +117,8 @@
 		<url>http://bitbucket.org/webcontext/tutorial-maven/issues</url>
 	</issueManagement>
 	
+	<ciManagement>
+		<system>jenkins</system>
+		<url>http://localhost:10090/jenkins-1.559/job/tutorial-maven</url>
+	</ciManagement>
 </project>

@@ -1,4 +1,4 @@
-package com.webcontext.libs.zelibrairie.services.ws;
+package com.webcontext.libs.restwebapp.services.ws;
 
 import java.util.List;
 
@@ -12,9 +12,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import com.webcontext.libs.zelibrairie.exception.EntityAlreadyExistsException;
-import com.webcontext.libs.zelibrairie.model.User;
-import com.webcontext.libs.zelibrairie.services.UserService;
+import com.webcontext.libs.restwebapp.exception.EntityAlreadyExistsException;
+import com.webcontext.libs.restwebapp.model.User;
+import com.webcontext.libs.restwebapp.services.UserService;
 
 /**
  * Rest Service providing access to User entity. will retrieve all occurrence

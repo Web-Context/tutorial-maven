@@ -43,19 +43,6 @@
 		</developer>
 	</developers>
 
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>org.jboss.arquillian</groupId>
-				<artifactId>arquillian-bom</artifactId>
-				<version>1.0.0.Final</version>
-				<scope>import</scope>
-				<type>pom</type>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
-
-
 	<dependencies>
 		<!-- logging capability -->
 		<dependency>
@@ -72,15 +59,6 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- jetty server -->
-		<dependency>
-			<groupId>org.eclipse.jetty</groupId>
-			<artifactId>jetty-webapp</artifactId>
-			<version>9.1.4.v20140401</version>
-			<scope>test</scope>
-		</dependency>
-
-
 		<!-- Jax-RS implementation -->
 		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
@@ -91,15 +69,9 @@
 
 		<!-- Arquillian -->
 		<dependency>
-			<groupId>org.jboss.arquillian.container</groupId>
-			<artifactId>arquillian-jetty-embedded-9</artifactId>
-			<version>1.0.0.CR2</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.jboss.shrinkwrap</groupId>
-			<artifactId>shrinkwrap-extension-jetty</artifactId>
-			<version>1.0.0-alpha-10</version>
+			<groupId>org.jboss.arquillian.core</groupId>
+			<artifactId>arquillian-core-api</artifactId>
+			<version>1.1.4.Final</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -109,7 +81,19 @@
 			<version>1.1.4.Final</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.jboss.arquillian.container</groupId>
+			<artifactId>arquillian-glassfish-embedded-3.1</artifactId>
+			<version>1.0.0.CR4</version>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.extras</groupId>
+			<artifactId>glassfish-embedded-all</artifactId>
+			<version>3.2-b06</version>
+		</dependency>
 
+
+		<!-- Unit test on Rest Service -->
 		<dependency>
 			<groupId>com.jayway.restassured</groupId>
 			<artifactId>rest-assured</artifactId>
@@ -147,4 +131,8 @@
 		<system>bitbucket</system>
 		<url>http://bitbucket.org/webcontext/tutorial-maven/issues</url>
 	</issueManagement>
+	<ciManagement>
+		<system>jenkins</system>
+		<url>http://localhost:10090/jenkins-1.559/job/tutorial-maven</url>
+	</ciManagement>
 </project>

@@ -1,12 +1,12 @@
-package com.webcontext.libs.zelibrairie.services;
+package com.webcontext.libs.restwebapp.services;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.webcontext.libs.zelibrairie.exception.EntityAlreadyExistsException;
-import com.webcontext.libs.zelibrairie.model.User;
+import com.webcontext.libs.restwebapp.exception.EntityAlreadyExistsException;
+import com.webcontext.libs.restwebapp.model.User;
 
 /**
  * Service to manage users. Can add update, delete and retrieve any users.
