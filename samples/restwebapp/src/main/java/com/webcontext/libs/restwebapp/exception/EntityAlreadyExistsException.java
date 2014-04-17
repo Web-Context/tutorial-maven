@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.webcontext.libs.zelibrairie.exception;
+package com.webcontext.libs.restwebapp.exception;
 
 /**
  * Exception raised when the Entity already exists in the persisting system.

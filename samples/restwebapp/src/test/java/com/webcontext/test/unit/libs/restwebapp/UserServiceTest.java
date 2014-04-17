@@ -1,4 +1,4 @@
-package com.webcontext.test.unit.libs.zelibraririe;
+package com.webcontext.test.unit.libs.restwebapp;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -13,9 +13,9 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import com.webcontext.libs.zelibrairie.exception.EntityAlreadyExistsException;
-import com.webcontext.libs.zelibrairie.model.User;
-import com.webcontext.libs.zelibrairie.services.UserService;
+import com.webcontext.libs.restwebapp.exception.EntityAlreadyExistsException;
+import com.webcontext.libs.restwebapp.model.User;
+import com.webcontext.libs.restwebapp.services.UserService;
 
 /**
  * Unit Test for class UserService.
@@ -92,14 +92,14 @@ public class UserServiceTest {
 
 	@Test
 	public void test_4_update() {
-		User usernew = new User("usernew", "Usernew", "Newuser",
-				"new.user@mail.com", "password");
+		User userupdate = new User("userupdate", "userupdate", "userupdate",
+				"user.update@mail.com", "password");
 		try {
-			userService.add(usernew);
+			userService.add(userupdate);
 		} catch (EntityAlreadyExistsException e) {
 			fail("Unable to insert data");
 		}
-		User last = userService.findByUsername("usernew");
+		User last = userService.findByUsername("userupdate");
 		last.setFirstname("Toto");
 		User modified = userService.update(last);
 

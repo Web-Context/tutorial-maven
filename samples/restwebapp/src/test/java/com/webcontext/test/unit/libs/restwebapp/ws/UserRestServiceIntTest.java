@@ -1,14 +1,13 @@
 /**
  * 
  */
-package com.webcontext.test.unit.libs.zelibraririe.ws;
+package com.webcontext.test.unit.libs.restwebapp.ws;
 
 import java.io.IOException;
 import java.net.URL;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
-import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
@@ -24,12 +23,13 @@ import com.jayway.restassured.RestAssured;
  * @author Frédéric Delorme<frederic.delorme@web-context.com>
  * 
  */
-@RunWith(Arquillian.class)
+@RunWith(org.jboss.arquillian.junit.Arquillian.class)
 public class UserRestServiceIntTest {
 	@Deployment
 	public static WebArchive deploy() {
-		return ShrinkWrap.create(WebArchive.class)
+		return ShrinkWrap.create(WebArchive.class,"test.war")
 				.addPackage("com.webcontext.libs.zelibraries")
+				.addAsWebInfResource("web.xml")
 				.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
 	}
 
