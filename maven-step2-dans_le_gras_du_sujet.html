@@ -326,8 +326,7 @@ ler-javac/1.8.1/plexus-compiler-javac-1.8.1.jar (13 KB at 26.8 KB/sec)
 			ajouter les dites dépendances:
 		</p>
 
-		<pre class="xml">
-&lt;project&gt;
+		<pre class="xml">&lt;project&gt;
   ...
   &lt;groupId&gt;&lt;/groupId&gt;
   &lt;artifactId&gt;&lt;/artifactId&gt;
@@ -366,20 +365,20 @@ ler-javac/1.8.1/plexus-compiler-javac-1.8.1.jar (13 KB at 26.8 KB/sec)
 			qui a la charcge de vérifier et activer cela:
 		</p>
 
-		<pre class="xml">  &lt;build&gt;
-      &lt;plugins&gt;
-        &lt;plugin&gt;
-          &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
-          &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
-          &lt;version&gt;3.1&lt;/version&gt;
-          &lt;configuration&gt;
-            &lt;target&gt;${src.target}&lt;/target&gt;
-            &lt;source&gt;${src.source}&lt;/source&gt;
-            &lt;encodage&gt;${src.encodage}&lt;/encodage&gt;
-          &lt;/configuration&gt;
-        &lt;/plugin&gt;
-      &lt;/plugins&gt;
-  &lt;/build&gt;
+		<pre class="xml">&lt;build&gt;
+  &lt;plugins&gt;
+    &lt;plugin&gt;
+      &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+      &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
+      &lt;version&gt;3.1&lt;/version&gt;
+      &lt;configuration&gt;
+        &lt;target&gt;${src.target}&lt;/target&gt;
+        &lt;source&gt;${src.source}&lt;/source&gt;
+        &lt;encodage&gt;${src.encodage}&lt;/encodage&gt;
+      &lt;/configuration&gt;
+    &lt;/plugin&gt;
+  &lt;/plugins&gt;
+&lt;/build&gt;
 </pre>
 
 
@@ -494,6 +493,7 @@ ler-javac/1.8.1/plexus-compiler-javac-1.8.1.jar (13 KB at 26.8 KB/sec)
 		
 		
 		
+		
 		</pre>
 
 
@@ -582,7 +582,8 @@ public class UserServiceTest {
   }
 
 }
-</pre>
+
+		</pre>
 
 
 		<h2>Test test test !</h2>
@@ -711,10 +712,10 @@ drwxr-xr-x 3 frederic frederic 4096 avril 16 19:14 test-classes/
 		<ul>
 			<li><strong>maven-javadoc-plugin</strong> pour produire la
 				documentation au format javadoc de notre API,</li>
-			<li><strong>maven-src-plugin</strong> pour livrer les sources avec
-				notre applciation</li>
-			<li><strong>maven-release-plugin</strong> pour faire la release et
-				la livraison de cette application sur un dépôt de type maven.</li>
+			<li><strong>maven-src-plugin</strong> pour livrer les sources
+				avec notre applciation</li>
+			<li><strong>maven-release-plugin</strong> pour faire la release
+				et la livraison de cette application sur un dépôt de type maven.</li>
 		</ul>
 
 		<h2>La release !</h2>
@@ -730,12 +731,11 @@ drwxr-xr-x 3 frederic frederic 4096 avril 16 19:14 test-classes/
 			de notre projet:
 		</p>
 
-		<pre class="xml">
-	&lt;plugin&gt;
-		&lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
-		&lt;artifactId&gt;maven-javadoc-plugin&lt;/artifactId&gt;
-		&lt;version&gt;2.9.1&lt;/version&gt;
-	&lt;/plugin&gt;			
+		<pre class="xml">&lt;plugin&gt;
+	&lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+	&lt;artifactId&gt;maven-javadoc-plugin&lt;/artifactId&gt;
+	&lt;version&gt;2.9.1&lt;/version&gt;
+&lt;/plugin&gt;
 </pre>
 
 		<p>Relançons la compilation avec une commande que nous connaissons
@@ -781,12 +781,11 @@ drwxr-xr-x  3 frederic frederic  4096 avril 16 19:27 test-classes/
 		<p>Tout bon packaging de logiciel doit être accompagné de ses
 			sources.</p>
 
-		<pre class="xml">
-	&lt;plugin&gt;
-		&lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
-		&lt;artifactId&gt;maven-source-plugin&lt;/artifactId&gt;
-		&lt;version&gt;2.2.1&lt;/version&gt;
-	&lt;/plugin&gt;			
+		<pre class="xml">&lt;plugin&gt;
+	&lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+	&lt;artifactId&gt;maven-source-plugin&lt;/artifactId&gt;
+	&lt;version&gt;2.2.1&lt;/version&gt;
+&lt;/plugin&gt;			
 </pre>
 
 		Nous lancerons de nouveau un appel à
@@ -813,12 +812,11 @@ drwxr-xr-x  3 frederic frederic  4096 avril 16 19:27 test-classes/
 			.
 		</p>
 
-		<pre class="xml">
-	&lt;plugin&gt;
-		&lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
-		&lt;artifactId&gt;maven-release-plugin&lt;/artifactId&gt;
-		&lt;version&gt;2.5&lt;/version&gt;
-	&lt;/plugin&gt;			
+		<pre class="xml">&lt;plugin&gt;
+	&lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+	&lt;artifactId&gt;maven-release-plugin&lt;/artifactId&gt;
+	&lt;version&gt;2.5&lt;/version&gt;
+&lt;/plugin&gt;			
 </pre>
 
 
@@ -832,13 +830,18 @@ drwxr-xr-x  3 frederic frederic  4096 avril 16 19:27 test-classes/
 		</ol>
 		<p>tout cela est fait à travers l'entrée suivante dan le pom.xml:</p>
 
-		<pre class="xml">
-	&lt;scm&gt;
-		&lt;url&gt;http://bitbucket.org/webcontext/tutorial-maven.git&lt;/url&gt;
-		&lt;connection&gt;scm:git:git@bitbucket.org:webcontext/tutorial-maven.git&lt;/connection&gt;
-		&lt;developerConnection&gt;scm:git:git@bitbucket.org:webcontext/tutorial-maven.git&lt;/developerConnection&gt;
-		&lt;tag&gt;${project.version}&lt;/tag&gt;
-	&lt;/scm&gt;
+		<pre class="xml">&lt;scm&gt;
+  &lt;url&gt;
+    http://bitbucket.org/webcontext/tutorial-maven.git
+  &lt;/url&gt;
+  &lt;connection&gt;
+    scm:git:git@bitbucket.org:webcontext/tutorial-maven.git
+  &lt;/connection&gt;
+  &lt;developerConnection&gt;
+    scm:git:git@bitbucket.org:webcontext/tutorial-maven.git
+  &lt;/developerConnection&gt;
+  &lt;tag&gt;${project.version}&lt;/tag&gt;
+&lt;/scm&gt;
 </pre>
 
 		<p>où:</p>
@@ -877,12 +880,33 @@ drwxr-xr-x  3 frederic frederic  4096 avril 16 19:27 test-classes/
 			<code>&lt;version&gt;</code>
 			, soit ici
 			<code>0.0.1-SNAPSHOT</code>
-			ce qui donne lieu à la release
+			, version de travail, ce qui donne lieu à la release
 			<code>0.0.1</code>
 			.
 		</p>
 
 		<pre class="console">$ mvn release:prepare</pre>
+
+		A cette étape, la release est prête a être lancée.
+
+		<h3>Release:perform</h3>
+
+		<p>La réalisation de la release implique que d'autrtes éléments de configuration soient apportés, en l'occurrence, la définition du dépôt cible de la release.</p>
+
+		<dl>
+			<dt>Repository Maven</dt>
+			<dd>Un répository maven est un dépôt destiné à contenir l'ensemble des versions d'un produit, avec ses dépendances, sa documentation et ses sources. Le dépot est accédé par maven lui-même lors des phases de calculs des dépendances d'un logiciel afin de les mettre à disposition du compilateur d'une part, puis de les glisser dans le packaging final, suivat les besoins exprimés dans le fichier <code>pom.xml</code></dd>
+		</dl>
+
+		<p>A la fin de la release <strong>0.0.1</strong>, le logiciel a été versionné en <strong>0.0.2-SNAPSHOT</strong>, prêt pour recevoir le développement de la prochaine release</p>
+
+		<p>Si vous regarder dans votre dépot D'artefact (Nexus ou Archiva, par exemple), vous pourrez voir que les jar du logiciel, des sources et de la javadoc en version 0.0.1 ont été poussés tous les trois.</p>
+
+		<figure>
+			<figcaption>Screenshot Nexus version 0.0.1</figcaption>
+		</figure>
+
+
 
 		<blockquote class="info">
 			<strong>Note</strong><br />Attention, les modifications doivent

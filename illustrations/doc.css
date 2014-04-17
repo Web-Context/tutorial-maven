@@ -77,45 +77,37 @@ p.subtitle {
 pre {
 	margin: 4%;
 	padding: 2%;
+	margin-bottom: 20px;
 }
 
 pre.xml {
 	border: 1px solid #363;
 	border-left: 6px solid #363;
 	background-color: #efe;
-	margin: 4%;
-	margin-bottom: 5px;
 }
 
 pre.diagram {
 	background-color: #fff;
 	font-size: 9pt;
 	text-align: left;
-	margin-bottom: 5px;
 }
 
 pre.java {
 	border: 1px solid #336;
 	border-left: 6px solid #336;
 	background-color: #eef;
-	margin: 4%;
-	margin-bottom: 5px;
 }
 
 pre.properties {
 	border: 1px solid #663;
 	border-left: 6px solid #663;
 	background-color: #ffe;
-	margin: 4%;
-	margin-bottom: 5px;
 }
 
 pre.console {
 	border: 1px solid #666;
 	background-color: #000;
 	color: #fff;
-	margin: 4%;
-	margin-bottom: 5px;
 	border-radius: 10px;
 }
 
@@ -340,4 +332,16 @@ blockquote code {
 .vcard div {
 	margin-left: 100px;
 	margin-bottom: 50px;
+}
+/*----- Definition list-----*/
+dl {
+	margin-left:30px;
+	padding:10px;
+}
+dt {
+	font-weight:bold;
+	font-size:11pt;
+}
+dd {
+	font-size;10pt;
 }
