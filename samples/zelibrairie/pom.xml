@@ -5,14 +5,14 @@
 	<!-- Product identification -->
 	<groupId>com.webcontext.apps</groupId>
 	<artifactId>zelibrairie</artifactId>
-	<version>0.0.1</version>
+	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<!-- Properties for project -->
 	<properties>
-		<src.target>1.6</src.target>
-		<src.source>1.6</src.source>
-		<src.encodage>UTF-8</src.encodage>
+		<src.target>1.7</src.target>
+		<src.source>1.7</src.source>
+		<src.encoding>UTF-8</src.encoding>
 	</properties>
 
 	<!-- Product description -->
@@ -60,13 +60,12 @@
 		</dependency>
 	</dependencies>
 
-	<!-- Concurrent Version Manager -->
+	<!-- Gestionaire de version -->
 	<scm>
-
-		<url>http://bitbucket.org/webcontext/tutorial-maven.git</url>
-		<connection>scm:git:git@bitbucket.org:webcontext/tutorial-maven.git</connection>
-		<developerConnection>scm:git:git@bitbucket.org:webcontext/tutorial-maven.git</developerConnection>
-		<tag>zelibrairie-0.0.1</tag>
+		<url>http://github.com/web-context/tutorial-maven.git</url>
+		<connection>scm:git:git@github.com:web-context/tutorial-maven.git</connection>
+		<developerConnection>scm:git:git@github.com:web-context/tutorial-maven.git</developerConnection>
+		<tag>v${project.version}</tag>
 	</scm>
 
 	<!-- Configuration Nexus/Archiva/artifactory -->
@@ -83,6 +82,18 @@
 		</snapshotRepository>
 	</distributionManagement>
 
+	<!-- Continuous Build -->
+	<ciManagement>
+		<system>jenkins</system>
+		<url>http://localhost:10090/jenkins-1.559/job/tutorial-maven</url>
+	</ciManagement>
+
+	<!-- Gestion des bugs -->
+	<issueManagement>
+		<system>github</system>
+		<url>http://github.com/web-context/tutorial-maven/issues</url>
+	</issueManagement>
+
 	<build>
 		<plugins>
 			<!-- Java Compiler Configuration -->
@@ -93,7 +104,7 @@
 				<configuration>
 					<target>${src.target}</target>
 					<source>${src.source}</source>
-					<encodage>${src.encodage}</encodage>
+					<encoding>${src.encoding}</encoding>
 				</configuration>
 			</plugin>
 
@@ -103,7 +114,7 @@
 				<artifactId>maven-resources-plugin</artifactId>
 				<version>2.6</version>
 				<configuration>
-					<encodage>${src.encodage}</encodage>
+				<encoding>${src.encoding}</encoding>
 				</configuration>
 			</plugin>
 
@@ -141,33 +152,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
-	<!-- Gestionaire de version -->
-	<scm>
-		<url>http://bitbucket.org/webcontext/tutorial-maven.git</url>
-		<connection>scm:git:git@bitbucket.org:webcontext/tutorial-maven.git</connection>
-		<developerConnection>scm:git:git@bitbucket.org:webcontext/tutorial-maven.git</developerConnection>
-		<tag>zelibrairie-0.0.1</tag>
-	</scm>
-	
-	<!-- Configuration Nexus/Archiva/artifactory -->
-	<distributionManagement>
-		<repository>
-			<id>deployment</id>
-			<name>Internal Releases</name>
-			<url>http://nostroamd:8080/nexus/content/repositories/releases/</url>
-		</repository>
-		<snapshotRepository>
-			<id>deployment</id>
-			<name>Internal Releases</name>
-			<url>http://nostroamd:8080/nexus/content/repositories/snapshots/</url>
-		</snapshotRepository>
-	</distributionManagement>
-
-	<!-- Continuous Build -->	
-	<ciManagement>
-		<system>jenkins</system>
-		<url>http://localhost:10090/jenkins-1.559/job/tutorial-maven</url>
-	</ciManagement>
-
 </project>

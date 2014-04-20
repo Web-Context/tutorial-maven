@@ -19,9 +19,9 @@ import com.webcontext.libs.restwebapp.services.UserService;
 
 /**
  * Unit Test for class UserService.
- * 
+ *
  * @author Frédéric Delorme<frederic.delorme@web-context.com>
- * 
+ *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class UserServiceTest {
@@ -81,7 +81,7 @@ public class UserServiceTest {
 
 	@Test
 	public void test_3_AddListUserAndDelete() {
-		
+
 		userService.add(userstest.values());
 
 		User user1 = userService.findByUsername("user1");

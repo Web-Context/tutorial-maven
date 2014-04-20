@@ -10,9 +10,9 @@
 
 	<!-- Properties for project -->
 	<properties>
-		<src.target>1.6</src.target>
-		<src.source>1.6</src.source>
-		<src.encodage>UTF-8</src.encodage>
+		<src.target>1.7</src.target>
+		<src.source>1.7</src.source>
+		<src.encoding>UTF-8</src.encoding>
 	</properties>
 
 	<!-- Profduct description -->
@@ -101,12 +101,47 @@
 			<scope>test</scope>
 		</dependency>
 
-
-
 	</dependencies>
+
+	<!-- Gestionaire de version -->
+	<scm>
+		<url>http://github.com/web-context/tutorial-maven.git</url>
+		<connection>scm:git:git@github.com:web-context/tutorial-maven.git</connection>
+		<developerConnection>scm:git:git@github.com:web-context/tutorial-maven.git</developerConnection>
+		<tag>v${project.version}</tag>
+	</scm>
+
+	<!-- Configuration Nexus/Archiva/artifactory -->
+	<distributionManagement>
+		<repository>
+			<id>deployment</id>
+			<name>Internal Releases</name>
+			<url>http://nostroamd:8080/nexus/content/repositories/releases/</url>
+		</repository>
+		<snapshotRepository>
+			<id>deployment</id>
+			<name>Internal Releases</name>
+			<url>http://nostroamd:8080/nexus/content/repositories/snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+	<!-- Continuous Build -->
+	<ciManagement>
+		<system>jenkins</system>
+		<url>http://localhost:10090/jenkins-1.559/job/tutorial-maven</url>
+	</ciManagement>
+
+	<!-- Gestion des bugs -->
+	<issueManagement>
+		<system>github</system>
+		<url>http://github.com/web-context/tutorial-maven/issues</url>
+	</issueManagement>
+
+
 
 	<build>
 		<plugins>
+			<!-- Paramétrage du compilateur java -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -114,25 +149,41 @@
 				<configuration>
 					<target>${src.target}</target>
 					<source>${src.source}</source>
-					<encodage>${src.encodage}</encodage>
+					<encoding>${src.encoding}</encoding>
 				</configuration>
 			</plugin>
+			<!-- Resources encoding configuration -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<encoding>${src.encoding}</encoding>
+				</configuration>
+			</plugin>
+			<!-- Project Documentation Packaging -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.9.1</version>
+			</plugin>
+
+			<!-- Sources Packaging -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>2.2.1</version>
+			</plugin>
+
+			<!-- Package Web Archive -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.4</version>
+				<configuration>
+					
+				</configuration>
+			</plugin>	
 		</plugins>
 	</build>
-
-
-	<scm>
-		<url>http://bitbucket.org/webcontext/tutorial-maven.git</url>
-		<connection>scm:git:git@bitbucket.org:webcontext/tutorial-maven.git</connection>
-		<developerConnection>scm:git:git@bitbucket.org:webcontext/tutorial-maven.git</developerConnection>
-		<tag>${project.version}</tag>
-	</scm>
-	<issueManagement>
-		<system>bitbucket</system>
-		<url>http://bitbucket.org/webcontext/tutorial-maven/issues</url>
-	</issueManagement>
-	<ciManagement>
-		<system>jenkins</system>
-		<url>http://localhost:10090/jenkins-1.559/job/tutorial-maven</url>
-	</ciManagement>
 </project>
