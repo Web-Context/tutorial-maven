@@ -108,7 +108,7 @@
 		<url>http://github.com/web-context/tutorial-maven.git</url>
 		<connection>scm:git:git@github.com:web-context/tutorial-maven.git</connection>
 		<developerConnection>scm:git:git@github.com:web-context/tutorial-maven.git</developerConnection>
-		<tag>v${project.version}</tag>
+		<tag>${project.artifactId}-${project.version}</tag>
 	</scm>
 
 	<!-- Configuration Nexus/Archiva/artifactory -->

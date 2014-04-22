@@ -13,14 +13,14 @@
     <module>restwebapp</module>
   </modules>
 
-  <scm>
-  	<url>http://bitbucket.org/webcontext/tutorial-maven.git</url>
-  	<connection>scm:git:git@bitbucket.org:webcontext/tutorial-maven.git</connection>
-  	<developerConnection>scm:git:git@bitbucket.org:webcontext/tutorial-maven.git</developerConnection>
-  	<tag>${project.version}</tag>
+<scm>
+    <url>http://github.com/web-context/tutorial-maven.git</url>
+    <connection>scm:git:git@github.com:web-context/tutorial-maven.git</connection>
+    <developerConnection>scm:git:git@github.com:web-context/tutorial-maven.git</developerConnection>
+    <tag>${project.artifactId}-${project.version}</tag>
   </scm>
   <issueManagement>
-  	<system>bitbucket</system>
-  	<url>http://bitbucket.org/webcontext/tutorial-maven/issues</url>
+    <system>bitbucket</system>
+    <url>http://github.com/web-context/tutorial-maven/issues</url>
   </issueManagement>
 </project>do

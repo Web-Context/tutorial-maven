@@ -1,0 +1,24 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  
+  <!-- Product identificaiton -->
+  <groupId>com.webcontext.apps</groupId>
+  <artifactId>tutorial-maven</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <modules>
+    <module>samples</module>
+  </modules>
+
+  <scm>
+  	<url>http://github.com/web-context/tutorial-maven.git</url>
+  	<connection>scm:git:git@github.com:web-context/tutorial-maven.git</connection>
+  	<developerConnection>scm:git:git@github.com:web-context/tutorial-maven.git</developerConnection>
+  	<tag>${project.artifactId}-${project.version}</tag>
+  </scm>
+  <issueManagement>
+  	<system>bitbucket</system>
+  	<url>http://github.com/web-context/tutorial-maven/issues</url>
+  </issueManagement>
+</project>
