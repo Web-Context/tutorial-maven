@@ -25,7 +25,7 @@ import com.jayway.restassured.RestAssured;
  */
 @RunWith(org.jboss.arquillian.junit.Arquillian.class)
 public class UserRestServiceIntTest {
-	@Deployment
+	/*@Deployment
 	public static WebArchive deploy() {
 		return ShrinkWrap.create(WebArchive.class,"test.war")
 				.addPackage("com.webcontext.libs.zelibraries")
@@ -39,6 +39,6 @@ public class UserRestServiceIntTest {
 			throws IOException {
 		RestAssured.expect().statusCode(200).when()
 				.get(baseURL.toString() + "/rest/users");
-	}
+	}*/
 
 }
