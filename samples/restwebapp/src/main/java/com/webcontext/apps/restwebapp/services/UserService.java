@@ -30,12 +30,12 @@ public class UserService {
 	 * @return
 	 */
 	public User add(User user) throws EntityAlreadyExistsException {
-
 		if (userEjb.findByUsername(user.getUsername()) == null) {
 			userEjb.save(user);
+
 		} else {
 			throw new EntityAlreadyExistsException("User " + user.getUsername()
-					+ " already exixts");
+				+ " already exixts");
 		}
 		return user;
 	}
@@ -48,7 +48,7 @@ public class UserService {
 	 * @throws EntityAlreadyExistsException
 	 */
 	public void add(Collection<User> newUsers)
-			throws EntityAlreadyExistsException {
+	throws EntityAlreadyExistsException {
 		for (User user : newUsers) {
 			add(user);
 		}

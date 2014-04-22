@@ -25,9 +25,9 @@ import com.webcontext.apps.restwebapp.services.UserService;
 
 /**
  * Unit Test for class UserService.
- * 
+ *
  * @author Frédéric Delorme<frederic.delorme@web-context.com>
- * 
+ *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class UserServiceTest {
@@ -101,10 +101,16 @@ public class UserServiceTest {
 	}
 
 	@Test
+<<<<<<< HEAD:samples/restwebapp/src/test/java/com/webcontext/test/unit/apps/restwebapp/UserServiceTest.java
 	public void test_3_AddListUserAndDelete()
 			throws EntityAlreadyExistsException {
 
 		userService.add(usersTest.values());
+=======
+	public void test_3_AddListUserAndDelete() {
+
+		userService.add(userstest.values());
+>>>>>>> 0d2aa41586b2b0bad3b0b3fda4efe7338111eb4d:samples/restwebapp/src/test/java/com/webcontext/test/unit/libs/restwebapp/UserServiceTest.java
 
 		User user1 = userService.findByUsername("user1");
 		userService.delete(user1);

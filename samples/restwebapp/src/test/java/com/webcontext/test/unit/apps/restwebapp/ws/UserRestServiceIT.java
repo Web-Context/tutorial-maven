@@ -28,11 +28,17 @@ import org.junit.runner.RunWith;
  * @author Frédéric Delorme<frederic.delorme@web-context.com>
  * 
  */
+<<<<<<< HEAD:samples/restwebapp/src/test/java/com/webcontext/test/unit/apps/restwebapp/ws/UserRestServiceIT.java
 @RunWith(Arquillian.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class UserRestServiceIT {
 
 	@Deployment
+=======
+//@RunWith(org.jboss.arquillian.junit.Arquillian.class)
+public class UserRestServiceIntTest {
+	/*@Deployment
+>>>>>>> 0d2aa41586b2b0bad3b0b3fda4efe7338111eb4d:samples/restwebapp/src/test/java/com/webcontext/test/unit/libs/restwebapp/ws/UserRestServiceIntTest.java
 	public static WebArchive deploy() {
 		return ShrinkWrap.create(WebArchive.class,"test.war")
 				.addPackage("com.webcontext.apps.zelibraries")
@@ -46,6 +52,6 @@ public class UserRestServiceIT {
 			throws IOException {
 		RestAssured.expect().statusCode(200).when()
 				.get(baseURL.toString() + "/rest/users");
-	}
+	}*/
 
 }

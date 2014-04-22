@@ -8,7 +8,18 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
+<<<<<<< HEAD
 	<!-- Product description -->
+=======
+	<!-- Properties for project -->
+	<properties>
+		<src.target>1.7</src.target>
+		<src.source>1.7</src.source>
+		<src.encoding>UTF-8</src.encoding>
+	</properties>
+
+	<!-- Profduct description -->
+>>>>>>> 0d2aa41586b2b0bad3b0b3fda4efe7338111eb4d
 	<name>RestWebApp</name>
 	<description>A demonstration Rest Oriented WebApp project to illustrate apache maven usage. </description>
 	<url>http://github.com/Web-Context/tutorial-maven</url>
@@ -150,6 +161,8 @@
 		</dependency>
 
 	</dependencies>
+<<<<<<< HEAD
+=======
 
 	<!-- Gestionaire de version -->
 	<scm>
@@ -184,6 +197,44 @@
 		<system>github</system>
 		<url>http://github.com/Web-Context/tutorial-maven/issues</url>
 	</issueManagement>
+>>>>>>> 0d2aa41586b2b0bad3b0b3fda4efe7338111eb4d
+
+	<!-- Gestionaire de version -->
+	<scm>
+		<url>http://github.com/Web-Context/tutorial-maven.git</url>
+		<connection>scm:git:git@github.com:Web-Context/tutorial-maven.git</connection>
+		<developerConnection>scm:git:git@github.com:Web-Context/tutorial-maven.git</developerConnection>
+		<tag>${project.artifactId}-${project.version}</tag>
+	</scm>
+
+<<<<<<< HEAD
+	<!-- Configuration Nexus/Archiva/artifactory -->
+	<distributionManagement>
+		<repository>
+			<id>deployment</id>
+			<name>Internal Releases</name>
+			<url>http://nostroamd:8080/nexus/content/repositories/releases/</url>
+		</repository>
+		<snapshotRepository>
+			<id>deployment</id>
+			<name>Internal Releases</name>
+			<url>http://nostroamd:8080/nexus/content/repositories/snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+	<!-- Continuous Build -->
+	<ciManagement>
+		<system>jenkins</system>
+		<url>http://localhost:10090/jenkins-1.559/job/tutorial-maven</url>
+	</ciManagement>
+
+	<!-- Gestion des bugs -->
+	<issueManagement>
+		<system>github</system>
+		<url>http://github.com/Web-Context/tutorial-maven/issues</url>
+	</issueManagement>
+=======
+>>>>>>> 0d2aa41586b2b0bad3b0b3fda4efe7338111eb4d
 
 	<build>
 		<plugins>
@@ -226,7 +277,14 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
 				<version>2.4</version>
+<<<<<<< HEAD
 			</plugin>
+=======
+				<configuration>
+					
+				</configuration>
+			</plugin>	
+>>>>>>> 0d2aa41586b2b0bad3b0b3fda4efe7338111eb4d
 		</plugins>
 	</build>
 </project>
