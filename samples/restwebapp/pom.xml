@@ -150,130 +150,86 @@
 		</dependency>
 
 	</dependencies>
-	<<<<<<< HEAD
-		=======
 
-		<!-- Gestionaire de version -->
-		<scm>
-			<url>http://github.com/Web-Context/tutorial-maven.git</url>
-			<connection>scm:git:git@github.com:Web-Context/tutorial-maven.git</connection>
-			<developerConnection>scm:git:git@github.com:Web-Context/tutorial-maven.git</developerConnection>
-			<tag>${project.artifactId}-${project.version}</tag>
-		</scm>
+	<!-- Configuration Nexus/Archiva/artifactory -->
+	<distributionManagement>
+		<repository>
+			<id>deployment</id>
+			<name>Internal Releases</name>
+			<url>http://nostroamd:8080/nexus/content/repositories/releases/</url>
+		</repository>
+		<snapshotRepository>
+			<id>deployment</id>
+			<name>Internal Releases</name>
+			<url>http://nostroamd:8080/nexus/content/repositories/snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
 
-		<!-- Configuration Nexus/Archiva/artifactory -->
-		<distributionManagement>
-			<repository>
-				<id>deployment</id>
-				<name>Internal Releases</name>
-				<url>http://nostroamd:8080/nexus/content/repositories/releases/</url>
-			</repository>
-			<snapshotRepository>
-				<id>deployment</id>
-				<name>Internal Releases</name>
-				<url>http://nostroamd:8080/nexus/content/repositories/snapshots/</url>
-			</snapshotRepository>
-		</distributionManagement>
+	<!-- Continuous Build -->
+	<ciManagement>
+		<system>travis-ci</system>
+		<url>https://travis-ci.org/Web-Context/tutorial-maven</url>
+	</ciManagement>
 
-		<!-- Continuous Build -->
-		<ciManagement>
-			<system>jenkins</system>
-			<url>http://localhost:10090/jenkins-1.559/job/tutorial-maven</url>
-		</ciManagement>
+	<!-- Gestion des bugs -->
+	<issueManagement>
+		<system>github</system>
+		<url>http://github.com/Web-Context/tutorial-maven/issues</url>
+	</issueManagement>
 
-		<!-- Gestion des bugs -->
-		<issueManagement>
-			<system>github</system>
-			<url>http://github.com/Web-Context/tutorial-maven/issues</url>
-		</issueManagement>
-		>>>>>>> 0d2aa41586b2b0bad3b0b3fda4efe7338111eb4d
+	<!-- Gestionaire de version -->
+	<scm>
+		<url>http://github.com/Web-Context/tutorial-maven.git</url>
+		<connection>scm:git:git@github.com:Web-Context/tutorial-maven.git</connection>
+		<developerConnection>scm:git:git@github.com:Web-Context/tutorial-maven.git</developerConnection>
+		<tag>${project.artifactId}-${project.version}</tag>
+	</scm>
 
-		<!-- Gestionaire de version -->
-		<scm>
-			<url>http://github.com/Web-Context/tutorial-maven.git</url>
-			<connection>scm:git:git@github.com:Web-Context/tutorial-maven.git</connection>
-			<developerConnection>scm:git:git@github.com:Web-Context/tutorial-maven.git</developerConnection>
-			<tag>${project.artifactId}-${project.version}</tag>
-		</scm>
+	<build>
+		<plugins>
+			<!-- Paramétrage du compilateur java -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<target>${src.target}</target>
+					<source>${src.source}</source>
+					<encoding>${src.encoding}</encoding>
+				</configuration>
+			</plugin>
+			<!-- Resources encoding configuration -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<encoding>${src.encoding}</encoding>
+				</configuration>
+			</plugin>
+			<!-- Project Documentation Packaging -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.9.1</version>
+			</plugin>
 
-		<<<<<<< HEAD
-			<!-- Configuration Nexus/Archiva/artifactory -->
-			<distributionManagement>
-				<repository>
-					<id>deployment</id>
-					<name>Internal Releases</name>
-					<url>http://nostroamd:8080/nexus/content/repositories/releases/</url>
-				</repository>
-				<snapshotRepository>
-					<id>deployment</id>
-					<name>Internal Releases</name>
-					<url>http://nostroamd:8080/nexus/content/repositories/snapshots/</url>
-				</snapshotRepository>
-			</distributionManagement>
+			<!-- Sources Packaging -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>2.2.1</version>
+			</plugin>
 
-			<!-- Continuous Build -->
-			<ciManagement>
-				<system>jenkins</system>
-				<url>http://localhost:10090/jenkins-1.559/job/tutorial-maven</url>
-			</ciManagement>
-
-			<!-- Gestion des bugs -->
-			<issueManagement>
-				<system>github</system>
-				<url>http://github.com/Web-Context/tutorial-maven/issues</url>
-			</issueManagement>
-			=======
-			>>>>>>> 0d2aa41586b2b0bad3b0b3fda4efe7338111eb4d
-
-			<build>
-				<plugins>
-					<!-- Paramétrage du compilateur java -->
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-compiler-plugin</artifactId>
-						<version>3.1</version>
-						<configuration>
-							<target>${src.target}</target>
-							<source>${src.source}</source>
-							<encoding>${src.encoding}</encoding>
-						</configuration>
-					</plugin>
-					<!-- Resources encoding configuration -->
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-resources-plugin</artifactId>
-						<version>2.6</version>
-						<configuration>
-							<encoding>${src.encoding}</encoding>
-						</configuration>
-					</plugin>
-					<!-- Project Documentation Packaging -->
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-javadoc-plugin</artifactId>
-						<version>2.9.1</version>
-					</plugin>
-
-					<!-- Sources Packaging -->
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-source-plugin</artifactId>
-						<version>2.2.1</version>
-					</plugin>
-
-					<!-- Package Web Archive -->
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-war-plugin</artifactId>
-						<version>2.4</version>
-						<<<<<<< HEAD
-						</plugin>
-						=======
-						<configuration>
-							
-						</configuration>
-					</plugin>	
-					>>>>>>> 0d2aa41586b2b0bad3b0b3fda4efe7338111eb4d
-				</plugins>
-			</build>
-		</project>
+			<!-- Package Web Archive -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.4</version>
+				<configuration>
+					
+				</configuration>
+			</plugin>	
+		</plugins>
+	</build>
+</project>
