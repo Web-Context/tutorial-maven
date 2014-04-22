@@ -36,6 +36,7 @@ public class UserServiceTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
+		userService = new UserService();
 		userstest = new HashMap<String, User>();
 		// add some user
 		userstest.put("user1", new User("user1", "User", "User1",
