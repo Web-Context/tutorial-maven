@@ -28,11 +28,12 @@ public class UserService {
 	 *            Add a new user.
 	 * @return
 	 */
-	public User add(User user) throws EntityAlreadyExistsException{
-		if(!users.containsKey(user.getUsername())){
+	public User add(User user) throws EntityAlreadyExistsException {
+		if (!users.containsKey(user.getUsername())) {
 			users.put(user.getUsername(), user);
-		}else{
-			throw new EntityAlreadyExistsException("User "+user.getUsername()+" already exixts");
+		} else {
+			throw new EntityAlreadyExistsException("User " + user.getUsername()
+					+ " already exixts");
 		}
 		return user;
 	}

@@ -1,18 +1,17 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<!-- Product identification -->
 	<groupId>com.webcontext.apps</groupId>
 	<artifactId>zelibrairie</artifactId>
-	<version>0.0.1</version>
+	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<!-- Properties for project -->
 	<properties>
-		<src.target>1.6</src.target>
-		<src.source>1.6</src.source>
-		<src.encodage>UTF-8</src.encodage>
+		<src.target>1.7</src.target>
+		<src.source>1.7</src.source>
+		<src.encoding>UTF-8</src.encoding>
 	</properties>
 
 	<!-- Product description -->
@@ -23,7 +22,7 @@
 	<!-- Organization -->
 	<organization>
 		<name>WebContext</name>
-		<url>http://www.web-context.com/</url>
+		<url>http://www.Web-Context.com/</url>
 	</organization>
 
 	<!-- Publication year -->
@@ -35,7 +34,7 @@
 			<id>fdelorme</id>
 			<name>Frédéric Delorme</name>
 			<organization>webcontext</organization>
-			<organizationUrl>http://www.web-context.com/</organizationUrl>
+			<organizationUrl>http://www.Web-Context.com/</organizationUrl>
 			<roles>
 				<role>architect</role>
 			</roles>
@@ -62,10 +61,10 @@
 
 	<!-- Gestionaire de version -->
 	<scm>
-		<url>http://bitbucket.org/webcontext/tutorial-maven.git</url>
-		<connection>scm:git:git@bitbucket.org:webcontext/tutorial-maven.git</connection>
-		<developerConnection>scm:git:git@bitbucket.org:webcontext/tutorial-maven.git</developerConnection>
-		<tag>zelibrairie-0.0.1</tag>
+		<url>http://github.com/Web-Context/tutorial-maven.git</url>
+		<connection>scm:git:git@github.com:Web-Context/tutorial-maven.git</connection>
+		<developerConnection>scm:git:git@github.com:Web-Context/tutorial-maven.git</developerConnection>
+		<tag>${project.artifactId}-${project.version}</tag>
 	</scm>
 	
 	<!-- Configuration Nexus/Archiva/artifactory -->
@@ -82,11 +81,17 @@
 		</snapshotRepository>
 	</distributionManagement>
 
-	<!-- Continuous Build -->	
+	<!-- Continuous Build -->
 	<ciManagement>
 		<system>jenkins</system>
 		<url>http://localhost:10090/jenkins-1.559/job/tutorial-maven</url>
 	</ciManagement>
+
+	<!-- Gestion des bugs -->
+	<issueManagement>
+		<system>github</system>
+		<url>http://github.com/Web-Context/tutorial-maven/issues</url>
+	</issueManagement>
 
 	<build>
 		<plugins>
@@ -98,7 +103,7 @@
 				<configuration>
 					<target>${src.target}</target>
 					<source>${src.source}</source>
-					<encodage>${src.encodage}</encodage>
+					<encoding>${src.encoding}</encoding>
 				</configuration>
 			</plugin>
 
@@ -108,7 +113,7 @@
 				<artifactId>maven-resources-plugin</artifactId>
 				<version>2.6</version>
 				<configuration>
-					<encodage>${src.encodage}</encodage>
+				<encoding>${src.encoding}</encoding>
 				</configuration>
 			</plugin>
 
@@ -146,5 +151,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>

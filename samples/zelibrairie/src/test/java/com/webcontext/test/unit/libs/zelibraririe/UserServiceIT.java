@@ -2,6 +2,7 @@ package com.webcontext.test.unit.libs.zelibraririe;
 
 import java.util.HashMap;
 import java.util.Map;
+import javax.inject.Inject;
 
 import static org.junit.Assert.*;
 
@@ -10,6 +11,13 @@ import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
+
+import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.jboss.shrinkwrap.api.asset.EmptyAsset;
+import org.jboss.shrinkwrap.api.spec.JavaArchive;
+import org.junit.runner.RunWith;
 
 import com.webcontext.libs.zelibrairie.exception.EntityAlreadyExistsException;
 import com.webcontext.libs.zelibrairie.model.User;
@@ -21,18 +29,31 @@ import com.webcontext.libs.zelibrairie.services.UserService;
  * @author Frédéric Delorme<frederic.delorme@web-context.com>
  * 
  */
+@RunWith(Arquillian.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class UserServiceTest {
 
 	private static Map<String, User> userstest = new HashMap<String, User>();
-	private static UserService userService = new UserService();
+
+	@Inject
+	private UserService userService;
+
+	/**
+	 * Deployement 
+	 */
+	@Deployment
+	public static deploy(){
+		public static JavaArchive createArchiveAndDeploy() {
+		return ShrinkWrap.create(JavaArchive.class)
+				.addClasses(UserService.class, User.class)
+				.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
+	}
 
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@Before
 	public void setUp() throws Exception {
-		userService = new UserService();
 		userstest = new HashMap<String, User>();
 		// add some user
 		userstest.put("user1", new User("user1", "User", "User1",

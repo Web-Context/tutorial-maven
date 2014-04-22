@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.ejb.Stateless;
+import javax.inject.Inject;
+
 import com.webcontext.libs.zelibrairie.exception.EntityAlreadyExistsException;
 import com.webcontext.libs.zelibrairie.model.User;
 
@@ -14,6 +17,7 @@ import com.webcontext.libs.zelibrairie.model.User;
  * @author Frédéric Delorme<frederic.delorme@web-context.com>
  * 
  */
+@Stateless
 public class UserService {
 
 	/**
