@@ -23,7 +23,7 @@ import com.jayway.restassured.RestAssured;
  * @author Frédéric Delorme<frederic.delorme@web-context.com>
  * 
  */
-@RunWith(org.jboss.arquillian.junit.Arquillian.class)
+//@RunWith(org.jboss.arquillian.junit.Arquillian.class)
 public class UserRestServiceIntTest {
 	/*@Deployment
 	public static WebArchive deploy() {
