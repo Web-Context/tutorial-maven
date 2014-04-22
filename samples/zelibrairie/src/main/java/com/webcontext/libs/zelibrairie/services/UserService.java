@@ -5,9 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.ejb.Stateless;
-import javax.inject.Inject;
-
 import com.webcontext.libs.zelibrairie.exception.EntityAlreadyExistsException;
 import com.webcontext.libs.zelibrairie.model.User;
 
@@ -17,7 +14,6 @@ import com.webcontext.libs.zelibrairie.model.User;
  * @author Frédéric Delorme<frederic.delorme@web-context.com>
  * 
  */
-@Stateless
 public class UserService {
 
 	/**
@@ -32,11 +28,12 @@ public class UserService {
 	 *            Add a new user.
 	 * @return
 	 */
-	public User add(User user) throws EntityAlreadyExistsException{
-		if(!users.containsKey(user.getUsername())){
+	public User add(User user) throws EntityAlreadyExistsException {
+		if (!users.containsKey(user.getUsername())) {
 			users.put(user.getUsername(), user);
-		}else{
-			throw new EntityAlreadyExistsException("User "+user.getUsername()+" already exixts");
+		} else {
+			throw new EntityAlreadyExistsException("User " + user.getUsername()
+					+ " already exixts");
 		}
 		return user;
 	}

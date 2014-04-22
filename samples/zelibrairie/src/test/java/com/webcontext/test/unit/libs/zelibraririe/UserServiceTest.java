@@ -1,4 +1,4 @@
-package com.webcontext.test.unit.libs.restwebapp;
+package com.webcontext.test.unit.libs.zelibraririe;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -13,28 +13,29 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import com.webcontext.libs.restwebapp.exception.EntityAlreadyExistsException;
-import com.webcontext.libs.restwebapp.model.User;
-import com.webcontext.libs.restwebapp.services.UserService;
+import com.webcontext.libs.zelibrairie.exception.EntityAlreadyExistsException;
+import com.webcontext.libs.zelibrairie.model.User;
+import com.webcontext.libs.zelibrairie.services.UserService;
 
 /**
  * Unit Test for class UserService.
- *
+ * 
  * @author Frédéric Delorme<frederic.delorme@web-context.com>
- *
+ * 
  */
+
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class UserServiceTest {
 
-	private static Map<String, User> userstest = new HashMap<String, User>();
 	private static UserService userService = new UserService();
+
+	private static Map<String, User> userstest = new HashMap<String, User>();
 
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@Before
 	public void setUp() throws Exception {
-		userService = new UserService();
 		userstest = new HashMap<String, User>();
 		// add some user
 		userstest.put("user1", new User("user1", "User", "User1",
@@ -92,14 +93,14 @@ public class UserServiceTest {
 
 	@Test
 	public void test_4_update() {
-		User userupdate = new User("userupdate", "userupdate", "userupdate",
-				"user.update@mail.com", "password");
+		User userupdate = new User("userupdate", "Usernew", "Newuser",
+				"new.user@mail.com", "password");
 		try {
 			userService.add(userupdate);
 		} catch (EntityAlreadyExistsException e) {
 			fail("Unable to insert data");
 		}
-		User last = userService.findByUsername("userupdate");
+		User last = userService.findByUsername("usernew");
 		last.setFirstname("Toto");
 		User modified = userService.update(last);
 

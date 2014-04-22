@@ -1,4 +1,4 @@
-package com.webcontext.libs.restwebapp.exception;
+package com.webcontext.apps.restwebapp.exception;
 
 /**
  * Exception raised when the Entity already exists in the persisting system.

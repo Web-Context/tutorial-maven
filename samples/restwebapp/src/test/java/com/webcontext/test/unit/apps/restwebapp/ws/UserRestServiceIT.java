@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.webcontext.test.unit.libs.restwebapp.ws;
+package com.webcontext.test.unit.apps.restwebapp.ws;
 
 import com.jayway.restassured.RestAssured;
 
@@ -25,7 +25,7 @@ import org.junit.runner.RunWith;
 /**
  * Integration Test for User Service.
  * 
- * @author Frédéric Delorme<frederic.delorme@web-context.com>
+ * @author FrÃ©dÃ©ric Delorme<frederic.delorme@web-context.com>
  * 
  */
 @RunWith(Arquillian.class)
@@ -35,8 +35,8 @@ public class UserRestServiceIT {
 	@Deployment
 	public static WebArchive deploy() {
 		return ShrinkWrap.create(WebArchive.class,"test.war")
-				.addPackage("com.webcontext.libs.zelibraries")
-				.addAsWebInfResource("web.xml")
+				.addPackage("com.webcontext.apps.zelibraries")
+				.addAsResource("META-INF/test-persistence.xml","META-INF/persistence.xml")
 				.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
 	}
 

@@ -1,12 +1,14 @@
-package com.webcontext.libs.restwebapp.services;
+package com.webcontext.apps.restwebapp.services;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import com.webcontext.libs.restwebapp.exception.EntityAlreadyExistsException;
-import com.webcontext.libs.restwebapp.model.User;
+import javax.ejb.Stateless;
+import javax.inject.Inject;
+
+import com.webcontext.apps.restwebapp.ejb.UserEJB;
+import com.webcontext.apps.restwebapp.exception.EntityAlreadyExistsException;
+import com.webcontext.apps.restwebapp.model.User;
 
 /**
  * Service to manage users. Can add update, delete and retrieve any users.
@@ -14,12 +16,11 @@ import com.webcontext.libs.restwebapp.model.User;
  * @author Frédéric Delorme<frederic.delorme@web-context.com>
  * 
  */
+@Stateless
 public class UserService {
 
-	/**
-	 * list of users.
-	 */
-	private static Map<String, User> users = new HashMap<String, User>();
+	@Inject
+	private UserEJB userEjb;
 
 	/**
 	 * Add a new User to the system.
@@ -29,8 +30,9 @@ public class UserService {
 	 * @return
 	 */
 	public User add(User user) throws EntityAlreadyExistsException {
-		if (!users.containsKey(user.getUsername())) {
-			users.put(user.getUsername(), user);
+
+		if (userEjb.findByUsername(user.getUsername()) == null) {
+			userEjb.save(user);
 		} else {
 			throw new EntityAlreadyExistsException("User " + user.getUsername()
 					+ " already exixts");
@@ -43,10 +45,12 @@ public class UserService {
 	 * 
 	 * @param users
 	 *            List of users to add to the service.
+	 * @throws EntityAlreadyExistsException
 	 */
-	public void add(Collection<User> newUsers) {
+	public void add(Collection<User> newUsers)
+			throws EntityAlreadyExistsException {
 		for (User user : newUsers) {
-			users.put(user.getUsername(), user);
+			add(user);
 		}
 	}
 
@@ -58,20 +62,19 @@ public class UserService {
 	 * @return
 	 */
 	public User update(User user) {
-		users.put(user.getUsername(), user);
+		userEjb.save(user);
 		return user;
 	}
 
 	/**
-	 * Delete the occurence of the <code>user</code> object.
+	 * Delete the occurrence of the <code>user</code> object.
 	 * 
 	 * @param user
 	 *            the user to be deleted.
 	 * @return
 	 */
-	public User delete(User user) {
-		users.remove(user.getUsername());
-		return user;
+	public void delete(User user) {
+		userEjb.delete(user);
 	}
 
 	/**
@@ -82,7 +85,7 @@ public class UserService {
 	 * @return
 	 */
 	public User findByUsername(String username) {
-		return users.get(username);
+		return userEjb.findByUsername(username);
 	}
 
 	/**
@@ -91,8 +94,7 @@ public class UserService {
 	 * @return
 	 */
 	public List<User> findAll() {
-		List<User> rtusers = (List<User>) users.values();
-		return rtusers;
+		return userEjb.findAll();
 	}
 
 	/**
@@ -100,8 +102,8 @@ public class UserService {
 	 * 
 	 * @return
 	 */
-	public int count() {
-		return users.size();
+	public long count() {
+		return userEjb.count();
 	}
 
 }

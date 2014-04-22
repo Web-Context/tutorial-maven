@@ -1,4 +1,9 @@
-package com.webcontext.libs.restwebapp.model;
+package com.webcontext.apps.restwebapp.model;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 /**
  * User is a user modeling for a System connected user.
@@ -6,9 +11,15 @@ package com.webcontext.libs.restwebapp.model;
  * @author Frédéric Delorme<frederic.delorme@web-context.com>
  * 
  */
+@Entity
+@NamedQueries({
+		@NamedQuery(name = "findByUsername", query = "SELECT u FROM User u WHERE u.username=:username"),
+		@NamedQuery(name = "findAll", query = "SELECT u FROM User u ORDER BY username ASC"),
+		@NamedQuery(name="count",query="SELECT count(u) as nbUser FROM User u")})
 public class User {
-
+	@Id
 	private String username;
+
 	private String password;
 	private String email;
 	private String firstname;

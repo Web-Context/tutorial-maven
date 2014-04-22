@@ -1,27 +1,27 @@
-package com.webcontext.test.unit.libs.zelibraririe;
+package com.webcontext.test.unit.apps.restwebapp;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import javax.inject.Inject;
 
-import static org.junit.Assert.*;
-
+import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.jboss.shrinkwrap.api.asset.EmptyAsset;
+import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.junit.Arquillian;
-import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.asset.EmptyAsset;
-import org.jboss.shrinkwrap.api.spec.JavaArchive;
-import org.junit.runner.RunWith;
-
-import com.webcontext.libs.zelibrairie.exception.EntityAlreadyExistsException;
-import com.webcontext.libs.zelibrairie.model.User;
-import com.webcontext.libs.zelibrairie.services.UserService;
+import com.webcontext.apps.restwebapp.exception.EntityAlreadyExistsException;
+import com.webcontext.apps.restwebapp.model.User;
+import com.webcontext.apps.restwebapp.services.UserService;
 
 /**
  * Unit Test for class UserService.
@@ -29,23 +29,21 @@ import com.webcontext.libs.zelibrairie.services.UserService;
  * @author Frédéric Delorme<frederic.delorme@web-context.com>
  * 
  */
-@RunWith(Arquillian.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class UserServiceTest {
 
-	private static Map<String, User> userstest = new HashMap<String, User>();
+	private static Map<String, User> usersTest;
 
 	@Inject
 	private UserService userService;
 
-	/**
-	 * Deployement 
-	 */
 	@Deployment
-	public static deploy(){
-		public static JavaArchive createArchiveAndDeploy() {
-		return ShrinkWrap.create(JavaArchive.class)
+	public static JavaArchive createArchiveAndDeploy() {
+		return ShrinkWrap
+				.create(JavaArchive.class)
 				.addClasses(UserService.class, User.class)
+				.addAsResource("META-INF/test-persistence.xml",
+						"persistence.xml")
 				.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
 	}
 
@@ -54,16 +52,18 @@ public class UserServiceTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		userstest = new HashMap<String, User>();
+		usersTest = new HashMap<String, User>();
 		// add some user
-		userstest.put("user1", new User("user1", "User", "User1",
+		usersTest.put("user1", new User("user1", "User", "User1",
 				"user1@mail.com", "password"));
-		userstest.put("user2", new User("user2", "User", "User2",
+		usersTest.put("user2", new User("user2", "User", "User2",
 				"user2@mail.com", "password"));
-		userstest.put("user3", new User("user3", "User", "User3",
+		usersTest.put("user3", new User("user3", "User", "User3",
 				"user3@mail.com", "password"));
-		userstest.put("user4", new User("user4", "User", "User4",
+		usersTest.put("user4", new User("user4", "User", "User4",
 				"user4@mail.com", "password"));
+
+		userService.add(usersTest.values());
 	}
 
 	/**
@@ -71,8 +71,7 @@ public class UserServiceTest {
 	 */
 	@After
 	public void tearDown() throws Exception {
-		userService = null;
-		userstest = null;
+		usersTest = null;
 	}
 
 	@Test
@@ -89,8 +88,11 @@ public class UserServiceTest {
 	}
 
 	@Test
-	public void test_2_AddListUserandFindByUsername() {
-		userService.add(userstest.values());
+	public void test_2_AddListUserandFindByUsername()
+			throws EntityAlreadyExistsException {
+
+		userService.add(usersTest.values());
+
 		assertEquals("All users was not inserted !", 5, userService.count());
 
 		User user1 = userService.findByUsername("user1");
@@ -99,9 +101,10 @@ public class UserServiceTest {
 	}
 
 	@Test
-	public void test_3_AddListUserAndDelete() {
-		
-		userService.add(userstest.values());
+	public void test_3_AddListUserAndDelete()
+			throws EntityAlreadyExistsException {
+
+		userService.add(usersTest.values());
 
 		User user1 = userService.findByUsername("user1");
 		userService.delete(user1);
@@ -110,15 +113,12 @@ public class UserServiceTest {
 	}
 
 	@Test
-	public void test_4_update() {
-		User userupdate = new User("userupdate", "Usernew", "Newuser",
-				"new.user@mail.com", "password");
-		try {
-			userService.add(userupdate);
-		} catch (EntityAlreadyExistsException e) {
-			fail("Unable to insert data");
-		}
-		User last = userService.findByUsername("usernew");
+	public void test_4_update() throws EntityAlreadyExistsException {
+
+		User userupdate = new User("userupdate", "userupdate", "userupdate",
+				"user.update@mail.com", "password");
+		userService.add(userupdate);
+		User last = userService.findByUsername("userupdate");
 		last.setFirstname("Toto");
 		User modified = userService.update(last);
 
