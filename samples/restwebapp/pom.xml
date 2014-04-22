@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<!-- Product identificaiton -->
+	<!-- Product identification -->
 	<groupId>com.webcontext.apps</groupId>
 	<artifactId>restwebapp</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
@@ -10,12 +10,12 @@
 
 	<!-- Properties for project -->
 	<properties>
-		<src.target>1.6</src.target>
-		<src.source>1.6</src.source>
+		<src.target>1.7</src.target>
+		<src.source>1.7</src.source>
 		<src.encodage>UTF-8</src.encodage>
 	</properties>
 
-	<!-- Profduct description -->
+	<!-- Product description -->
 	<name>RestWebApp</name>
 	<description>A demonstration Rest Oriented WebApp project to illustrate apache maven usage. </description>
 	<url>http://github.com/web-context/tutorial-maven</url>
@@ -69,12 +69,12 @@
 
 		<!-- Arquillian -->
 		<dependency>
-			<groupId>org.jboss.arquillian.core</groupId>
-			<artifactId>arquillian-core-api</artifactId>
-			<version>1.1.4.Final</version>
-			<scope>test</scope>
+			<groupId>org.jboss.arquillian</groupId>
+			<artifactId>arquillian-bom</artifactId>
+			<version>1.0.0.Final</version>
+			<scope>import</scope>
+			<type>pom</type>
 		</dependency>
-
 		<dependency>
 			<groupId>org.jboss.arquillian.junit</groupId>
 			<artifactId>arquillian-junit-core</artifactId>
@@ -87,11 +87,11 @@
 			<version>1.0.0.CR4</version>
 		</dependency>
 		<dependency>
-			<groupId>org.glassfish.extras</groupId>
+			<groupId>org.glassfish.main.extras</groupId>
 			<artifactId>glassfish-embedded-all</artifactId>
-			<version>3.2-b06</version>
+			<version>3.1.2</version>
+			<scope>provided</scope>
 		</dependency>
-
 
 		<!-- Unit test on Rest Service -->
 		<dependency>
@@ -100,8 +100,6 @@
 			<version>2.3.1</version>
 			<scope>test</scope>
 		</dependency>
-
-
 
 	</dependencies>
 

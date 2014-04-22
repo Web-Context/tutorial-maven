@@ -1,11 +1,9 @@
 package com.webcontext.test.unit.libs.zelibraririe;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
 import java.util.HashMap;
 import java.util.Map;
+
+import static org.junit.Assert.*;
 
 import org.junit.After;
 import org.junit.Before;

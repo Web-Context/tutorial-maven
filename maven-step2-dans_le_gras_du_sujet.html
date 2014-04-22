@@ -88,7 +88,7 @@
   &lt;name&gt;ZeLibrairie&lt;/name&gt;
   &lt;description&gt;A demonstration librabry project to illustrate 
   apache maven usage. &lt;/description&gt;
-  &lt;url&gt;http://www.bitbucket.org/webcontext/zelibrairie&lt;/url&gt;
+  &lt;url&gt;http://www.github.com/web-context/zelibrairie&lt;/url&gt;
   &lt;organization&gt;
     &lt;name&gt;WebContext&lt;/name&gt;
     &lt;url&gt;http://www.web-context.com/&lt;/url&gt;
@@ -832,13 +832,13 @@ drwxr-xr-x  3 frederic frederic  4096 avril 16 19:27 test-classes/
 
 		<pre class="xml">&lt;scm&gt;
   &lt;url&gt;
-    http://bitbucket.org/webcontext/tutorial-maven.git
+    http://github.com/web-context/tutorial-maven.git
   &lt;/url&gt;
   &lt;connection&gt;
-    scm:git:git@bitbucket.org:webcontext/tutorial-maven.git
+    scm:git:git@github.com.org:web-context/tutorial-maven.git
   &lt;/connection&gt;
   &lt;developerConnection&gt;
-    scm:git:git@bitbucket.org:webcontext/tutorial-maven.git
+    scm:git:git@github.com:web-context/tutorial-maven.git
   &lt;/developerConnection&gt;
   &lt;tag&gt;${project.version}&lt;/tag&gt;
 &lt;/scm&gt;
@@ -846,12 +846,18 @@ drwxr-xr-x  3 frederic frederic  4096 avril 16 19:27 test-classes/
 
 		<p>où:</p>
 		<ul>
-			<li>l'<code>url</code> indique le chemin sur le net où l'on peut
+			<li>l'<code>url</code> indique le chemin sur le réseau (internet/intranet) où nous pourrons
 				consulter le repository versioné du projet,
 			</li>
 			<li>la <code>connection</code> est l'url du dépôt sur lequel les
-				sources sont stockées. c'est sur cette url que le plugin va réaliser
-				les tags de version.
+				sources sont stockées. C'est sur cette url que le plugin va réaliser
+				les tags de version. elle est de la forme: <code>scm:[git/svm/cvs/hg]:([protocole:port]:)[server]([:port])/[repository]</code> où:
+                <ul>
+                <li><strong>protocole</strong> http(s) ou ssh (généralement)</li>
+                <li><strong>server</strong> Nom du serveur, ou nom DNS du service</li>
+                <li><strong>port</strong> votre serveur ne sert peut-être pas par défaut ur le port 80, mais sur u autre port, par ex: 8080</li>
+                <li><strong>repository</strong> le nom du dépôt sur le serveur. généralement préfixé par le nom d'utilistaur propriétaire du dépôt, ex: web-context/tutorial-maven.git</li>
+                </ul>
 			</li>
 			<li><code>developperConnection</code> est l'url dans le dépôt de
 				la branche de développement.</li>
@@ -887,7 +893,7 @@ drwxr-xr-x  3 frederic frederic  4096 avril 16 19:27 test-classes/
 
 		<pre class="console">$ mvn release:prepare</pre>
 
-		A cette étape, la release est prête a être lancée.
+		A cette étape, la release est prête à être lancée.
 
 		<h3>Release:perform</h3>
 
@@ -900,7 +906,7 @@ drwxr-xr-x  3 frederic frederic  4096 avril 16 19:27 test-classes/
 
 		<p>A la fin de la release <strong>0.0.1</strong>, le logiciel a été versionné en <strong>0.0.2-SNAPSHOT</strong>, prêt pour recevoir le développement de la prochaine release</p>
 
-		<p>Si vous regarder dans votre dépot D'artefact (Nexus ou Archiva, par exemple), vous pourrez voir que les jar du logiciel, des sources et de la javadoc en version 0.0.1 ont été poussés tous les trois.</p>
+		<p>Si nous regardons dans notre dépôt d'artefact (Nexus ou Archiva, par exemple), nous pourrons voir que les jar du logiciel, des sources et de la javadoc en version 0.0.1 ont été poussés tous les trois.</p>
 
 		<figure>
 			<figcaption>Screenshot Nexus version 0.0.1</figcaption>

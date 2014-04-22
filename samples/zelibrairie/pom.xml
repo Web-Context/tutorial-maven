@@ -60,15 +60,14 @@
 		</dependency>
 	</dependencies>
 
-	<!-- Concurrent Version Manager -->
+	<!-- Gestionaire de version -->
 	<scm>
-
 		<url>http://bitbucket.org/webcontext/tutorial-maven.git</url>
 		<connection>scm:git:git@bitbucket.org:webcontext/tutorial-maven.git</connection>
 		<developerConnection>scm:git:git@bitbucket.org:webcontext/tutorial-maven.git</developerConnection>
 		<tag>zelibrairie-0.0.1</tag>
 	</scm>
-
+	
 	<!-- Configuration Nexus/Archiva/artifactory -->
 	<distributionManagement>
 		<repository>
@@ -82,6 +81,12 @@
 			<url>http://nostroamd:8080/nexus/content/repositories/snapshots/</url>
 		</snapshotRepository>
 	</distributionManagement>
+
+	<!-- Continuous Build -->	
+	<ciManagement>
+		<system>jenkins</system>
+		<url>http://localhost:10090/jenkins-1.559/job/tutorial-maven</url>
+	</ciManagement>
 
 	<build>
 		<plugins>
@@ -141,33 +146,5 @@
 			</plugin>
 		</plugins>
 	</build>
-
-	<!-- Gestionaire de version -->
-	<scm>
-		<url>http://bitbucket.org/webcontext/tutorial-maven.git</url>
-		<connection>scm:git:git@bitbucket.org:webcontext/tutorial-maven.git</connection>
-		<developerConnection>scm:git:git@bitbucket.org:webcontext/tutorial-maven.git</developerConnection>
-		<tag>zelibrairie-0.0.1</tag>
-	</scm>
-	
-	<!-- Configuration Nexus/Archiva/artifactory -->
-	<distributionManagement>
-		<repository>
-			<id>deployment</id>
-			<name>Internal Releases</name>
-			<url>http://nostroamd:8080/nexus/content/repositories/releases/</url>
-		</repository>
-		<snapshotRepository>
-			<id>deployment</id>
-			<name>Internal Releases</name>
-			<url>http://nostroamd:8080/nexus/content/repositories/snapshots/</url>
-		</snapshotRepository>
-	</distributionManagement>
-
-	<!-- Continuous Build -->	
-	<ciManagement>
-		<system>jenkins</system>
-		<url>http://localhost:10090/jenkins-1.559/job/tutorial-maven</url>
-	</ciManagement>
 
 </project>
