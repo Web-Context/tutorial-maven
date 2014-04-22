@@ -22,7 +22,7 @@
 	<!-- Organization -->
 	<organization>
 		<name>WebContext</name>
-		<url>http://www.web-context.com/</url>
+		<url>http://www.Web-Context.com/</url>
 	</organization>
 
 	<!-- Publication year -->
@@ -34,7 +34,7 @@
 			<id>fdelorme</id>
 			<name>Frédéric Delorme</name>
 			<organization>webcontext</organization>
-			<organizationUrl>http://www.web-context.com/</organizationUrl>
+			<organizationUrl>http://www.Web-Context.com/</organizationUrl>
 			<roles>
 				<role>architect</role>
 			</roles>
@@ -61,9 +61,9 @@
 
 	<!-- Gestionaire de version -->
 	<scm>
-		<url>http://github.com/web-context/tutorial-maven.git</url>
-		<connection>scm:git:git@github.com:web-context/tutorial-maven.git</connection>
-		<developerConnection>scm:git:git@github.com:web-context/tutorial-maven.git</developerConnection>
+		<url>http://github.com/Web-Context/tutorial-maven.git</url>
+		<connection>scm:git:git@github.com:Web-Context/tutorial-maven.git</connection>
+		<developerConnection>scm:git:git@github.com:Web-Context/tutorial-maven.git</developerConnection>
 		<tag>${project.artifactId}-${project.version}</tag>
 	</scm>
 
@@ -90,7 +90,7 @@
 	<!-- Gestion des bugs -->
 	<issueManagement>
 		<system>github</system>
-		<url>http://github.com/web-context/tutorial-maven/issues</url>
+		<url>http://github.com/Web-Context/tutorial-maven/issues</url>
 	</issueManagement>
 
 	<build>
