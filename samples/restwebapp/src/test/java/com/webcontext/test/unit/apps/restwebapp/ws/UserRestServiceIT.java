@@ -33,16 +33,19 @@ public class UserRestServiceIT {
 	public static WebArchive deploy() {
 		return ShrinkWrap
 				.create(WebArchive.class, "test.war")
-				.addPackage("com.webcontext.apps.zelibraries")
-				.addAsResource("META-INF/test-persistence.xml",
-						"META-INF/persistence.xml")
-				.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
+					.addPackage("com.webcontext.apps.zelibraries")
+					.addAsResource("META-INF/test-persistence.xml","META-INF/persistence.xml")
+					.addAsWebInfResource("WEB-INF/web.xml")
+					.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
 	}
-
+	
 	@Test
 	@RunAsClient
-	public void test_1_findUser(@ArquillianResource URL baseURL)
+	public void test_1_findAll(@ArquillianResource URL baseURL)
 			throws IOException {
+		
+		System.out.println("base URL="+baseURL.toString());
+		
 		RestAssured.expect().statusCode(200).when()
 				.get(baseURL.toString() + "/rest/users");
 	}

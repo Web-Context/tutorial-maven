@@ -9,6 +9,7 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
+import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
@@ -17,6 +18,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 
 import com.webcontext.apps.restwebapp.exception.EntityAlreadyExistsException;
@@ -29,6 +31,7 @@ import com.webcontext.apps.restwebapp.services.UserService;
  * @author Frédéric Delorme<frederic.delorme@web-context.com>
  * 
  */
+@RunWith(Arquillian.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class UserServiceTest {
 
@@ -40,11 +43,10 @@ public class UserServiceTest {
 	@Deployment
 	public static JavaArchive createArchiveAndDeploy() {
 		return ShrinkWrap
-				.create(JavaArchive.class)
-				.addClasses(UserService.class, User.class)
-				.addAsResource("META-INF/test-persistence.xml",
-						"persistence.xml")
-				.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
+			.create(JavaArchive.class)
+			.addClasses(UserService.class, User.class)
+			.addAsResource("META-INF/test-persistence.xml","persistence.xml")
+			.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
 	}
 
 	/**
