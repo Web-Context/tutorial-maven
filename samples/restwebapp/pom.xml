@@ -2,20 +2,13 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<!-- Product identificaiton -->
+	<!-- Product identification -->
 	<groupId>com.webcontext.apps</groupId>
 	<artifactId>restwebapp</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
-	<!-- Properties for project -->
-	<properties>
-		<src.target>1.7</src.target>
-		<src.source>1.7</src.source>
-		<src.encoding>UTF-8</src.encoding>
-	</properties>
-
-	<!-- Profduct description -->
+	<!-- Product description -->
 	<name>RestWebApp</name>
 	<description>A demonstration Rest Oriented WebApp project to illustrate apache maven usage. </description>
 	<url>http://github.com/Web-Context/tutorial-maven</url>
@@ -43,12 +36,63 @@
 		</developer>
 	</developers>
 
+	<!-- Properties for project -->
+	<properties>
+		<src.target>1.7</src.target>
+		<src.source>1.7</src.source>
+		<src.encoding>UTF-8</src.encoding>
+	</properties>
+
+	<!-- Specific dependency for arquillian -->
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.jboss.arquillian</groupId>
+				<artifactId>arquillian-bom</artifactId>
+				<version>1.0.0.Final</version>
+				<scope>import</scope>
+				<type>pom</type>
+			</dependency>
+			<dependency>
+				<groupId>org.jboss.arquillian.extension</groupId>
+				<artifactId>arquillian-drone-bom</artifactId>
+				<version>1.0.0.Final</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+
 	<dependencies>
+		<!-- All Java EE dependencies -->
+		<dependency>
+			<groupId>org.glassfish.extras</groupId>
+			<artifactId>glassfish-embedded-all</artifactId>
+			<version>3.2-b06</version>
+			<scope>provided</scope>
+		</dependency>
+
 		<!-- logging capability -->
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 			<version>1.2.17</version>
+		</dependency>
+
+		<!-- Jax-RS implementation -->
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jaxrs</artifactId>
+			<version>3.0.8.Final</version>
+		</dependency>
+
+		<!-- JavaEE Test Server -->
+		<dependency>
+			<groupId>org.jboss.arquillian.container</groupId>
+			<artifactId>arquillian-glassfish-embedded-3.1</artifactId>
+			<version>1.0.0.CR4</version>
+			<scope>test</scope>
 		</dependency>
 
 		<!-- testing capability -->
@@ -59,40 +103,6 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- Jax-RS implementation -->
-		<dependency>
-			<groupId>org.jboss.resteasy</groupId>
-			<artifactId>resteasy-jaxrs</artifactId>
-			<version>3.0.8.Final</version>
-		</dependency>
-
-
-		<!-- Arquillian -->
-		<dependency>
-			<groupId>org.jboss.arquillian.core</groupId>
-			<artifactId>arquillian-core-api</artifactId>
-			<version>1.1.4.Final</version>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.jboss.arquillian.junit</groupId>
-			<artifactId>arquillian-junit-core</artifactId>
-			<version>1.1.4.Final</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.jboss.arquillian.container</groupId>
-			<artifactId>arquillian-glassfish-embedded-3.1</artifactId>
-			<version>1.0.0.CR4</version>
-		</dependency>
-		<dependency>
-			<groupId>org.glassfish.extras</groupId>
-			<artifactId>glassfish-embedded-all</artifactId>
-			<version>3.2-b06</version>
-		</dependency>
-
-
 		<!-- Unit test on Rest Service -->
 		<dependency>
 			<groupId>com.jayway.restassured</groupId>
@@ -101,15 +111,45 @@
 			<scope>test</scope>
 		</dependency>
 
-	</dependencies>
+		<!-- Arquillian -->
+		<dependency>
+			<groupId>org.jboss.arquillian.junit</groupId>
+			<artifactId>arquillian-junit-container</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.arquillian.extension</groupId>
+			<artifactId>arquillian-drone-impl</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.arquillian.extension</groupId>
+			<artifactId>arquillian-drone-selenium</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.arquillian.extension</groupId>
+			<artifactId>arquillian-drone-selenium-server</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-server</artifactId>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.mortbay.jetty</groupId>
+					<artifactId>servlet-api-2.5</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
 
-	<!-- Gestionaire de version -->
-	<scm>
-		<url>http://github.com/Web-Context/tutorial-maven.git</url>
-		<connection>scm:git:git@github.com:Web-Context/tutorial-maven.git</connection>
-		<developerConnection>scm:git:git@github.com:Web-Context/tutorial-maven.git</developerConnection>
-		<tag>${project.artifactId}-${project.version}</tag>
-	</scm>
+	</dependencies>
 
 	<!-- Configuration Nexus/Archiva/artifactory -->
 	<distributionManagement>
@@ -127,8 +167,8 @@
 
 	<!-- Continuous Build -->
 	<ciManagement>
-		<system>jenkins</system>
-		<url>http://localhost:10090/jenkins-1.559/job/tutorial-maven</url>
+		<system>travis-ci</system>
+		<url>https://travis-ci.org/Web-Context/tutorial-maven</url>
 	</ciManagement>
 
 	<!-- Gestion des bugs -->
@@ -137,7 +177,13 @@
 		<url>http://github.com/Web-Context/tutorial-maven/issues</url>
 	</issueManagement>
 
-
+	<!-- Gestionaire de version -->
+	<scm>
+		<url>http://github.com/Web-Context/tutorial-maven.git</url>
+		<connection>scm:git:git@github.com:Web-Context/tutorial-maven.git</connection>
+		<developerConnection>scm:git:git@github.com:Web-Context/tutorial-maven.git</developerConnection>
+		<tag>${project.artifactId}-${project.version}</tag>
+	</scm>
 
 	<build>
 		<plugins>
@@ -181,9 +227,9 @@
 				<artifactId>maven-war-plugin</artifactId>
 				<version>2.4</version>
 				<configuration>
-					
+
 				</configuration>
-			</plugin>	
+			</plugin>
 		</plugins>
 	</build>
 </project>

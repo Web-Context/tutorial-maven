@@ -88,7 +88,7 @@
   &lt;name&gt;ZeLibrairie&lt;/name&gt;
   &lt;description&gt;A demonstration librabry project to illustrate 
   apache maven usage. &lt;/description&gt;
-  &lt;url&gt;http://www.bitbucket.org/webcontext/zelibrairie&lt;/url&gt;
+  &lt;url&gt;http://www.github.com/web-context/zelibrairie&lt;/url&gt;
   &lt;organization&gt;
     &lt;name&gt;WebContext&lt;/name&gt;
     &lt;url&gt;http://www.web-context.com/&lt;/url&gt;
@@ -829,18 +829,105 @@ drwxr-xr-x  3 frederic frederic  4096 avril 16 19:27 test-classes/
 
     <pre class="xml">&lt;scm&gt;
   &lt;url&gt;
-    http://bitbucket.org/webcontext/tutorial-maven.git
+    http://github.com/web-context/tutorial-maven.git
   &lt;/url&gt;
   &lt;connection&gt;
-    scm:git:git@bitbucket.org:webcontext/tutorial-maven.git
+    scm:git:git@github.com.org:web-context/tutorial-maven.git
   &lt;/connection&gt;
   &lt;developerConnection&gt;
-    scm:git:git@bitbucket.org:webcontext/tutorial-maven.git
+    scm:git:git@github.com:web-context/tutorial-maven.git
   &lt;/developerConnection&gt;
   &lt;tag&gt;${project.version}&lt;/tag&gt;
 &lt;/scm&gt;
 </pre>
 
+<<<<<<< HEAD
+		<p>où:</p>
+		<ul>
+			<li>l'<code>url</code> indique le chemin sur le réseau (internet/intranet) où nous pourrons
+				consulter le repository versioné du projet,
+			</li>
+			<li>la <code>connection</code> est l'url du dépôt sur lequel les
+				sources sont stockées. C'est sur cette url que le plugin va réaliser
+				les tags de version. elle est de la forme: <code>scm:[git/svm/cvs/hg]:([protocole:port]:)[server]([:port])/[repository]</code> où:
+                <ul>
+                <li><strong>protocole</strong> http(s) ou ssh (généralement)</li>
+                <li><strong>server</strong> Nom du serveur, ou nom DNS du service</li>
+                <li><strong>port</strong> votre serveur ne sert peut-être pas par défaut ur le port 80, mais sur u autre port, par ex: 8080</li>
+                <li><strong>repository</strong> le nom du dépôt sur le serveur. généralement préfixé par le nom d'utilistaur propriétaire du dépôt, ex: web-context/tutorial-maven.git</li>
+                </ul>
+			</li>
+			<li><code>developperConnection</code> est l'url dans le dépôt de
+				la branche de développement.</li>
+			<li><code>tag</code> est le template de marqage des release:
+				${project.version} permet de récupérer le numéro de version</li>
+		</ul>
+
+		<p>Pour réaliser la release, nous devons faire les choses en deux
+			étapes:</p>
+
+		<ol>
+			<li>Préparer la release, permet de packager dans la bonne
+				version: le versionning <code>0.0.1-SNAPSHOT</code>code> sera
+				remplacé par la version "release", à savoir <code>0.0.1</code>
+			</li>
+			<li>Faire la release, c'est a dire pousser les sources et la
+				tagger, en pousser les composants (artefacts) vers le gestionnaire
+				de composant (par exemple, Nexus, Artifactory ou encore Archiva).</li>
+		</ol>
+
+		<h3>Release:prepare</h3>
+
+		<p>
+			Lors de cette étape, Maven va nous demander de confirmer la version à
+			releaser. celle-ci correspond à la version de la balise Projet
+			<code>&lt;version&gt;</code>
+			, soit ici
+			<code>0.0.1-SNAPSHOT</code>
+			, version de travail, ce qui donne lieu à la release
+			<code>0.0.1</code>
+			.
+		</p>
+
+		<pre class="console">$ mvn release:prepare</pre>
+
+	    <p>Si nous regardons du côté de notre repository GIT:</p>
+
+	    <figure>
+	      <figcaption>
+	        <img style="width:600px" src="illustrations/github-release-tag.png"/>
+	        <figcaption>Release:Prepare push tag to code repository accordding to <code>&lt;tag&gt;</code> format.</figcaption>
+	      </figure>
+
+	    <p>A cette étape, la release est prête a être lancée.</p>
+
+
+		<h3>Release:perform</h3>
+
+		<p>La réalisation de la release implique que d'autrtes éléments de configuration soient apportés, en l'occurrence, la définition du dépôt cible de la release.</p>
+
+		<dl>
+			<dt>Repository Maven</dt>
+			<dd>Un répository maven est un dépôt destiné à contenir l'ensemble des versions d'un produit, avec ses dépendances, sa documentation et ses sources. Le dépot est accédé par maven lui-même lors des phases de calculs des dépendances d'un logiciel afin de les mettre à disposition du compilateur d'une part, puis de les glisser dans le packaging final, suivat les besoins exprimés dans le fichier <code>pom.xml</code></dd>
+		</dl>
+
+		<p>A la fin de la release <strong>0.0.1</strong>, le logiciel a été versionné en <strong>0.0.2-SNAPSHOT</strong>, prêt pour recevoir le développement de la prochaine release</p>
+
+		<p>Si nous regardons dans notre dépôt d'artefact (Nexus ou Archiva, par exemple), nous pourrons voir que les jar du logiciel, des sources et de la javadoc en version 0.0.1 ont été poussés tous les trois.</p>
+
+		<figure>
+			<figcaption>Screenshot Nexus version 0.0.1</figcaption>
+		</figure>
+
+		<blockquote class="info">
+			<strong>Note</strong><br />Attention, les modifications doivent
+			toutes avoir été commitées (via git/svn) sinon, la préparation de la
+			release est refusée.
+		</blockquote>
+
+		<em>To be continued ...</em>
+	</div>
+=======
     <p>où:</p>
     <ul>
       <li>l'<code>url</code> indique le chemin sur le net où l'on peut
@@ -921,5 +1008,6 @@ drwxr-xr-x  3 frederic frederic  4096 avril 16 19:27 test-classes/
 
     <em>To be continued ...</em>
   </div>
+>>>>>>> 0d2aa41586b2b0bad3b0b3fda4efe7338111eb4d
 </body>
 </html>

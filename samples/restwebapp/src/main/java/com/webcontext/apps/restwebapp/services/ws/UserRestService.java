@@ -1,7 +1,8 @@
-package com.webcontext.libs.restwebapp.services.ws;
+package com.webcontext.apps.restwebapp.services.ws;
 
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -12,9 +13,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import com.webcontext.libs.restwebapp.exception.EntityAlreadyExistsException;
-import com.webcontext.libs.restwebapp.model.User;
-import com.webcontext.libs.restwebapp.services.UserService;
+import com.webcontext.apps.restwebapp.exception.EntityAlreadyExistsException;
+import com.webcontext.apps.restwebapp.model.User;
+import com.webcontext.apps.restwebapp.services.UserService;
 
 /**
  * Rest Service providing access to User entity. will retrieve all occurrence
@@ -28,7 +29,8 @@ public class UserRestService {
 	/**
 	 * Internal Service.
 	 */
-	private static UserService userService = new UserService();
+	@Inject
+	private static UserService userService;
 
 	/**
 	 * Default constructor.

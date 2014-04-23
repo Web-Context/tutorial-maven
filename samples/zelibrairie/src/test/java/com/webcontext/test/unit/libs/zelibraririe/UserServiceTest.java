@@ -23,11 +23,13 @@ import com.webcontext.libs.zelibrairie.services.UserService;
  * @author Frédéric Delorme<frederic.delorme@web-context.com>
  * 
  */
+
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class UserServiceTest {
 
-	private static Map<String, User> userstest = new HashMap<String, User>();
 	private static UserService userService = new UserService();
+
+	private static Map<String, User> userstest = new HashMap<String, User>();
 
 	/**
 	 * @throws java.lang.Exception
@@ -81,7 +83,7 @@ public class UserServiceTest {
 
 	@Test
 	public void test_3_AddListUserAndDelete() {
-		
+
 		userService.add(userstest.values());
 
 		User user1 = userService.findByUsername("user1");

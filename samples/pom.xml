@@ -8,19 +8,19 @@
   <packaging>pom</packaging>
 
   <modules>
-    <!--module>basicpom</module-->
     <module>zelibrairie</module>
     <module>restwebapp</module>
   </modules>
 
-<scm>
+  <scm>
     <url>http://github.com/Web-Context/tutorial-maven.git</url>
     <connection>scm:git:git@github.com:Web-Context/tutorial-maven.git</connection>
     <developerConnection>scm:git:git@github.com:Web-Context/tutorial-maven.git</developerConnection>
     <tag>${project.artifactId}-${project.version}</tag>
   </scm>
+
   <issueManagement>
     <system>bitbucket</system>
     <url>http://github.com/Web-Context/tutorial-maven/issues</url>
   </issueManagement>
-</project>do
+</project>
