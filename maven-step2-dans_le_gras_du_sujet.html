@@ -19,7 +19,7 @@
       Maven couvrait toutes les phases de la production logicielle. Et bien
       c'est exactement le cas.</p>
     <p>
-      Laissez moi illustrer (avec un peu d'inspiration du livre référence "<a
+      Illustrons (avec un peu d'inspiration du livre référence "<a
         title="Aller sur le site Amazon.com pour contempler ce bô livre"
         href="http://www.amazon.com/gp/product/0596517335" target="_blank">Maven:the
         definitive guide</a>", je l'avoue) l'exemple d'un projet java consistant
@@ -30,7 +30,7 @@
       d'autre que d'être un exemple par pour cette série d'article. Nous
       allons donc produire un beau logiciel à l'aide de maven. pour cela,
       nous devrons, compiler, gérer des dépendances, faire des tests (par
-      là j'entends les jouer en automatique) et enfin, si tout cela
+      là comprenons les jouer en automatique) et enfin, si tout cela
       fonctionne, nous pourrons le packager sous la forme d'un JAR.</p>
     <p>Ensuite nous verrons que, afin de livrer cette librairie de
       façon propre et élégante, nous pourrons assemble sources,
@@ -491,8 +491,7 @@ ler-javac/1.8.1/plexus-compiler-javac-1.8.1.jar (13 KB at 26.8 KB/sec)
 }
 </pre>
 
-
-    <h3>Testator</h3>
+    <h3>Testator 2: The Revenge</h3>
 
     <p>
       Nos classes applicatives étant prêtes, nous allons nous pencher sur
@@ -579,6 +578,10 @@ public class UserServiceTest {
 }
 </pre>
 
+<blockquote class="info"><strong>Trick &amp; Tips</strong><br/>
+<p>Noter l'annotation en amont de déclaration de la classe <code>@FixMethodOrder</code>
+ui permet d'imposer à JUnit (depuis la version 4.11), un ordre d'exécution des différentes méthodes annotées <code>@Test</code>.</p>
+<p><code>MethodSorters.NAME_ASCENDING</code> propose une  exécution dans l'ordre alphabétique des nom des méthodes.</p></blockquote>
 
     <h2>Test test test !</h2>
 
