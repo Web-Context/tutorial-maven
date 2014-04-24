@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 /**
  * User is a user modeling for a System connected user.
@@ -14,8 +15,9 @@ import javax.persistence.NamedQuery;
 @Entity
 @NamedQueries({
 		@NamedQuery(name = "findByUsername", query = "SELECT u FROM User u WHERE u.username=:username"),
-		@NamedQuery(name = "findAll", query = "SELECT u FROM User u ORDER BY username ASC"),
+		@NamedQuery(name = "findAll", query = "SELECT u FROM User u ORDER BY u.username ASC"),
 		@NamedQuery(name="count",query="SELECT count(u) as nbUser FROM User u")})
+@Table(name="USERS")
 public class User {
 	@Id
 	private String username;

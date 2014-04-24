@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -57,6 +59,7 @@ public class UserEJB {
 	 *            the User entity to be saved.
 	 * @return the return the saved user.
 	 */
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public User save(final User user) {
 		em.persist(user);
 		return user;
@@ -68,6 +71,7 @@ public class UserEJB {
 	 * @param user
 	 *            the user to be deleted.
 	 */
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void delete(User user) {
 		user = em.merge(user);
 		em.remove(user);

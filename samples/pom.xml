@@ -23,4 +23,8 @@
     <system>bitbucket</system>
     <url>http://github.com/Web-Context/tutorial-maven/issues</url>
   </issueManagement>
+  <ciManagement>
+  	<system>travis-ci</system>
+  	<url>https://travis-ci.org/Web-Context/tutorial-maven</url>
+  </ciManagement>
 </project>
