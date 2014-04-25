@@ -4,7 +4,7 @@
 	<!-- Product identification -->
 	<groupId>com.webcontext.apps</groupId>
 	<artifactId>zelibrairie</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<packaging>jar</packaging>
 
 	<!-- Properties for project -->
@@ -64,7 +64,7 @@
 		<url>http://github.com/Web-Context/tutorial-maven.git</url>
 		<connection>scm:git:git@github.com:Web-Context/tutorial-maven.git</connection>
 		<developerConnection>scm:git:git@github.com:Web-Context/tutorial-maven.git</developerConnection>
-		<tag>${project.artifactId}-${project.version}</tag>
+		<tag>zelibrairie-0.0.1</tag>
 	</scm>
 	
 	<!-- Configuration Nexus/Archiva/artifactory -->
