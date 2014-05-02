@@ -32,7 +32,6 @@ public class UserService {
 	public User add(User user) throws EntityAlreadyExistsException {
 		if (userEjb.findByUsername(user.getUsername()) == null) {
 			userEjb.save(user);
-
 		} else {
 			throw new EntityAlreadyExistsException("User " + user.getUsername()
 				+ " already exixts");

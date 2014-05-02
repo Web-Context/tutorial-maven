@@ -1,0 +1,86 @@
+h1. Maven - Step 3 : Une application Web a tester
+
+Mantenant qe nous avons les bases de réalisation d'un logicel Java, compilé, testé unitairement, , documenté, packagé et publié via Maven, nous pouvons passer à l'étape suivante: appliquer cette recette à une applicaiton Web.
+
+h2. Quelques pré-requis
+
+Afin de monter à bord facilement, il est indispensable d'avoir quelques bases relative  la conception et au fonctionnement d'application web aujourd'hui standard; à savoir, comprendre l'approche dite "orientée REST":http://fr.wikipedia.org/wiki/Representational_State_Transfer, et avoir déjà manipulé un serveur d'application Java web.
+L'idéal serait aussi d'avoir quelques notions autour des EJB et autres composants exotiques du monde JavaEE. Nous considererons que ces notions sont connues et sues.
+
+Nous partirons donc sur une approche JavaEE 6, avec un EJB, une persistence en JPA 2.0 et un web service REST.
+
+Le tout dans un serveur d'application JBoss.
+
+Nous choisirons volontairement "JBoss":http://www.jboss.org pour sa facilité d'intégration avec la chaine d'outils de test unitaire gravitant autour de "Arquillian":http://www.arquillian.org. Outil que nous utiliserons en deuxième partie de cet article pour tester certains composants de notre application.
+
+h2. Platforme ? comme les chaussures vous voulez dire ?
+
+Non, par platforme, nous entendons plateforme de développement.
+
+La plateforme de développement est constituée du JDK 1.7 et du serveur JBOSS AS 7.
+
+Sous Linux l'installation de JBoss est assez simple. Référons nous, au besoin, à la "doc en ligne":https://docs.jboss.org/author/display/AS7/Installing+and+starting+JBoss+AS+on+Linux,+Unix+or+Mac+OS+X.
+
+Comme d'habitude, nous installerons jdk via @apt-get@ et serveur dans @/opt/tools/java/servers/jbos/as7@ en respectant les préconisations de l'article "Set a Java Development workstation on Ubuntu":http://mcgivrer.wordpress.com/2012/11/13/set-a-java-development-workstation-on-ubuntu/.
+
+OK, je crois que nous pouvons maintenant nous (re)lancer à la conquète de Maven.
+
+h2. Maven et le chic web
+
+h3. l'éternel JUnit
+
+Si nous testons des composants non lié à la plateforme JavaEE, comme dans notre article précédent, seul "JUnit":http://www.junit.org est necessaire.
+Mais dans le cas où nous devons apporter des implementation des spécifications JavaEE, la mise en euvre de test se complique tout de suite.
+
+Nous pouvons arriver à résoudre certains problème lié à JPA via des instanciation savage sans profiter de @CDI@ ou des @PersistenceContext@, mais pour les EJB, c'est tout de suite plus chaud. 
+
+Aussi,  nous allons mettre en oeuvre l'outil ultime de test dans le chapitre suivant.
+
+h3. Environnement de test
+
+L'environnement de test est aussi le contexte d'exécution de votre code correspondant de test unitaire.
+
+
+bc(java). @FixMethodOrder(MethodSorters.NAME_ASCENDING)
+public class UserDAOTest(){
+	@PersistenceContext(unitName="restwebapp")
+	EntityManager em;
+	...
+}
+
+h3. Arquillian, le sauveur
+
+h2. Tests Unitaires
+
+TODO
+
+
+h2. Tests d'integration
+
+TODO
+
+h2. Tests End-2-End
+
+TODO
+
+
+h3. One step beyond
+
+Un serveur embarqué dans l'application, grâce à Maven, c'est possible !
+
+* JBoss
+
+TODO
+
+
+* GlassFish
+
+TODO
+
+* TomEE
+
+TODO
+
+* Jetty 
+
+TODO
