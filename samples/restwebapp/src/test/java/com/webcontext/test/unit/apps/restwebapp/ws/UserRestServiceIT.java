@@ -20,7 +20,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 
 import com.jayway.restassured.RestAssured;
-import com.webcontext.apps.restwebapp.ejb.UserEJB;
+import com.webcontext.apps.restwebapp.managers.UserManager;
 import com.webcontext.apps.restwebapp.model.User;
 import com.webcontext.apps.restwebapp.services.UserService;
 import com.webcontext.apps.restwebapp.services.ws.UserRestService;
@@ -40,7 +40,7 @@ public class UserRestServiceIT {
 		return ShrinkWrap
 				.create(WebArchive.class, "test.war")
 				.addClasses(User.class, 
-						UserEJB.class, 
+						UserManager.class, 
 						UserService.class,
 						UserRestService.class
 						)

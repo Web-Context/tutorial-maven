@@ -1,4 +1,4 @@
-package com.webcontext.apps.restwebapp.ejb;
+package com.webcontext.apps.restwebapp.managers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import com.webcontext.apps.restwebapp.ejb.exceptions.DaoException;
 import com.webcontext.apps.restwebapp.model.User;
 
 /**
@@ -18,7 +19,7 @@ import com.webcontext.apps.restwebapp.model.User;
  * @author Frédéric Delorme<frederic.delorme@gmail.com>
  */
 @Stateless
-public class UserEJB {
+public class UserManager {
 
 	@PersistenceContext(unitName = "defaultPersistenceUnit")
 	private EntityManager em;
@@ -63,6 +64,24 @@ public class UserEJB {
 	public User save(final User user) {
 		em.persist(user);
 		return user;
+	}
+
+	/**
+	 * Delete the User <code>user</code>.
+	 * 
+	 * @param user
+	 *            the user to be deleted.
+	 * @throws DaoException 
+	 */
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	public void delete(String username) throws DaoException {
+		User user = findByUsername(username);
+		
+		if(user!=null){
+			em.remove(user);
+		}else{
+			throw new DaoException("User with name username='"+username+"' does not exist.");
+		}
 	}
 
 	/**

@@ -6,8 +6,8 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
-import com.webcontext.apps.restwebapp.ejb.UserEJB;
 import com.webcontext.apps.restwebapp.exception.EntityAlreadyExistsException;
+import com.webcontext.apps.restwebapp.managers.UserManager;
 import com.webcontext.apps.restwebapp.model.User;
 
 /**
@@ -20,7 +20,7 @@ import com.webcontext.apps.restwebapp.model.User;
 public class UserService {
 
 	@Inject
-	private UserEJB userEjb;
+	private UserManager userEjb;
 
 	/**
 	 * Add a new User to the system.
