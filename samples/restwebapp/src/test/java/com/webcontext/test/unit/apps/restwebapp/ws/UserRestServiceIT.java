@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.net.URL;
 
 import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.container.test.api.OverProtocol;
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.test.api.ArquillianResource;
@@ -35,7 +34,7 @@ import com.webcontext.apps.restwebapp.services.ws.UserRestService;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class UserRestServiceIT {
 	
-	@Deployment @OverProtocol("Servlet 2.5")
+	@Deployment
 	public static WebArchive deploy() {
 		return ShrinkWrap
 				.create(WebArchive.class, "test.war")
@@ -46,7 +45,7 @@ public class UserRestServiceIT {
 						)
 				.addAsResource("META-INF/test-persistence.xml",
 						"META-INF/persistence.xml")
-				.addAsWebInfResource("WEB-INF/web.xml")
+				.addAsWebInfResource(EmptyAsset.INSTANCE,"WEB-INF/web.xml")
 				.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
 	}
 

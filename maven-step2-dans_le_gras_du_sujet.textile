@@ -1,0 +1,650 @@
+h1. Dans le gras du sujet
+
+p. Il faut bien avouer que le premier article était TRES succinct. Je vous propose d'aborder plus sérieusement le sujet.
+
+
+h2. Gooooooaaal !
+
+p. Commençons par le début: les "goals" (non, rien à voir avec le foot, quoique ... )  J'ai évoqué dans la première partie le fait que Maven couvrait toutes les phases de la production logicielle. Et bien c'est exactement le cas.
+
+p. Illustrons (avec un peu d'inspiration du livre référence "Maven:the definitive guide(Aller sur le site Amazon.com pour contempler ce bô livre)":http://www.amazon.com/gp/product/0596517335 , je l'avoue) l'exemple d'un projet java consistant à créer une librairie livrable sous forme de jar.
+
+p. Commençons par le début, appelons notre librairie ZeLibraire, publiée par moi même et qui, malencontreusement ne sert a rien d'autre que d'être un exemple par pour cette série d'article. Nous allons donc produire un beau logiciel à l'aide de maven. pour cela, nous devrons, compiler, gérer des dépendances, faire des tests (par là comprenons les jouer en automatique) et enfin, si tout cela fonctionne, nous pourrons le packager sous la forme d'un JAR.
+
+p. Ensuite nous verrons que, afin de livrer cette librairie de façon propre et élégante, nous pourrons assemble sources, documentation et jar de façon très propre (limite professionnel oserais-je, et cela tombe bien, c'est à cela que Maven sert).
+
+p. Voila un premier schéma (chouette hein ?) qui explique les principales phases que nous allons activer pour notre projet Zelibrairie.
+
+"!http://mcgivrer.files.wordpress.com/2014/04/maven-phases-vs-goals.png?w=750!(Phases et goals de Apache Maven)":http://mcgivrer.files.wordpress.com/2014/04/maven-phases-vs-goals.png
+
+p(figure). Phases et goals de Apache Maven
+
+p. Bon, un peu d'explication:
+
+p. sur la gauche, en <span style="color: blue; font-weight: bold;">bleu</span>, les phases gérées par Maven, sur la droite, en <span style="color: green; font-weight: bold;">vert</span> les "Goals" activables correspondants. 
+
+p. Ok, nous voilà bien avancés, nous ne savons toujours pas ce qu'est un "goal".
+
+p. Un *goal* est en fait une action que l'on peut lancer depuis la commande @mvn@.  (NDR: Ah ben quand même, il a lâcher le morceau :). Par exemple, pour nettoyer l'espace de compilation, nous ferons :
+
+
+bc(console)..  $ mvn clean
+
+p. Nous commençons maintenant à entrevoir quelques possibilités offertes par Maven.
+
+
+h2. A l'attaque des pom's
+
+p. Si je veux commencer à créer mon projet , voilà à quoi ressemble les premières lignes de mon fichier de projet maven: file: *pom.xml*
+
+
+bc(xml). <project xmlns="http://maven.apache.org/POM/4.0.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<modelVersion>4.0.0</modelVersion>
+<groupId>com.webcontext.apps</groupId>
+<artifactId>zelibrairie</artifactId>
+<version>0.0.1-SNAPSHOT</version>
+<packaging>jar</packaging>
+<name>ZeLibrairie</name>
+<description>A demonstration librabry project to illustrate 
+apache maven usage. </description>
+<url>http://www.github.com/web-context/zelibrairie</url>
+<organization>
+<name>WebContext</name>
+<url>http://www.web-context.com/</url>
+</organization>
+</project>
+
+p. Nous avons maintenant indiqué que le projet s'appellerait @Zelibrairie@, que le nom maven du projet serait@zelibrairie@ (artifactId), qu'il serait publié sous le groupe @com.webcontext.apps@ (groupId). On trouve également une @version@ du logiciel qui servira à suivre la vie du dit logiciel. on trouve également des champs @description@ et @organisation@ qui serviront à documenter le projet lorsque celui-ci sera publié sur un dépôt officiel Maven (que nous découvrirons dans la phase de release, donc plus loin dans cet article).
+
+
+
+h2. Super Structure
+
+p. Nous n'avons pas encore expliqué la structure d'un projet dansles détails. Afin de l'illustrer, commençons par créer notre répertoire de travail :
+
+
+bc(console)..  $ mkdir zelibrairie$ cd zelibrairie
+
+p. Ensuite, créons la structure du projet:
+
+bc(console)..  $ mkdir -p zelibrairie/src/main/java
+$ mkdir -p zelibrairie/src/test/java
+
+p. A l'aide de notre éditeur de code préféré, créons le fichier @pom.xml@ en copiant le contenu de l'exemple précédemment indiqué. Nous obtenons la structure ci-dessous:
+
+bc(diagram).. zelibrairie      # répertoire de base du projet
+|_ src              # sources du projet découpées en deux groupes
+|  |_ main          # les sources a proprement parlé du code du projet
+|  |  |_ java       # - les classes java dans leurs packages
+|  |_ test          # le code des tests unitaires, intégration et E2E.
+|  |  |_ java       # - les parties java pour l'exécution de ce tests
+|_ pom.xml          # le fichier de description du projet Maven.
+
+p(figure). Structure des sources d'un projet "Mavenisé"
+
+h2. Léon le nettoyeur
+
+p. Executons maintenant la commande d'exécution du goal @clean@
+
+
+p. Sur la console, nous pourons lire:
+
+
+bc(console)..  $ mvn clean
+[INFO] Scanning for projects...
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building ZeLibraibrie 0.0.1-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ zelibrairie ---
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 0.299s
+[INFO] Finished at: Mon Apr 14 01:42:37 CEST 2014
+[INFO] Final Memory: 5M/108M
+[INFO] ------------------------------------------------------------------------
+
+p.         Un répertoire @target@ sera créé dès que nous exécuterons la commande de compilation; c'est là que le résultat du travail sera produit.
+
+
+
+h3. Compilator, le retour
+
+p. Même sans code, vous pouvez lancer une petite compilation :
+
+
+bc(console)..  $ mvn compile
+
+p. donnant lieu à la sortie console suivante :
+
+
+bc(console)..  $ mvn compile
+[INFO] Scanning for projects...
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] Building ZeLibrairie 0.0.1-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+Downloading: http://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-
+resources-plugin/2.5/maven-resources-plugin-2.5.pom
+...
+...
+Downloaded: http://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-compi
+ler-javac/1.8.1/plexus-compiler-javac-1.8.1.jar (13 KB at 26.8 KB/sec)
+[INFO] Nothing to compile - all classes are up to date
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 8.715s
+[INFO] Finished at: Mon Apr 14 10:52:35 CEST 2014
+[INFO] Final Memory: 6M/244M
+[INFO] ------------------------------------------------------------------------
+
+p. Mais comment se fait-il que la compilation d'aucun code produise autant de choses ? :) Et bien, cela vient du fait de la nature même de Maven, qui est constitué uniquement d'un système de plugins.
+
+p. Ces plugins sont activés sur certaines phases du cycle Maven, et s'ils ne sont pas disponibles localement (dans un répertoire de cache @[USERHOME]/.m2/repository@), ils sont automatiquement téléchargés, et activés.
+
+p. En lançant pour la premier fois la compilation de notre projet, c'est ce qu'il vient de se passer. Dans le log des opérations, nous pouvons constater, entre autres, le téléchargement d'un plugin du nom de @plexus-compiler-javac-1.8.1.jar@: c'est le moteur de compilation de Maven pour les fichiers sources
+java.
+
+p. nous pouvons finalement voir que notre compilation à réussi (le contraire eu été inquiétant :)
+
+p. Ok, ajoutons un peu de code pour voir de quoi Maven est capable !
+
+
+h2. Les choses sérieuses
+
+p. La structure d'un pom est très importante et elle donne moulte information sur un projet, non seulement à l'outil Maven, mais aux développeurs.
+
+p. Reprenons le @pom.xml@ standard et regardons de plus près les différents blocs:
+
+p=. "!http://mcgivrer.files.wordpress.com/2014/04/maven-pom-xml-full-structure-overview.png!(Les différents blocs dans le fichier pom.xml de Maven.)":http://mcgivrer.files.wordpress.com/2014/04/maven-pom-xml-full-structure-overview.png
+
+p=(figure). Les différents blocs dans le fichier pom.xml de Maven.
+
+p. Après avoir découvert ensemble la partie déclaration administrative, nous devons voir de plus près la partie *dependencies*.
+Les "dependencies" sont la déclaration des librairies nécessaires à l'exécution de votre programme. Ces dépendances se retrouveront sur le "chemin de classe" (oui, c'est curieux, le classpath en français). et en fonction du paramètre @scope@, la librairie sera présente dans le classpath de compilation, de test, ou de runtime.
+
+p. Il est également possible de d&clarer des dépendances dites "systèmes", elles seront packagée dans l'application finale,non pas depuis le repository (que nous découvrirons et expliquerons plus tard) mais depuis un chemin fixe, par exemple @c:\meslibrairies\monjar.jar@.
+
+
+h3. les différents scopes
+
+|_. Scope    |_. Description |
+| @compile@  | La dépendance sera ajoutée au classpath dans tous les cas | 
+| @runtime@  | la dépendance sera package avec l'application mais n'est pas nécessaire à la compilation. | 
+| @test@     | cette fois, la dépendance sera présente uniquement lors de la phase d'execution des tests (voir le graphe plu haut pour revoir les phases/goals de maven | 
+| @system@ | La dépendance système a la particularité | 
+| @provided@ | La dépendance est intégrée au classpath pour la compilation mais ne sera pas packagée car réputée fournie par l'environnement d'execution de l'application, le conteneur web dans le cas d'une application, par exemple. | 
+| @import@ | ce scope n'est disponible que pour une dépendance de type @pom@. l'ensemble des dépendances mentionnées dans le pom référencé comme dépendances seront portées au classpath et packagée dans l'application. |
+
+p(figure). Les différents scopes maven.
+
+p. Nous disions vouloir construire une premier application, donc ? non ?
+
+p. Ajoutons les dépendances de base nécessaire à notre petite code party: à savoir l'indispensable logger @Log4J@, ainsi que le non moins indispensable @JUnit@ ce qui nous permettra de jouer avec les fameux scopes et permettra de mieux comprendre leur intérêt. Donc, éditons notre fichier POM pour ajouter les dites dépendances:
+
+bc(xml).. <project>
+  ...
+  <groupId></groupId>
+  <artifactId></artifactId>
+  <version></version>
+  ...
+  <dependencies>
+
+  <!-- logging capability -->
+  <dependency>
+  <groupId>log4j</groupId>
+  <artifactId>log4j</artifactId>
+  <version>1.2.17</version>
+  </dependency>
+
+  <!-- testing capability -->
+  <dependency>
+  <groupId>junit</groupId>
+  <artifactId>junit</artifactId>
+  <version>4.11</version>
+  <scope>test</scope>
+  </dependency>
+
+  </dependencies>
+  ...
+  </project>
+
+
+h3. Configuración del Compilador
+
+p. Ensuite concentrons nous sur la compilation. Nousouhaitons préciser que l'application doit être compilée sur un JDK 1.7 et que nous voulons nous assurer que les sources soient bien encodés en UTF-8: c'est le plugin maven special @maven-compiler-plugin@ qui a la charcge de vérifier et activer cela:
+
+
+bc(xml). <build>
+  <plugins>
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-compiler-plugin</artifactId>
+      <version>3.1</version>
+      <configuration>
+        <target>${src.target}</target>
+        <source>${src.source}</source>
+        <encoding>${src.encoding}</encoding>
+      </configuration>
+    </plugin>
+  </plugins>
+</build>
+
+p. Nous utilisons ici une version 3.1 du plugin. nous précisons l'encodage des fichiers et le JDK à utiliser.
+
+h3. Application à 2 classes
+
+p. OK, créons une ou deux classes (en fait deux) dans le répertoire @src/main/java@ en respectant biensur le chemin de package @com.webcontext.libs.zelibrairie@ pour pouvoir faire quelques tests depuis l'autre répertoire @src/test/java@: nota: les classes ont été volontairemetn simplifiées dans l'article et sont bien complète sur le repository github ("http://github.com/Web-Context/tutorial-maven":http://github.com/Web-Context/tutorial-maven" )
+
+p. *1.* Une entité digne de ce nom pour modélisé un User (oh c'est super original, je sais) :
+
+p. *file:* @com.webcontext.libs.zelibrairie.model.User(.java)@
+
+bc(java).. public class User{
+  public String username;
+  public String lastname;
+  public String firstname;
+  public String email;
+  public String password;
+
+  public User(){
+
+  }
+
+  /*---- getters &amp; setters ----*/
+  ...
+
+  @Override
+  public String toString() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("User [");
+    if (username != null)
+    builder.append("username=").append(username).append(", ");
+    if (email != null)
+    builder.append("email=").append(email).append(", ");
+    if (firstname != null)
+    builder.append("firstname=").append(firstname).append(", ");
+    if (lastname != null)
+    builder.append("lastname=").append(lastname);
+    builder.append("]");
+    return builder.toString();
+  }
+}
+
+p. *2.* Un service de gestion de ces utilisateurs :
+
+p. *file:* @com.webcontext.libs.zelibrairie.services.UserService(.java)@
+
+bc(java).. public class UserService {
+  private static Map<String , User> users = new HashMap<String, User>();
+
+  public User add(User user) {
+    users.put(user.getUsername(), user);
+    return user;
+  }
+
+  public void add(Collection<User> newUsers) {
+    for (User user : newUsers) {
+      users.put(user.getUsername(), user);
+    }
+  }
+
+  public User update(User user) {
+    users.put(user.getUsername(), user);
+    return user;
+  }
+
+  public User delete(User user) {
+    users.remove(user.getUsername());
+    return user;
+  }
+
+  public User findByUsername(String username) {
+    return users.get(username);
+  }
+
+  public List<User> findAll() {
+    List<User> rtusers = (List<User>) users.values();
+    return rtusers;
+  }
+
+  public int count() {
+    return users.size();
+  }
+
+}
+
+h3. Testator 2: The Revenge
+
+p. Nos classes applicatives étant prêtes, nous allons nous pencher sur notre classe de test du service @UserService@, dans le répertoir @src/test/java@, donc:
+
+p. *file:* @com.webcontext.test.unit.libs.zelibrairie.services.UserService(.java)@
+
+bc(java).. @FixMethodOrder(MethodSorters.NAME_ASCENDING)
+public class UserServiceTest {
+
+  private static Map<String , User> userstest = new HashMap<String, User>();
+  private static UserService userService = new UserService();
+
+  @Before
+  public void setUp() throws Exception {
+    userService = new UserService();
+    userstest = new HashMap<String , User>();
+    // add some user
+    userstest.put("user1", new User("user1", "User", "User1",
+    "user1@mail.com", "password"));
+    userstest.put("user2", new User("user2", "User", "User2",
+    "user2@mail.com", "password"));
+    userstest.put("user3", new User("user3", "User", "User3",
+    "user3@mail.com", "password"));
+    userstest.put("user4", new User("user4", "User", "User4",
+    "user4@mail.com", "password"));
+  }
+
+  @After
+  public void tearDown() throws Exception {
+    userService = null;
+    userstest = null;
+  }
+
+  @Test
+  public void test_1_add() {
+    User usernew = new User("usernew", "Usernew", "Newuser",
+    "new.user@mail.com", "password");
+    userService.add(usernew);
+    assertEquals("Size of collection is not the right one.", 1,
+    userService.count());
+  }
+
+  @Test
+  public void test_2_AddListUserandFindByUsername() {
+    userService.add(userstest.values());
+    assertEquals("All users was not inserted !", 5, userService.count());
+
+    User user1 = userService.findByUsername("user1");
+    assertTrue("User not found", user1!=null);
+    assertEquals("User not the right one.", "User1", user1.getLastname());
+  }
+
+  @Test
+  public void test_3_AddListUserAndDelete() {
+    userService.add(userstest.values());
+
+    User user1 = userService.findByUsername("user1");
+    userService.delete(user1);
+    User isUserDeleted = userService.findByUsername("user1");
+    assertTrue("User has not bean deleted", isUserDeleted==null);
+  }
+  @Test
+  public void test_4_update() {
+    User usernew = new User("usernew", "Usernew", "Newuser",
+    "new.user@mail.com", "password");
+    userService.add(usernew);
+    User last = userService.findByUsername("usernew");
+    last.setFirstname("Toto");
+    User modified = userService.update(last);
+
+    assertEquals("USer was not modified","Toto",modified.getFirstname());
+  }
+}
+
+bq(info).. *Trick &amp; Tips*<br/>
+Noter l'annotation en amont de déclaration de la classe @@FixMethodOrder@ qui permet d'imposer à JUnit (depuis la version 4.11), un ordre d'exécution des différentes méthodes annotées @@Test@.
+
+@MethodSorters.NAME_ASCENDING@ propose une  exécution dans l'ordre alphabétique des nom des méthodes.
+
+h2. Test test test !
+
+p. Maintenant, ne faiblissons pas, compilons et testons
+
+bc(console)..  $ mvn clean test
+
+p. En laçant cette commande, maven nettoie le projet, et compile tous les sources, en scope @compile@ et @test@. Enfin, les tests JUnit présents sont exécutés :
+
+bc(console)..  [INFO] Scanning for projects...
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building ZeLibrairie 0.0.1-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ zelibrairie ---
+[INFO] Deleting /home/frederic/Projects/tutorials/tutorial-maven/samples/zelibrairie/target
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ zelibrairie ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] skip non existing resourceDirectory /home/frederic/Projects/tutorials/tutorial-maven/samples/zelibrairie/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ zelibrairie ---
+[INFO] Changes detected - recompiling the module!
+[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!
+[INFO] Compiling 2 source files to /home/frederic/Projects/tutorials/tutorial-maven/samples/zelibrairie/target/classes
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ zelibrairie ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] skip non existing resourceDirectory /home/frederic/Projects/tutorials/tutorial-maven/samples/zelibrairie/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:testCompile (default-testCompile) @ zelibrairie ---
+[INFO] Changes detected - recompiling the module!
+[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!
+[INFO] Compiling 1 source file to /home/frederic/Projects/tutorials/tutorial-maven/samples/zelibrairie/target/test-classes
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.12.4:test (default-test) @ zelibrairie ---
+[INFO] Surefire report directory: /home/frederic/Projects/tutorials/tutorial-maven/samples/zelibrairie/target/surefire-reports
+
+-------------------------------------------------------
+T E S T S
+-------------------------------------------------------
+Running com.webcontext.test.unit.libs.zelibraririe.UserServiceTest
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.067 sec
+
+Results :
+
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0
+
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 2.198s
+[INFO] Finished at: Tue Apr 15 02:49:08 CEST 2014
+[INFO] Final Memory: 16M/174M
+[INFO] ------------------------------------------------------------------------
+
+p. Le projet a bien été compilé et les tests se sont correctement
+exécutés !
+
+p. Maven a procédé à la compilation de nos sources, et a vérifié
+le projet en jouant les tests unitaires.
+
+p. Nous irons encore plus loin dans la suite de l'article en
+expliquant ce que devient notre projet après compilation et test.
+
+h2. Et mon Jar dans tout ça ?
+
+p. L'ultime étape de notre article est de générer une archive java
+contenant notre bibliothèque.
+
+p. Pour cela, nous allons ajouter un nouveau plugin Maven, le plugin de
+generation du jar (sic): @maven-jar-plugin@ (re sic). Ajoutons donc les lignes suivantes à notre bonne vieille @pom.xml@, à la suite des autres plugins déjà présents :
+
+bc(xml).. <!-- Configuration du jar -->
+<plugin>
+<groupId>org.apache.maven.plugins</groupId>
+<artifactId>maven-jar-plugin</artifactId>
+<version>2.4</version>
+</plugin>
+
+p. Si vous regarder dans le répertoire @target@ après une construction de votre projet, nous pouvons observer l'apparition d'un @JAR@. C'est le résultat de la compilation et du packaging réalisé par maven via le plugin JAR:
+
+bc(console)..  $ ll target
+total 40
+drwxr-xr-x 9 frederic frederic 4096 avril 16 19:14 ./
+drwxr-xr-x 5 frederic frederic 4096 avril 16 19:14 ../
+drwxr-xr-x 3 frederic frederic 4096 avril 16 19:14 classes/
+drwxr-xr-x 3 frederic frederic 4096 avril 16 19:14 generated-sources/
+drwxr-xr-x 3 frederic frederic 4096 avril 16 19:14 generated-test-sources/
+drwxr-xr-x 2 frederic frederic 4096 avril 16 19:14 maven-archiver/
+drwxr-xr-x 3 frederic frederic 4096 avril 16 19:14 maven-status/
+drwxr-xr-x 2 frederic frederic 4096 avril 16 19:14 surefire-reports/
+drwxr-xr-x 3 frederic frederic 4096 avril 16 19:14 test-classes/
+-rw-r--r-- 1 frederic frederic 2298 avril 16 19:14 zelibrairie-0.0.1-SNAPSHOT.jar
+
+p. Nous avons produit notre logiciel, nous l'avons packagé en JAR. il ne nous reste plus qu'à l'estampiller comme une release.
+
+p. Et bien cela tombe bien, nous pouvons aussi confier cette tâche à Maven. Nous allons réaliser cela à l'aide 3 nouveaux plugins:
+* *maven-javadoc-plugin* pour produire la
+documentation au format javadoc de notre API,
+* *maven-src-plugin* pour livrer les sources
+avec notre applciation
+* *maven-release-plugin* pour faire la release
+et la livraison de cette application sur un dépôt de type maven.
+
+h2. La release !
+
+h3. Documentons, documentons !
+
+p. Commençons par le premier step, à savoir, la documentation de notre librairie.
+
+p. Comme nous l'avons remarqué, tout passant par des plugins, ajoutons notre nouveau plugin au fichier @pom.xml@ de notre projet:
+
+bc(xml). <plugin>
+<groupId>org.apache.maven.plugins</groupId>
+<artifactId>maven-javadoc-plugin</artifactId>
+<version>2.9.1</version>
+</plugin>
+
+p. Relançons la compilation avec une commande que nous connaissons maintenant, mais ajoutons un goal supplémentaire:
+
+bc(console)..  
+$ mvn clean install javadoc:jar
+
+p. si vous regarder dans le répertoire @target@ , un nouveau jar a fait son apparition :
+
+bc(console)..  $ ll target
+total 116
+drwxr-xr-x 12 frederic frederic  4096 avril 16 19:29 ./
+drwxr-xr-x  5 frederic frederic  4096 avril 16 19:27 ../
+drwxr-xr-x  4 frederic frederic  4096 avril 16 19:29 apidocs/
+drwxr-xr-x  3 frederic frederic  4096 avril 16 19:27 classes/
+drwxr-xr-x  3 frederic frederic  4096 avril 16 19:27 generated-sources/
+drwxr-xr-x  3 frederic frederic  4096 avril 16 19:27 generated-test-sources/
+drwxr-xr-x  2 frederic frederic  4096 avril 16 19:28 javadoc-bundle-options/
+drwxr-xr-x  2 frederic frederic  4096 avril 16 19:27 maven-archiver/
+drwxr-xr-x  3 frederic frederic  4096 avril 16 19:27 maven-status/
+drwxr-xr-x  3 frederic frederic  4096 avril 16 19:28 site/
+drwxr-xr-x  2 frederic frederic  4096 avril 16 19:27 surefire-reports/
+drwxr-xr-x  3 frederic frederic  4096 avril 16 19:27 test-classes/
+-rw-r--r--  1 frederic frederic  2323 avril 16 19:27 zelibrairie-0.0.1-SNAPSHOT.jar
+-rw-r--r--  1 frederic frederic 64253 avril 16 19:29 zelibrairie-0.0.1-SNAPSHOT-javadoc.jar
+
+
+p. Le fichier @zelibrairie-0.0.1-SNAPSHOT-javadoc.jar@ a été généré par le plugin javadoc. Ainsi, la documentation est prête.
+
+h3. La source du savoir
+
+p. Tout bon packaging de logiciel doit être accompagné de ses sources.
+
+bc(xml). <plugin>
+<groupId>org.apache.maven.plugins</groupId>
+<artifactId>maven-source-plugin</artifactId>
+<version>2.2.1</version>
+</plugin>      
+
+
+Nous lancerons de nouveau un appel à @mvn@:
+
+bc(console)..  $ mvn source:jar
+
+
+p. Ce qui produira le fichier @zelibrairie-0.0.1-SNAPSHOT-sources.jar@. Ok, l'étape finale nécessite un peu plus de configuration : la RELEASE !
+
+h3. Relachement du stress
+
+p. La touche finale est la livraison ou delivery, le dernier petit coup de stress avant la fin du projet. Là aussi, Maven va nous donner un bon coup de main avec le plugin @maven-release-plugin@.
+
+bc(xml). <plugin>
+  <groupId>org.apache.maven.plugins</groupId>
+  <artifactId>maven-release-plugin</artifactId>
+  <version>2.5</version>
+</plugin>      
+
+p. Mais pour que celui-ci soit opérationnel, nous devons indiquer plusieurs choses:
+
+# le repository des sources di projet, a travers lequel il va
+pouvoir versionner et tagger notre livraison,
+# comment accèder à ce repository
+# comment versionner.
+
+p. tout cela est fait à travers l'entrée suivante dan le pom.xml:
+
+bc(xml). <scm>
+  <url>http://github.com/web-context/tutorial-maven.git</url>
+  <connection>scm:git:git@github.com.org:web-context/tutorial-maven.git</connection>
+  <developerConnection>scm:git:git@github.com:web-context/tutorial-maven.git</developerConnection>
+  <tag>${project.version}</tag>
+</scm>
+
+p. où:
+
+* l'@url@ indique le chemin sur le réseau (internet/intranet) où nous pourrons consulter le repository versioné du projet,
+* la @connection@ est l'url du dépôt sur lequel les sources sont stockées. C'est sur cette url que le plugin va réaliser les tags de version. elle est de la forme: @scm:[git/svm/cvs/hg]:([protocole:port]:)[server]([:port])/[repository]@ où:
+** *protocole* http(s) ou ssh (généralement)
+** *server* Nom du serveur, ou nom DNS du service
+** *port* votre serveur ne sert peut-être pas par défaut ur le port 80, mais sur u autre port, par ex: 8080
+** *repository* le nom du dépôt sur le serveur. généralement préfixé par le nom d'utilistaur propriétaire du dépôt, ex: web-context/tutorial-maven.git
+* @developperConnection@ est l'url dans le dépôt de la branche de développement.
+* @tag@ est le template de marqage des release: ${project.version} permet de récupérer le numéro de version.
+
+p. Pour réaliser la release, nous devons faire les choses en deux étapes:
+
+# Préparer la release, permet de packager dans la bonne version: le versionning @0.0.1-SNAPSHOT@code> sera remplacé par la version "release", à savoir @0.0.1@ # Faire la release, c'est a dire pousser les sources et la tagger, en pousser les composants (artefacts) vers le gestionnaire
+de composant (par exemple, Nexus, Artifactory ou encore Archiva).
+
+h3. Release:prepare
+
+p. Lors de cette étape, Maven va nous demander de confirmer la version à releaser. celle-ci correspond à la version de la balise Projet @<version>@, soit ici @0.0.1-SNAPSHOT@, version de travail, ce qui donne lieu à la release @0.0.1@.
+
+
+bc(console)..  $ mvn release:prepare
+
+p. Si nous regardons du côté de notre repository GIT:
+
+<figure>
+<figcaption>
+<a href="http://mcgivrer.files.wordpress.com/2014/04/github-release-tag.png"><img style="width:600px" src="http://mcgivrer.files.wordpress.com/2014/04/github-release-tag.png"/></a>
+<figcaption>Release:Prepare push tag to code repository accordding to @<tag>@ format.</figcaption>
+</figure>
+
+p. A cette étape, la release est prête a être lancée.
+
+h3. Release:perform
+
+p. La réalisation de la release implique que d'autrtes éléments de configuration soient apportés, en l'occurrence, la définition du dépôt cible de la release.
+
+
+<dl>
+<dt>Repository Maven</dt>
+<dd>Un répository maven est un dépôt destiné à contenir l'ensemble des versions d'un produit, avec ses dépendances, sa documentation et ses sources. Le dépot est accédé par maven lui-même lors des phases de calculs des dépendances d'un logiciel afin de les mettre à disposition du compilateur d'une part, puis de les glisser dans le packaging final, suivat les besoins exprimés dans le fichier @pom.xml@</dd>
+</dl>
+
+p. A la fin de la release *0.0.1*, le logiciel a été versionné en *0.0.2-SNAPSHOT*, prêt pour recevoir le développement de la prochaine release
+
+
+p. Si nous regardons dans notre dépôt d'artefact (Nexus ou Archiva, par exemple), nous pourrons voir que les jar du logiciel, des sources et de la javadoc en version 0.0.1 ont été poussés tous les trois.
+
+
+p=. "!http://mcgivrer.files.wordpress.com/2014/04/nexus-release-0-0-1.png!(Screenshot Nexus version 0.0.1)":http://mcgivrer.files.wordpress.com/2014/04/nexus-release-0-0-1.png
+
+p=(figure). Screenshot Nexus version 0.0.1
+
+
+bq(info). *Note*<br />Attention, les modifications doivent
+toutes avoir été commitées (via git/svn) sinon, la préparation de la
+release est refusée.
+
+__To be continued ...__

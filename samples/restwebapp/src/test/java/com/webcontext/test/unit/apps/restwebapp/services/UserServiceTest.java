@@ -21,7 +21,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 
-import com.webcontext.apps.restwebapp.exception.EntityAlreadyExistsException;
+import com.webcontext.apps.restwebapp.exceptions.EntityAlreadyExistsException;
 import com.webcontext.apps.restwebapp.managers.UserManager;
 import com.webcontext.apps.restwebapp.model.User;
 import com.webcontext.apps.restwebapp.services.UserService;
@@ -46,8 +46,10 @@ public class UserServiceTest {
 		return ShrinkWrap
 			.create(JavaArchive.class)
 			.addClasses(UserService.class, UserManager.class,User.class)
-			.addAsResource("META-INF/test-persistence.xml","persistence.xml")
-			.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
+			.addAsResource("META-INF/test-persistence.xml",
+					"persistence.xml")
+			.addAsManifestResource(EmptyAsset.INSTANCE, 
+					"beans.xml");
 	}
 
 	/**

@@ -6,7 +6,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
-import com.webcontext.apps.restwebapp.exception.EntityAlreadyExistsException;
+import com.webcontext.apps.restwebapp.exceptions.EntityAlreadyExistsException;
 import com.webcontext.apps.restwebapp.managers.UserManager;
 import com.webcontext.apps.restwebapp.model.User;
 
@@ -20,7 +20,7 @@ import com.webcontext.apps.restwebapp.model.User;
 public class UserService {
 
 	@Inject
-	private UserManager userEjb;
+	private UserManager userMgr;
 
 	/**
 	 * Add a new User to the system.
@@ -30,8 +30,8 @@ public class UserService {
 	 * @return
 	 */
 	public User add(User user) throws EntityAlreadyExistsException {
-		if (userEjb.findByUsername(user.getUsername()) == null) {
-			userEjb.save(user);
+		if (userMgr.findByUsername(user.getUsername()) == null) {
+			userMgr.save(user);
 		} else {
 			throw new EntityAlreadyExistsException("User " + user.getUsername()
 				+ " already exixts");
@@ -61,7 +61,7 @@ public class UserService {
 	 * @return
 	 */
 	public User update(User user) {
-		userEjb.save(user);
+		userMgr.save(user);
 		return user;
 	}
 
@@ -73,7 +73,7 @@ public class UserService {
 	 * @return
 	 */
 	public void delete(User user) {
-		userEjb.delete(user);
+		userMgr.delete(user);
 	}
 
 	/**
@@ -84,7 +84,7 @@ public class UserService {
 	 * @return
 	 */
 	public User findByUsername(String username) {
-		return userEjb.findByUsername(username);
+		return userMgr.findByUsername(username);
 	}
 
 	/**
@@ -93,7 +93,7 @@ public class UserService {
 	 * @return
 	 */
 	public List<User> findAll() {
-		return userEjb.findAll();
+		return userMgr.findAll();
 	}
 
 	/**
@@ -102,7 +102,7 @@ public class UserService {
 	 * @return
 	 */
 	public long count() {
-		return userEjb.count();
+		return userMgr.count();
 	}
 
 }

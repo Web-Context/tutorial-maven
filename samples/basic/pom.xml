@@ -1,0 +1,187 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+	http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<!-- The Basics -->
+	<groupId>thegroup</groupId>
+	<artifactId>thename</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<!--parent></parent-->
+	<!--modules></modules-->
+	<!--dependencyManagement></dependencyManagement-->
+
+	<!-- Product description -->
+	<name>TheName</name>
+	<description>A basic mven project.</description>
+	<url>${project.git.url}${project.name}.git</url>
+
+
+	<!-- Properties for project -->
+	<properties>
+		<src.target>1.7</src.target>
+		<src.source>1.7</src.source>
+		<src.encoding>UTF-8</src.encoding>
+		<project.git.url>http://www.github.com/Web-Context</project.git.url>
+		<project.git.issues>http://www.github.com/Web-Context/${project.name}/issues</project.git.issues>
+		<jenkins.url.job>http://localhost:10090/jenkins/job</jenkins.url.job>
+	</properties>
+
+
+	<!-- Organization -->
+	<organization>
+		<name>WebContext</name>
+		<url>http://www.web-context.com/</url>
+	</organization>
+
+	<!-- Publication year -->
+	<inceptionYear>2014</inceptionYear>
+
+	<!-- List of core commiters -->
+	<developers>
+		<developer>
+			<id>fdelorme</id>
+			<name>Frédéric Delorme</name>
+			<organization>Web-Context</organization>
+			<organizationUrl>http://www.web-context.com/</organizationUrl>
+			<roles>
+				<role>architect</role>
+			</roles>
+			<timezone>+1</timezone>
+		</developer>
+	</developers>
+
+	<!-- dependency management -->
+	<dependencies>
+		<!-- logging capability -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+
+		<!-- testing capability -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<!-- Build Settings -->
+	<build>
+		<plugins>
+			<!-- Java Compiler Configuration -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<target>${src.target}</target>
+					<source>${src.source}</source>
+					<encoding>${src.encoding}</encoding>
+				</configuration>
+			</plugin>
+
+			<!-- Resources encoding configuration -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<encoding>${src.encoding}</encoding>
+				</configuration>
+			</plugin>
+
+			<!-- Jar packaging -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.4</version>
+				<configuration>
+					<!--includes><include>com/web/context**</include></includes-->
+				</configuration>
+			</plugin>
+
+			<!-- Project Documentation Packaging -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.9.1</version>
+			</plugin>
+
+			<!-- Sources Packaging -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>2.2.1</version>
+			</plugin>
+
+			<!-- Release packaging -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.5</version>
+			</plugin>
+		</plugins>
+	</build>
+	<!-- Reporting -->
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-report-plugin</artifactId>
+				<version>2.17</version>
+				<configuration>
+					<outputDirectory>${basedir}/target/reporting</outputDirectory>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>2.1</version>
+				<configuration>
+					<outputDirectory>${basedir}/target/reporting</outputDirectory>
+				</configuration>
+			</plugin>
+		</plugins>
+	</reporting>
+	<!-- Version management -->
+	<scm>
+		<url>http://github.com/Web-Context/${project.name}.git</url>
+		<connection>scm:git:git@github.com:Web-Context/${project.name}.git</connection>
+		<developerConnection>scm:git:git@github.com:Web-Context/${project.name}.git</developerConnection>
+		<tag>${project.artifactId}-${project.version}</tag>
+	</scm>
+	
+	<!-- Configuration Nexus/Archiva/artifactory -->
+	<distributionManagement>
+		<repository>
+			<id>deployment</id>
+			<name>Internal Releases</name>
+			<url>http://nostroamd:8080/nexus/content/repositories/releases/</url>
+		</repository>
+		<snapshotRepository>
+			<id>deployment</id>
+			<name>Internal Releases</name>
+			<url>http://nostroamd:8080/nexus/content/repositories/snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+	<!-- Continuous Build -->
+	<ciManagement>
+		<system>jenkins</system>
+		<url>${jenkins.url.job}/${project.name}</url>
+	</ciManagement>
+
+	<!-- Gestion des bugs -->
+	<issueManagement>
+		<system>github</system>
+		<url>${project.git.issues}</url>
+	</issueManagement>
+
+</project>

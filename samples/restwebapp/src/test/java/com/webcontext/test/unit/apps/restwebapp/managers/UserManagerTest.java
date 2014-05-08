@@ -17,7 +17,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 
-import com.webcontext.apps.restwebapp.ejb.exceptions.DaoException;
+import com.webcontext.apps.restwebapp.exceptions.DaoException;
 import com.webcontext.apps.restwebapp.managers.UserManager;
 import com.webcontext.apps.restwebapp.model.User;
 
