@@ -149,12 +149,48 @@
 				<artifactId>maven-release-plugin</artifactId>
 				<version>2.5</version>
 			</plugin>
+
+
+			<!--This plugin's configuration is used to store Eclipse m2e settings 
+				only. It has no influence on the Maven build itself. -->
+			<plugin>
+				<groupId>org.eclipse.m2e</groupId>
+				<artifactId>lifecycle-mapping</artifactId>
+				<version>1.0.0</version>
+				<configuration>
+					<lifecycleMappingMetadata>
+						<pluginExecutions>
+							<pluginExecution>
+								<pluginExecutionFilter>
+									<groupId>
+										org.codehaus.mojo
+									</groupId>
+									<artifactId>
+										build-helper-maven-plugin
+									</artifactId>
+									<versionRange>
+										[1.8,)
+									</versionRange>
+									<goals>
+										<goal>parse-version</goal>
+									</goals>
+								</pluginExecutionFilter>
+								<action>
+									<ignore></ignore>
+								</action>
+							</pluginExecution>
+						</pluginExecutions>
+					</lifecycleMappingMetadata>
+				</configuration>
+			</plugin>
+
 		</plugins>
 	</build>
 
 	<!-- Reporting -->
 	<reporting>
 		<plugins>
+			<!-- Generate Test report -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-report-plugin</artifactId>
@@ -163,6 +199,7 @@
 					<outputDirectory>${basedir}/target/reporting</outputDirectory>
 				</configuration>
 			</plugin>
+			<!-- Build Project Site -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-site-plugin</artifactId>
@@ -171,6 +208,23 @@
 					<outputDirectory>${basedir}/target/reporting</outputDirectory>
 				</configuration>
 			</plugin>
+			<!-- Build Code quality Analysis report -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pmd-plugin</artifactId>
+				<version>3.0.1</version>
+				<configuration>
+					<linkXref>true</linkXref>
+					<sourceEncoding>utf-8</sourceEncoding>
+					<minimumTokens>100</minimumTokens>
+					<targetJdk>1.7</targetJdk>
+					<!-- <excludes> <exclude>**/*Bean.java</exclude> <exclude>**/generated/*.java</exclude> 
+						</excludes> -->
+					<excludeRoots>
+						<excludeRoot>target/generated-sources/stubs</excludeRoot>
+					</excludeRoots>
+				</configuration>
+			</plugin>	
 		</plugins>
 	</reporting>
 

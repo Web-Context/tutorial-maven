@@ -20,7 +20,7 @@
 		This (very) small project demonstrate usage of the asciidoctor maven plugin to generate official documentation, based on some wiki-markup based text files, producing HTML (one file or multiple file) format, and /or PDF format. 
 		
 		The platform used need asciidoctor and docbook to be accessible from the execution environment.</description>
-	<url>${project.git.url}${project.name}.git</url>
+	<url>${project.git.url}/${project.name}.git</url>
 
 
 	<!-- Properties for project -->
@@ -144,39 +144,44 @@
 			    <groupId>org.asciidoctor</groupId>
 			    <artifactId>asciidoctor-maven-plugin</artifactId>
 			    <version>${asciidoctor.version}</version>
-				<configruation>
-					<sourceDirectory>$(project.basedir}/src/main/docs</sourceDirectory>
-					<outputDirectory>$(project.basedir}/docs</outputDirectory>
-					<imagesDir>../resources/illustrations/</imagesDir>
+				<configuration>
+					<!-- Source documentation (.ad files) -->
+					<sourceDirectory>${project.basedir}/src/main/docs</sourceDirectory>
+					<!-- Sources for images -->
+					<imagesDir>illustrations/</imagesDir>
 					<headerFooter>true</headerFooter>
-				</configruation>
+				</configuration>
 			    <executions>
+			    	<!-- Generate HTML page -->
 					<execution>
 						<id>output-html</id>
 						<phase>generate-resources</phase>
 						<goals>
 							<goal>process-asciidoc</goal>
 						</goals>
-						<configruation>
+						<configuration>
+							<outputDirectory>${project.basedir}/target/docs/html</outputDirectory>
 							<sourceHighlighter>coderay</sourceHighlighter>
 							<backend>html</backend>
 							<attributes>
 								<toc/>
-								<stylesheet>docs.css</stylesheet>
+								<stylesheet>css/docs.css</stylesheet>
 							</attributes>
-						</configruation>
+						</configuration>
 					</execution>
+			    	<!-- Generate DocBook -->
 					<execution>
 						<id>output-docbook</id>
 						<phase>generate-resources</phase>
 						<goals>
 							<goal>process-asciidoc</goal>
 						</goals>
-						<configruation>
+						<configuration>
+							<outputDirectory>${project.basedir}/target/docbook</outputDirectory>
 							<sourceHighlighter>coderay</sourceHighlighter>
 							<backend>docbook</backend>
 							<doctype>book</doctype>
-						</configruation>
+						</configuration>
 					</execution>
 				</executions> 
 			</plugin>
@@ -193,6 +198,30 @@
 	<!-- Reporting -->
 	<reporting>
 		<plugins>
+			<!-- PMD Code quality analysis -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pmd-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+		          	<rulesets>
+			            <!-- Two rule sets that come bundled with PMD -->
+			            <ruleset>/rulesets/java/braces.xml</ruleset>
+			            <ruleset>/rulesets/java/naming.xml</ruleset>
+					</rulesets>
+					<linkXref>true</linkXref>
+					<sourceEncoding>utf-8</sourceEncoding>
+					<minimumTokens>100</minimumTokens>
+					<targetJdk>1.7</targetJdk>
+					<!-- <excludes> <exclude>**/*Bean.java</exclude> <exclude>**/generated/*.java</exclude> 
+						</excludes> -->
+					<excludeRoots>
+						<excludeRoot>target/generated-sources/stubs</excludeRoot>
+					</excludeRoots>
+
+				</configuration>
+			</plugin>
+			<!-- build test report -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-report-plugin</artifactId>
