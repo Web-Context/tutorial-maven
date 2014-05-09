@@ -1,0 +1,71 @@
+== Tutorial Maven
+=======================
+:Author: Frédéric Delorme
+:Email: frederic.delorme@web-context.com
+:Date: ${build.date}
+:Revision: ${project.version}
+=======================
+
+=== Hello from the author !
+
+image:images/fdelorme.jpg["Frédéric Delorme",width=64,link="images/fdelorme.jpg",title="author: Frédéric Delorme"]
+
+Votre serviteur (Frédérc Delorme) est heureux de vous proposer la génération de documentation basé sur les outils AsciiDoc, AsciiDoctor et DocBook.
+
+
+=== Exemple
+
+Avec une configuration adhoc, il est possible de générer des fichier *HTML* (en format unique, ou pultiple) ou au format *docbook*. Il est alors possible de générer des *PDF* pour ces fichiers docbooks. 
+
+Ci-dessous un exemple extrait du fichier pom.xml du project *samples/AsciiDocs* :
+
+
+[source, xml]
+...
+<plugin>
+  <groupId>org.asciidoctor</groupId>
+  <artifactId>asciidoctor-maven-plugin</artifactId>
+  <version>${asciidoctor.version}</version>
+  <configruation>
+    <sourceDirectory>$(project.basedir}/src/main/docs</sourceDirectory>
+    <outputDirectory>$(project.basedir}/docs</outputDirectory>
+    <imagesDir>../resources/illustrations/</imagesDir>
+    <headerFooter>true</headerFooter>
+  </configruation>
+  <executions>
+    <execution>
+      <id>output-html</id>
+      <phase>generate-resources</phase>
+      <goals>
+        <goal>process-asciidoc</goal>
+      </goals>
+      <configruation>
+        <sourceHighlighter>coderay</sourceHighlighter>
+        <backend>html</backend>
+        <attributes>
+          <toc/>
+          <stylesheet>docs.css</stylesheet>
+        </attributes>
+      </configruation>
+    </execution>
+    <execution>
+      <id>output-docbook</id>
+      <phase>generate-resources</phase>
+      <goals>
+        <goal>process-asciidoc</goal>
+      </goals>
+      <configruation>
+        <sourceHighlighter>coderay</sourceHighlighter>
+        <backend>docbook</backend>
+        <doctype>book</doctype>
+      </configruation>
+    </execution>
+  </executions> 
+</plugin>
+...
+
+
+TIP: Ce tutorial sera bientôt terminé, et apportera j'espère toutes les réponses aux questions que vous vous posez.
+
+
+image:images/logo_web-context.png["web-context.github.io",width=64,link="http://web-context.github.io/",title="http://web-context.github.io/"] « Web-Context »
