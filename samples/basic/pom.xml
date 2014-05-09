@@ -6,18 +6,13 @@
 
 	<!-- The Basics -->
 	<groupId>thegroup</groupId>
-	<artifactId>thename</artifactId>
+	<artifactId>basic</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<!--parent></parent-->
 	<!--modules></modules-->
 	<!--dependencyManagement></dependencyManagement-->
-
-	<!-- Product description -->
-	<name>TheName</name>
-	<description>A basic mven project.</description>
-	<url>${project.git.url}${project.name}.git</url>
 
 
 	<!-- Properties for project -->
@@ -29,6 +24,12 @@
 		<project.git.issues>http://www.github.com/Web-Context/${project.name}/issues</project.git.issues>
 		<jenkins.url.job>http://localhost:10090/jenkins/job</jenkins.url.job>
 	</properties>
+
+
+	<!-- Product description -->
+	<name>basic</name>
+	<description>A basic mven project.</description>
+	<url>${project.git.url}${project.name}.git</url>
 
 
 	<!-- Organization -->
@@ -107,14 +108,14 @@
 				</configuration>
 			</plugin>
 
-			<!-- Project Documentation Packaging -->
+			<!-- Project Java Documentation Packaging -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<version>2.9.1</version>
 			</plugin>
 
-			<!-- Sources Packaging -->
+			<!-- Project Sources Packaging -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
@@ -129,9 +130,49 @@
 			</plugin>
 		</plugins>
 	</build>
+
+	<pluginManagement>
+		<plugins>
+			<!--This plugin's configuration is used to store Eclipse m2e settings 
+				only. It has no influence on the Maven build itself. -->
+			<plugin>
+				<groupId>org.eclipse.m2e</groupId>
+				<artifactId>lifecycle-mapping</artifactId>
+				<version>1.0.0</version>
+				<configuration>
+					<lifecycleMappingMetadata>
+						<pluginExecutions>
+							<pluginExecution>
+								<pluginExecutionFilter>
+									<groupId>
+										org.codehaus.mojo
+									</groupId>
+									<artifactId>
+										build-helper-maven-plugin
+									</artifactId>
+									<versionRange>
+										[1.8,)
+									</versionRange>
+									<goals>
+										<goal>parse-version</goal>
+									</goals>
+								</pluginExecutionFilter>
+								<action>
+									<ignore></ignore>
+								</action>
+							</pluginExecution>
+						</pluginExecutions>
+					</lifecycleMappingMetadata>
+				</configuration>
+			</plugin>
+		</plugins>
+	</pluginManagement>
+
+
 	<!-- Reporting -->
 	<reporting>
 		<plugins>
+			<!-- Generate Test report -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-report-plugin</artifactId>
@@ -140,6 +181,7 @@
 					<outputDirectory>${basedir}/target/reporting</outputDirectory>
 				</configuration>
 			</plugin>
+			<!-- Build Project Site -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-site-plugin</artifactId>
@@ -148,6 +190,23 @@
 					<outputDirectory>${basedir}/target/reporting</outputDirectory>
 				</configuration>
 			</plugin>
+			<!-- Build Code quality Analysis report -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pmd-plugin</artifactId>
+				<version>3.0.1</version>
+				<configuration>
+					<linkXref>true</linkXref>
+					<sourceEncoding>utf-8</sourceEncoding>
+					<minimumTokens>100</minimumTokens>
+					<targetJdk>1.7</targetJdk>
+					<!-- <excludes> <exclude>**/*Bean.java</exclude> <exclude>**/generated/*.java</exclude> 
+						</excludes> -->
+					<excludeRoots>
+						<excludeRoot>target/generated-sources/stubs</excludeRoot>
+					</excludeRoots>
+				</configuration>
+			</plugin>			
 		</plugins>
 	</reporting>
 	<!-- Version management -->
