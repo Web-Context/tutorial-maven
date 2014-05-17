@@ -16,7 +16,7 @@ import javax.persistence.Table;
 @NamedQueries({
 		@NamedQuery(name = "findByUsername", query = "SELECT u FROM User u WHERE u.username=:username"),
 		@NamedQuery(name = "findAll", query = "SELECT u FROM User u ORDER BY u.username ASC"),
-		@NamedQuery(name="count",query="SELECT count(u) as nbUser FROM User u")})
+		@NamedQuery(name="count",query="SELECT COUNT(u) FROM User u")})
 @Table(name="USERS")
 public class User {
 	@Id

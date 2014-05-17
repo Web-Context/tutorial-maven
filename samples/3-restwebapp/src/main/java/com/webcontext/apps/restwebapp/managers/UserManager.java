@@ -3,6 +3,7 @@ package com.webcontext.apps.restwebapp.managers;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ejb.Singleton;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -16,6 +17,7 @@ import com.webcontext.apps.restwebapp.model.User;
  * 
  * @author Frédéric Delorme<frederic.delorme@gmail.com>
  */
+@Singleton
 @Stateless
 public class UserManager {
 

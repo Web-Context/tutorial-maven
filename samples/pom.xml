@@ -9,10 +9,10 @@
   <packaging>pom</packaging>
 
   <modules>
-    <module>asciidocs</module>
-    <module>fastweb</module>
-    <module>zelibrairie</module>
-    <module>restwebapp</module>
+    <module>2-zelibrairie</module>
+    <module>3-restwebapp</module>
+    <module>4-fastweb</module>
+    <module>5-asciidocs</module>
   </modules>
 
   <scm>
