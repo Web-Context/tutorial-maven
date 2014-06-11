@@ -1,0 +1,32 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.webcontext.apps</groupId>
+	<artifactId>modularwebapp</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>ModularWebApp</name>
+	<modules>
+
+		<module>userservice</module>
+		<module>webapp</module>
+	</modules>
+
+	<scm>
+		<url>http://github.com/Web-Context/tutorial-maven.git</url>
+		<connection>scm:git:git@github.com:Web-Context/tutorial-maven.git</connection>
+		<developerConnection>scm:git:git@github.com:Web-Context/tutorial-maven.git</developerConnection>
+		<tag>${project.artifactId}-${project.version}</tag>
+	</scm>
+
+	<issueManagement>
+		<system>bitbucket</system>
+		<url>http://github.com/Web-Context/tutorial-maven/issues</url>
+	</issueManagement>
+	<ciManagement>
+		<system>travis-ci</system>
+		<url>https://travis-ci.org/Web-Context/tutorial-maven</url>
+	</ciManagement>
+
+	<description>A maven modular based web application.</description>
+</project>

@@ -10,12 +10,12 @@
 
 image:images/fdelorme.jpg["Frédéric Delorme",width=64,link="images/fdelorme.jpg",title="author: Frédéric Delorme"]
 
-Votre serviteur (Frédérc Delorme) est heureux de vous proposer la génération de documentation basé sur les outils AsciiDoc, AsciiDoctor et DocBook.
+Votre serviteur (Frédéric Delorme) est heureux de vous proposer la génération de documentation basée sur les outils AsciiDoc, AsciiDoctor et DocBook.
 
 
 === Exemple
 
-Avec une configuration adhoc, il est possible de générer des fichier *HTML* (en format unique, ou pultiple) ou au format *docbook*. Il est alors possible de générer des *PDF* pour ces fichiers docbooks. 
+Avec une configuration adhoc, il est possible de générer des fichier *HTML* (en format unique, ou multiple) ou au format *docbook*. Il est alors possible de générer des *PDF* pour ces fichiers docbooks. 
 
 Ci-dessous un exemple extrait du fichier pom.xml du project *samples/AsciiDocs* :
 
@@ -29,7 +29,7 @@ Ci-dessous un exemple extrait du fichier pom.xml du project *samples/AsciiDocs* 
   <configruation>
     <sourceDirectory>$(project.basedir}/src/main/docs</sourceDirectory>
     <outputDirectory>$(project.basedir}/docs</outputDirectory>
-    <imagesDir>../resources/illustrations/</imagesDir>
+    <imagesDir>illustrations/</imagesDir>
     <headerFooter>true</headerFooter>
   </configruation>
   <executions>

@@ -148,7 +148,7 @@
 					<!-- Source documentation (.ad files) -->
 					<sourceDirectory>${project.basedir}/src/main/docs</sourceDirectory>
 					<!-- Sources for images -->
-					<imagesDir>illustrations/</imagesDir>
+					<imagesDir>../resources/illustrations/</imagesDir>
 					<headerFooter>true</headerFooter>
 				</configuration>
 			    <executions>

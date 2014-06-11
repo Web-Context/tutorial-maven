@@ -1,0 +1,6 @@
+com.webcontext.apps.restwebapp.model.User:
+  - username: fdelorme
+    password: abcd123
+    email: frederic.delorme@web-context.com
+    firstname: Frédéric
+    lastname: Delorme
