@@ -3,9 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<!-- Product identification -->
-	<groupId>com.webcontext.apps</groupId>
 	<artifactId>restwebapp</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
 	<!-- Product description -->
@@ -35,13 +33,6 @@
 			<timezone>+1</timezone>
 		</developer>
 	</developers>
-
-	<!-- Properties for project -->
-	<properties>
-		<src.target>1.7</src.target>
-		<src.source>1.7</src.source>
-		<src.encoding>UTF-8</src.encoding>
-	</properties>
 
 	<!-- Specific dependency for arquillian -->
 	<dependencyManagement>
@@ -202,4 +193,9 @@
 			</plugin>
 		</plugins>
 	</build>
+	<parent>
+		<groupId>com.webcontext.apps</groupId>
+		<artifactId>samples</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
 </project>

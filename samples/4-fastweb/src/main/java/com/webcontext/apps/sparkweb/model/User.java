@@ -52,7 +52,6 @@ public class User implements Serializable {
 	private Date createAt;
 
 	public User() {
-		// TODO Auto-generated constructor stub
 	}
 
 	/**

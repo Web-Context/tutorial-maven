@@ -2,17 +2,9 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<!-- Product identification -->
-	<groupId>com.webcontext.apps</groupId>
 	<artifactId>zelibrairie</artifactId>
 	<version>0.0.3-SNAPSHOT</version>
 	<packaging>jar</packaging>
-
-	<!-- Properties for project -->
-	<properties>
-		<src.target>1.7</src.target>
-		<src.source>1.7</src.source>
-		<src.encoding>UTF-8</src.encoding>
-	</properties>
 
 	<!-- Product description -->
 	<name>ZeLibrairie</name>
@@ -228,4 +220,9 @@
 		</plugins>
 	</reporting>
 
+	<parent>
+		<groupId>com.webcontext.apps</groupId>
+		<artifactId>samples</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
 </project>

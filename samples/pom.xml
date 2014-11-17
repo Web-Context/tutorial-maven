@@ -1,58 +1,66 @@
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  
-  <!-- Product identificaiton -->
-  <groupId>com.webcontext.apps</groupId>
-  <artifactId>samples</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <packaging>pom</packaging>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-  <modules>
-    <module>2-zelibrairie</module>
-    <module>3-restwebapp</module>
-    <module>4-fastweb</module>
-    <module>5-asciidocs</module>
-    <module>6-modularwebapp</module>
-  </modules>
+	<!-- Product identificaiton -->
+	<groupId>com.webcontext.apps</groupId>
+	<artifactId>samples</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
 
-  <scm>
-    <url>http://github.com/Web-Context/tutorial-maven.git</url>
-    <connection>scm:git:git@github.com:Web-Context/tutorial-maven.git</connection>
-    <developerConnection>scm:git:git@github.com:Web-Context/tutorial-maven.git</developerConnection>
-    <tag>${project.artifactId}-${project.version}</tag>
-  </scm>
+	<!-- Properties for project -->
+	<properties>
+		<src.target>1.8</src.target>
+		<src.source>1.8</src.source>
+		<src.encoding>UTF-8</src.encoding>
+	</properties>
 
-  <issueManagement>
-    <system>bitbucket</system>
-    <url>http://github.com/Web-Context/tutorial-maven/issues</url>
-  </issueManagement>
-  <ciManagement>
-  	<system>travis-ci</system>
-  	<url>https://travis-ci.org/Web-Context/tutorial-maven</url>
-  </ciManagement>
+	<modules>
+		<module>2-zelibrairie</module>
+		<module>3-restwebapp</module>
+		<module>4-fastweb</module>
+		<module>5-asciidocs</module>
+		<module>6-modularwebapp</module>
+	</modules>
 
-<!-- Reporting -->
-  <reporting>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-report-plugin</artifactId>
-        <version>2.17</version>
-        <configuration>
-          <outputDirectory>${basedir}/target/reporting</outputDirectory>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-site-plugin</artifactId>
-        <version>2.1</version>
-        <configuration>
-          <outputDirectory>${basedir}/target/reporting</outputDirectory>
-        </configuration>
-      </plugin>
-    </plugins>
-  </reporting>
+	<scm>
+		<url>http://github.com/Web-Context/tutorial-maven.git</url>
+		<connection>scm:git:git@github.com:Web-Context/tutorial-maven.git</connection>
+		<developerConnection>scm:git:git@github.com:Web-Context/tutorial-maven.git</developerConnection>
+		<tag>${project.artifactId}-${project.version}</tag>
+	</scm>
+
+	<issueManagement>
+		<system>bitbucket</system>
+		<url>http://github.com/Web-Context/tutorial-maven/issues</url>
+	</issueManagement>
+	<ciManagement>
+		<system>travis-ci</system>
+		<url>https://travis-ci.org/Web-Context/tutorial-maven</url>
+	</ciManagement>
+
+	<!-- Reporting -->
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-report-plugin</artifactId>
+				<version>2.17</version>
+				<configuration>
+					<outputDirectory>${basedir}/target/reporting</outputDirectory>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>2.1</version>
+				<configuration>
+					<outputDirectory>${basedir}/target/reporting</outputDirectory>
+				</configuration>
+			</plugin>
+		</plugins>
+	</reporting>
 
 
 </project>
