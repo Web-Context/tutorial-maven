@@ -1,8 +1,8 @@
 ----------------------------------------------------------------
-2014-06-11 19:40:06.102 GMT:
-AmorÃ§age de Derby version The Apache Software Foundation - Apache Derby - 10.6.2.1 - (999685) : instance a816c00e-0146-8c71-ca11-00000dfc52e8 
-dans le rÃ©pertoire de base de donnÃ©es /tmp/gfembed579362617897719649tmp/lib/databases/embedded_default  avec le chargeur de classe sun.misc.Launcher$AppClassLoader@18fb53f6
+2014-11-18 21:51:11.167 GMT:
+Amorçage de Derby version The Apache Software Foundation - Apache Derby - 10.6.2.1 - (999685) : instance a816c00e-0149-c4e3-4cf0-0000069ad5c0 
+dans le répertoire de base de données C:\Users\frede_000.ULTRANOSTROMO\AppData\Local\Temp\gfembed289812800650858318tmp\lib\databases\embedded_default  avec le chargeur de classe sun.misc.Launcher$AppClassLoader@6bc7c054
 
 java.vendor=Oracle Corporation
-java.runtime.version=1.7.0_51-b13
-Chargeur de classe de la base de donnÃ©es dÃ©marrÃ© - derby.database.classpath=''
+java.runtime.version=1.8.0_11-b12
+Chargeur de classe de la base de données démarré - derby.database.classpath=''

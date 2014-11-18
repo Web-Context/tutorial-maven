@@ -39,19 +39,25 @@ Pourquoi ce rappel ? Parce que justement, le petit fichier Project Maven, le fam
 
 La structure du fichier obéit à quelques règles syntaxiques de base. Vous trouverez ci-dessous un modèle de fichier type.
 
-bc(Java). <project xmlns="http://Maven.apache.org/POM/4.0.0" 
+bc(xml).. <project xmlns="http://Maven.apache.org/POM/4.0.0" 
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
   xsi:schemaLocation="http://Maven.apache.org/POM/4.0.0 http://Maven.apache.org/xsd/Maven-4.0.0.xsd">
+
   <modelVersion>4.0.0</modelVersion>
+
   <groupId>[project_group_id]</groupId>
   <artifactId>[project_articfact_id]</artifactId>
   <version>[project_version: ex. : 0.0.1-SNAPSHOT]</version>
+
   <packaging>[jar/war/ear/pom]</packaging>
+
   <name>[project_name]</name>
+
   <description>[project_description]</description>
+
 </project>
 
-Voilà comment se décrit un projet à l'aide de Maven.
+p. Voilà comment se décrit un projet à l'aide de Maven.
 
 En exemple, attaché à cet article, vous trouvez dans ce fichier @pom_sample.xml@ décrivant une application web orientée REST, plus d'informations sur les possibilités d'un "simple pom" au niveau de la description administrative du projet. L'intérêt ne sera que visible lors de la mise en intégration continue (ou construction continue), où les liens vers le repository de sources ou l'outil de suivi des bugs auront tous leurs sens.
 
@@ -63,14 +69,16 @@ C'est la première mission de Maven.
 
 Un projet réalisé sous Maven, est en fait dénommé un artifact, il possède son propre identifiant, l'artifactId. Ce projet fait obligatoirement partie d'un groupe, cela permettant un classement des composants d'un même projet, ou d'un ensemble de projets. Il est par habitude composé principalement du nom de la société, de l'association, de la fondation ou de l'organisation à l'origine du logiciel. Dans notre cas, nous partirons sur com.webcontext.apps pour tous nos exemples dans la suite de cet article. Le groupe en question sera également identifié par un groupId.
 
-bq(ibnfo). *Note*
+bq(info). *Note*
 Le groupId est souvent similaire au nom du package Java de base de votre application. Par exemple si votre application est contenue dans un package de base "com.masociete.monprojet", le groupId pourra être "com.masociete.apps" et l'artifactId "monprojet".
 
 h2. BUILD
 
-La deuxième mission de Maven est l'aide à la construction de l'application. Le premier élément à spécifier serait donc une cible de compilation. Implicitement, Maven nécessite la présence d'un JDK afin de pouvoir compiler les sources Java. Maven n'apportant pas lui-même ces outils de base. Aussi, vous devez, par Maven, indiquer une cible de version de ce JDK.
+La deuxième mission de Maven consiste à assister le développeur dans la construction de l'application. Le premier élément à spécifier serait donc une cible de compilation. 
+Implicitement, Maven nécessite la présence d'un JDK afin de pouvoir compiler les sources Java. 
+Maven n'apportant pas lui-même ces outils de base. Aussi, vous devez, par Maven, indiquer une cible de version de ce JDK.
 
-Cela se fera via l'aide d'un ensemble de plugin de Maven, spécialisés sur certaines missions.
+Cela se fera grace à un ensemble de plugin de Maven, spécialisés sur certaines missions.
 
 Attardons-nous un peu sur le premier :
 
@@ -118,7 +126,7 @@ $ mvn compile
 
 Nous avons donc nettoyé et compilé nos sources. Enfin, pour le moment, cela est fictif car nous n'avons pas encore de sources. A ce propos, regardons la structure d'un projet Maven:
 
-bc(diagram). _ [mon_projet]   # répertoire de base du projet
+bc(diagram). [mon_projet]          # répertoire de base du projet
   |_ src              # sources du projet découpées en deux groupes
   |  |_ main          # les sources à proprement parler du code du projet
   |  |  |_ Java       # - les classes Java dans leurs packages   

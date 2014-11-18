@@ -6,6 +6,13 @@
 	<artifactId>restwebapp</artifactId>
 	<packaging>war</packaging>
 
+	<!-- Parent artifact -->
+	<parent>
+		<groupId>com.webcontext.apps</groupId>
+		<artifactId>samples</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+
 	<!-- Product description -->
 	<name>RestWebApp</name>
 	<description>A demonstration Rest Oriented WebApp project to illustrate apache maven usage. </description>
@@ -49,13 +56,21 @@
 
 
 	<dependencies>
-		<!-- All Java EE dependencies -->
+		<!-- Java EE 7 API -->
 		<dependency>
-			<groupId>org.glassfish.extras</groupId>
-			<artifactId>glassfish-embedded-all</artifactId>
-			<version>3.2-b06</version>
+			<groupId>javax</groupId>
+			<artifactId>javaee-web-api</artifactId>
+			<version>7.0</version>
 			<scope>provided</scope>
 		</dependency>
+
+		<!-- JPA implementation -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>4.3.7.Final</version>
+		</dependency>
+
 
 		<!-- logging capability -->
 		<dependency>
@@ -73,9 +88,9 @@
 
 		<!-- JavaEE Test Server -->
 		<dependency>
-			<groupId>org.jboss.arquillian.container</groupId>
-			<artifactId>arquillian-glassfish-embedded-3.1</artifactId>
-			<version>1.0.0.CR4</version>
+			<groupId>org.wildfly.arquillian</groupId>
+			<artifactId>wildfly-arquillian-container-remote</artifactId>
+			<version>1.0.0.Alpha2</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -147,6 +162,7 @@
 	</scm>
 
 	<build>
+		<finalName>${project.artifactId}</finalName>
 		<plugins>
 			<!-- Paramétrage du compilateur java -->
 			<plugin>
@@ -193,9 +209,5 @@
 			</plugin>
 		</plugins>
 	</build>
-	<parent>
-		<groupId>com.webcontext.apps</groupId>
-		<artifactId>samples</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
-	</parent>
+
 </project>

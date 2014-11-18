@@ -24,7 +24,7 @@ import org.junit.runners.MethodSorters;
 import com.webcontext.apps.restwebapp.exceptions.EntityAlreadyExistsException;
 import com.webcontext.apps.restwebapp.managers.UserManager;
 import com.webcontext.apps.restwebapp.model.User;
-import com.webcontext.apps.restwebapp.services.UserService;
+import com.webcontext.apps.restwebapp.services.business.UserService;
 
 /**
  * Unit Test for class UserService.
@@ -80,7 +80,7 @@ public class UserServiceTest {
 	}
 
 	@Test
-	public void test_1_add() {
+	public void test_1_addUser() {
 		User usernew = new User("usernew", "Usernew", "Newuser",
 				"new.user@mail.com", "password");
 		try {
@@ -93,7 +93,7 @@ public class UserServiceTest {
 	}
 
 	@Test
-	public void test_2_AddListUserandFindByUsername()
+	public void test_2_AddListUserAndFindByUsername()
 			throws EntityAlreadyExistsException {
 
 		userService.add(usersTest.values());

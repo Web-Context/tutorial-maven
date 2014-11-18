@@ -15,7 +15,7 @@ import javax.ws.rs.core.Response;
 
 import com.webcontext.apps.restwebapp.exceptions.EntityAlreadyExistsException;
 import com.webcontext.apps.restwebapp.model.User;
-import com.webcontext.apps.restwebapp.services.UserService;
+import com.webcontext.apps.restwebapp.services.business.UserService;
 
 /**
  * Rest Service providing access to User entity. will retrieve all occurrence
@@ -98,6 +98,39 @@ public class UserRestService {
 		}
 	}
 
+	/**
+	 * Retrieve a User from persistence based on its <code>userId</code>.
+	 * <ul>
+	 * <li><code>OK</code> the data is saved with success
+	 * <li>
+	 * <li><code>NOT_FOUND</code> this data does not exist
+	 * <li>
+	 * <li><code>INTERNAL_SERVER_ERROR</code> error during processing.
+	 * <li>
+	 * </ul>
+	 * 
+	 * @param userId
+	 * @return
+	 */
+	@Path("/id/{userId}")
+	@GET
+	@Produces({ MediaType.APPLICATION_JSON })
+	public Response findById(@PathParam("userId") Long userId) {
+		try {
+			User user = userService.findById(userId);
+			if (user == null) {
+				return Response.status(Response.Status.NOT_FOUND).build();
+			} else {
+				return Response.ok().entity(user).build();
+			}
+		} catch (Exception e) {
+			return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+					.entity(e).build();
+		}
+	}
+
+	
+	
 	/**
 	 * Update the User to persistence.
 	 * <ul>

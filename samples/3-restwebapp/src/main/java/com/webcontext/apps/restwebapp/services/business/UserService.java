@@ -1,4 +1,4 @@
-package com.webcontext.apps.restwebapp.services;
+package com.webcontext.apps.restwebapp.services.business;
 
 import java.util.Collection;
 import java.util.List;
@@ -34,7 +34,7 @@ public class UserService {
 			userMgr.save(user);
 		} else {
 			throw new EntityAlreadyExistsException("User " + user.getUsername()
-				+ " already exixts");
+					+ " already exixts");
 		}
 		return user;
 	}
@@ -47,7 +47,7 @@ public class UserService {
 	 * @throws EntityAlreadyExistsException
 	 */
 	public void add(Collection<User> newUsers)
-	throws EntityAlreadyExistsException {
+			throws EntityAlreadyExistsException {
 		for (User user : newUsers) {
 			add(user);
 		}
@@ -94,6 +94,17 @@ public class UserService {
 	 */
 	public List<User> findAll() {
 		return userMgr.findAll();
+	}
+
+	/**
+	 * Retrieve a User on its internal <code>userId</code>.
+	 * 
+	 * @param userId
+	 *            the internal user id.
+	 * @return
+	 */
+	public User findById(Long userId) {
+		return userMgr.findById(userId);
 	}
 
 	/**

@@ -21,7 +21,7 @@ import org.junit.runners.MethodSorters;
 import com.jayway.restassured.RestAssured;
 import com.webcontext.apps.restwebapp.managers.UserManager;
 import com.webcontext.apps.restwebapp.model.User;
-import com.webcontext.apps.restwebapp.services.UserService;
+import com.webcontext.apps.restwebapp.services.business.UserService;
 import com.webcontext.apps.restwebapp.services.ws.UserRestService;
 
 /**
@@ -33,19 +33,16 @@ import com.webcontext.apps.restwebapp.services.ws.UserRestService;
 @RunWith(Arquillian.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class UserRestServiceIT {
-	
+
 	@Deployment
 	public static WebArchive deploy() {
 		return ShrinkWrap
 				.create(WebArchive.class, "test.war")
-				.addClasses(User.class, 
-						UserManager.class, 
-						UserService.class,
-						UserRestService.class
-						)
+				.addClasses(User.class, UserManager.class, UserService.class,
+						UserRestService.class)
 				.addAsResource("META-INF/test-persistence.xml",
 						"META-INF/persistence.xml")
-				.addAsWebInfResource(EmptyAsset.INSTANCE,"WEB-INF/web.xml")
+				.addAsWebInfResource(EmptyAsset.INSTANCE, "WEB-INF/web.xml")
 				.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
 	}
 
@@ -58,6 +55,17 @@ public class UserRestServiceIT {
 
 		RestAssured.expect().statusCode(200).when()
 				.get(baseURL.toString() + "/rest/users");
+	}
+
+	@Test
+	@RunAsClient
+	public void test_1_findById(@ArquillianResource URL baseURL)
+			throws IOException {
+
+		System.out.println("base URL=" + baseURL.toString());
+
+		RestAssured.expect().statusCode(200).when()
+				.get(baseURL.toString() + "/rest/users/id/1");
 	}
 
 }

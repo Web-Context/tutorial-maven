@@ -196,24 +196,24 @@ bc(xml).. <project>
   ...
   <dependencies>
 
-  <!-- logging capability -->
-  <dependency>
-  <groupId>log4j</groupId>
-  <artifactId>log4j</artifactId>
-  <version>1.2.17</version>
-  </dependency>
+    <!-- logging capability -->
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <version>1.2.17</version>
+    </dependency>
 
-  <!-- testing capability -->
-  <dependency>
-  <groupId>junit</groupId>
-  <artifactId>junit</artifactId>
-  <version>4.11</version>
-  <scope>test</scope>
-  </dependency>
+    <!-- testing capability -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.11</version>
+      <scope>test</scope>
+    </dependency>
 
   </dependencies>
   ...
-  </project>
+</project>
 
 
 h3. Configuración del Compilador
@@ -401,7 +401,7 @@ Noter l'annotation en amont de déclaration de la classe @@FixMethodOrder@ qui p
 
 h2. Test test test !
 
-p. Maintenant, ne faiblissons pas, compilons et testons
+p. Maintenant, ne faiblissons point, compilons et testons
 
 bc(console)..  $ mvn clean test
 
@@ -474,9 +474,9 @@ generation du jar (sic): @maven-jar-plugin@ (re sic). Ajoutons donc les lignes s
 
 bc(xml).. <!-- Configuration du jar -->
 <plugin>
-<groupId>org.apache.maven.plugins</groupId>
-<artifactId>maven-jar-plugin</artifactId>
-<version>2.4</version>
+  <groupId>org.apache.maven.plugins</groupId>
+  <artifactId>maven-jar-plugin</artifactId>
+  <version>2.4</version>
 </plugin>
 
 p. Si vous regarder dans le répertoire @target@ après une construction de votre projet, nous pouvons observer l'apparition d'un @JAR@. C'est le résultat de la compilation et du packaging réalisé par maven via le plugin JAR:
@@ -513,9 +513,9 @@ p. Commençons par le premier step, à savoir, la documentation de notre librair
 p. Comme nous l'avons remarqué, tout passant par des plugins, ajoutons notre nouveau plugin au fichier @pom.xml@ de notre projet:
 
 bc(xml). <plugin>
-<groupId>org.apache.maven.plugins</groupId>
-<artifactId>maven-javadoc-plugin</artifactId>
-<version>2.9.1</version>
+  <groupId>org.apache.maven.plugins</groupId>
+  <artifactId>maven-javadoc-plugin</artifactId>
+  <version>2.9.1</version>
 </plugin>
 
 p. Relançons la compilation avec une commande que nous connaissons maintenant, mais ajoutons un goal supplémentaire:
@@ -550,9 +550,9 @@ h3. La source du savoir
 p. Tout bon packaging de logiciel doit être accompagné de ses sources.
 
 bc(xml). <plugin>
-<groupId>org.apache.maven.plugins</groupId>
-<artifactId>maven-source-plugin</artifactId>
-<version>2.2.1</version>
+  <groupId>org.apache.maven.plugins</groupId>
+  <artifactId>maven-source-plugin</artifactId>
+  <version>2.2.1</version>
 </plugin>      
 
 

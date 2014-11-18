@@ -3,6 +3,7 @@ package com.webcontext.apps.restwebapp.services.ws;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.inject.Inject;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
@@ -10,11 +11,14 @@ import org.apache.log4j.Logger;
 
 import com.webcontext.apps.restwebapp.exceptions.EntityAlreadyExistsException;
 import com.webcontext.apps.restwebapp.model.User;
-import com.webcontext.apps.restwebapp.services.UserService;
+import com.webcontext.apps.restwebapp.services.business.UserService;
 
 @ApplicationPath("/rest")
 public class RestApplication extends Application {
 	private static Logger logger = Logger.getLogger(RestApplication.class);
+
+	@Inject
+	UserService userService;
 
 	/*
 	 * (non-Javadoc)
@@ -23,7 +27,7 @@ public class RestApplication extends Application {
 	 */
 	public Set<Class<?>> getClasses() {
 
-		initializeData();
+		// initializeData();
 
 		Set<Class<?>> services = new HashSet<Class<?>>();
 		services.add(UserRestService.class);
@@ -31,19 +35,4 @@ public class RestApplication extends Application {
 		return services;
 	}
 
-	/**
-	 * First initialization of data set.
-	 */
-	private void initializeData() {
-		UserService userService = new UserService();
-
-		if (userService.count() == 0) {
-			try {
-				userService.add(new User("admin", "Admin", "Istrator",
-						"admin@home", "pwd"));
-			} catch (EntityAlreadyExistsException e) {
-				logger.fatal("Error during ata initialization", e);
-			}
-		}
-	}
 }
