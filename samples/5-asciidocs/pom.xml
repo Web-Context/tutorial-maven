@@ -16,10 +16,7 @@
 
 	<!-- Product description -->
 	<name>AsciiDocs</name>
-	<description>
-		This (very) small project demonstrate usage of the asciidoctor maven plugin to generate official documentation, based on some wiki-markup based text files, producing HTML (one file or multiple file) format, and /or PDF format. 
-		
-		The platform used need asciidoctor and docbook to be accessible from the execution environment.</description>
+	<description>This (very) small project demonstrate usage of the asciidoctor maven plugin to generate official documentation, based on some wiki-markup based text files, producing HTML (one file or multiple file) format, and /or PDF format. The platform used need asciidoctor and docbook to be accessible from the execution environment.</description>
 	<url>${project.git.url}/${project.name}.git</url>
 
 
