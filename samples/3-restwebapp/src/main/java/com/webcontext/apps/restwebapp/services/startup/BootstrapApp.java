@@ -4,6 +4,7 @@
 package com.webcontext.apps.restwebapp.services.startup;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.Startup;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -33,6 +34,14 @@ public class BootstrapApp {
 			try {
 				userService.add(new User("admin", "Admin", "Istrator",
 						"admin@home", "pwd"));
+
+				for (int i = 0; i < 20; i++) {
+					String username = String.format("user%02d", i);
+					userService.add(new User(username, (username + "Firstname")
+							.toUpperCase(), (username + "Lastname")
+							.toUpperCase(), username + "@home", username
+							+ "pwd"));
+				}
 			} catch (EntityAlreadyExistsException e) {
 				logger.fatal("Error during ata initialization", e);
 			}
