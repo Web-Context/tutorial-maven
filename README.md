@@ -1,4 +1,6 @@
-# Tutorial Maven
+# Tutorial Maven 
+
+![Building on travis-CI](https://travis-ci.org/Web-Context/tutorial-maven.svg?branch=master "Building status on Travis-CI") 
 
 _Créé par [Frédéric Delorme](mailto:frederic.delorme@gmail.com), le 18-NOV-2014._
 
