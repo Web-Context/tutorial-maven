@@ -12,6 +12,20 @@
 		<module>samples</module>
 	</modules>
 
+	<contributors>
+		<contributor>
+			<name>Frédéric Delorme</name>
+			<email>frederic.delorme@gmail.com</email>
+			<organization>GE HealthCare Dose management team</organization>
+			<organizationUrl>http://www3.gehealthcare.com/en/products/dose_management/dosewatch/</organizationUrl>
+			<roles>
+				<role>Software Architect</role>
+			</roles>
+			<timezone>+1</timezone>
+			<url></url>
+		</contributor>
+	</contributors>
+
 	<scm>
 		<url>http://github.com/Web-Context/tutorial-maven.git</url>
 		<connection>scm:git:git@github.com:Web-Context/tutorial-maven.git</connection>

@@ -6,7 +6,7 @@ Il existe une autre catégorie d'outils: les outils d'aide à la construction.
 
 Le plus ancien et le plus vénérable était "Ant":http://ant.apache.org/.  Je dis était car il n'est plus trop au goût du jour. En effet, à sa suite sont arrivés bien des concurrents parmi lesquels on peut trouver,  "Maven":http://Maven.apache.org/, "gradle":http://www.gradle.org/ (Gradle, the next automation generation official web site), "sbt":http://www.scala-sbt.org/ (Simple Build Tool, the Scala/Java official web site.) (pour Simple Build Tool), et la liste s'allonge tous les jours.
 
-Celui qui a le plus marqué ces 10 dernières années et qui domine encore le marché de la construction d'application, car utilisé de façon industrielle est Maven.
+Celui qui a le plus marqué ces 10 dernières années et qui domine encore le marché de la construction d'application, car utilisé de façon industrielle est *Maven*.
 
 Maven va au-delà du simple outil de construction, il possède un cycle de vie qui colle à celui de la fabrication d'un logiciel. La simple commande @mvn@ est capable, dans le désordre:
 
@@ -15,13 +15,19 @@ Maven va au-delà du simple outil de construction, il possède un cycle de vie q
 * d'exécuter des tests unitaires(UT),
 * des tests  d'intégration (INT),
 * et des test End-to-End (E2E).
+* de construire de la documentation javadoc et de la publier sur un site distant,
+* de créer et packager des releases versionnées (quels sont ces néologismes ? des insultes ?)
+* de commander des outils de mesure de qualité de code comme, "Sonar":http://www.sonarsource.com,
+* de commander des outils de mesure de la couverture de tests, comme "Cobertura":http://mojo.codehaus.org/cobertura-maven-plugin/index.html,
+* de s'interconnecter avec des outils de gestion de sources comme "Jenkins":http://jenkins-ci.org ou "Bamboo":https://www.atlassian.com/software/bamboo, ou encore "GitLab":
+* etc ...
 
 
-Elle est même capable de prendre en main la création d'une release, se chargeant de la gestion du numéro de version, de la compilation des dépendances, et du packaging dans le but de la livraison, sous plusieurs formes pilotées qui plus est: JAR, WAR et/ou EAR. Il sera même capable de construire la documentation du code basée sur Javadoc ou même docbook, de construire un site de livraison et même, si vous lui demandez avec les formes,  proposera un packaging en ZIP des sources du projet.
+Il est donc capable de prendre en main la création d'une release, se chargeant de la gestion du numéro de version, de la compilation des dépendances, et du packaging dans le but de la livraison, sous plusieurs formes pilotées qui plus est: JAR, WAR et/ou EAR. Il sera capable de construire la documentation du code basée sur Javadoc ou même docbook, de construire un site de livraison et même, si vous lui demandez gentillement, sera capable de proposer un packaging en ZIP des sources du projet.
 
-Bref, vous le comprenez, Maven est L'outil du jour pour la construction de logiciel Java.
+Bref, vous le comprenez, Maven est l'Outil (avec un grand 'O') du jour pour la construction et la diffusion de logiciel Java.
 
-Même si quelques concurrents arrivent doucement à sa hauteur, comme Gradle, aujourd'hui seul Maven est capable de couvrir une telle gamme de prestations.
+Même si quelques concurrents arrivent doucement à sa hauteur, comme Gradle, aujourd'hui seul Maven est capable d'offrir une telle gamme de prestations.
 
 h1. Premier shoot à la pom(.xml)
 

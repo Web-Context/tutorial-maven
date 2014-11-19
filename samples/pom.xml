@@ -11,8 +11,8 @@
 
 	<!-- Properties for project -->
 	<properties>
-		<src.target>1.8</src.target>
-		<src.source>1.8</src.source>
+		<src.target>1.7</src.target>
+		<src.source>1.7</src.source>
 		<src.encoding>UTF-8</src.encoding>
 	</properties>
 
